@@ -28,7 +28,7 @@
             //echo $result;
             echo "<select name='pais' id='paises'>";
             while($fila=mysql_fetch_array($result)){
-            echo "<option value='".$fila['Codigo'].">".$fila['Nombre']."</option>";
+            echo "<option value='".$fila['Codigo']."'>".$fila['Nombre']."</option>";
             }   
             echo "</select>";
         ?>
