@@ -9,52 +9,57 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Publicacion</title>
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+    </style>
 
 
 </head>
 
 <body>
-
+    <header>
+        <?php require("header.php")?>
+    </header>
 
     <!--Contenido de la publicación -->
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <nav class="navbar navbar-inverse">
-                    <div class="container-fluid">
-                        <ul class="nav navbar-nav ">
-                            <li class="active"><a href="#">Descripción</a></li>
-                            <li><a href="#">Imgenes</a></li>
-                            <li><a href="#">Videos</a></li>
-                            <li><a href="#">Audios</a></li>
-                            <li><a href="#">Documentos</a></li>
-                            <li><a href="#">Referencias</a></li>
-                            <li><a href="#">Comentarios</a></li>
-                        </ul>
-                    </div>
-                </nav>
+
+    <div class="row">
+        <nav class="col s10 offset-s1 blue darken-4">
+            <div class="nav-wrapper ">
+                <ul id="nav-mobile" class="left hide-on-med-and-down">
+                    <li class="active"><a href="#">Descripción</a></li>
+                    <li><a href="#">Imgenes</a></li>
+                    <li><a href="#">Videos</a></li>
+                    <li><a href="#">Audios</a></li>
+                    <li><a href="#">Documentos</a></li>
+                    <li><a href="#">Referencias</a></li>
+                    <li><a href="#">Comentarios</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="col s10 offset-s1 grey lighten-2" style="height:70vh;">
+            <div class="valign-wrapper">
+                <h5 class="valign">This should be vertically aligned</h5>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div id="contDesc" class="jumbotron">
-                    contenido
-                </div>
+    </div>
 
-            </div>
-        </div>
-
+    <div class="row">
 
     </div>
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <?php require("footer.php");?>
+
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+
 </body>
 
 </html>
