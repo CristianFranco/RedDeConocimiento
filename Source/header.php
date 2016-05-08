@@ -3,7 +3,7 @@
         <a href="#" class="brand-logo">RedConocimiento</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
 
-            <li class="col s2">
+            <li class="col s2 active">
                 <!--<i class="material-icons left">search</i>-->
 
                 <div class="input-field col s1">
@@ -22,9 +22,9 @@
             <li><a href="badges.html"><i class="material-icons">home</i></a></li>
             <!-- Si no está logeado-->
             <?php if(!isset($_SESSION['idUsuario'])){ ?>
-
-                <li><b href="" id="click">Iniciar Sesión</b></li>
-                <li><a href="collapsible.html">Registrarse</a></li>
+                <li><a href="collapsible.html" ><i class="material-icons">person_add</i></a></li>
+            <li><a href="" id="click"><i class="material-icons">exit_to_app</i></a></li>
+                
 
                 <!--- Si está logeado-->
                 <?php } else{ ?>

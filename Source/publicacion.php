@@ -57,9 +57,16 @@
                 <div class="nav-wrapper">
                     <ul id="nav-mobile" class="left hide-on-med-and-down">
                         <li class="active">
-                            <a href="#">
-                                <i class="material-icons prefix">info</i>
+                            <!-- <div class="input-field col s1">
+                                <i class="material-icons right">search</i>
+                                <input id="cajaBuscar" type="text" class="validate white blue-text text-darken-2" style="width:200px;height:30px;" placeholder="Buscar">
+
+                            </div>-->
+                            <a>
+                                <i class="material-icons left">info</i>&nbsp;
+
                             </a>
+
                         </li>
                         <li class="active"><a href="#">
                             (<span class="badge">4</span>)
