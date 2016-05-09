@@ -7,6 +7,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 </head>
 <body>
+    <h2>Registro de Datos</h2>
  <form action"" method="post" class="" name="registro">
         <label>Nombre:</label>
         <input type="text" name="nombre" size="60" maxlength="45">
@@ -21,21 +22,13 @@
         <input type="tex" name="tel" size="60" maxlength="45">
         <br><br>
         <label>Pais:</label>
-        <?php
-            $conn = mysql_connect('107.180.58.59','adminRCO','StrUsr94?'); 
-            $consulta_pais='SELECT * FROM RCO.Pais;';
-            $result=mysql_query($consulta_pais,$conn);
-            //echo $result;
-            echo "<select name='pais' id='paises'>";
-            while($fila=mysql_fetch_array($result)){
-            echo "<option value='".$fila['Codigo']."'>".$fila['Nombre']."</option>";
-            }   
-            echo "</select>";
-        ?>
+     <select name="pais" id="paises">
+            <option>Seleccionar Pais...</option>   
+        </select>
         <br><br>
         <label>Ciudad:</label>
         <select name="ciudades" id="ciudades">
-            
+            <option>Seleccionar Ciudad...</option>
             
         </select>
      <br><br>
@@ -47,9 +40,26 @@
         <br><br>
         <label>Confirmar Contrase&ntilde;a:</label>
         <input type="password" name="confpass" size="60" maxlength="32">
+      <br><br>
+        <input type="submit"   value="Registrarse"
 </form>
+    
 
 <script>
+    $("#paises").on("focus",function(e){
+        $.ajax({
+                url: "getPaises.php"
+                , method: "POST"
+                , dataType: "JSON"
+                , success: function (result) {
+                    $("#paises").empty();
+                    for(var x=0;x<result.length;x++){
+                        $("#paises").append('<option value="'+result[x].Id+'">'+result[x].Nombre+'</select>');
+                    }
+                    console.log(result[0].Id+" "+result[0].Nombre);
+                }
+    });
+    })
     $("#paises").on("change",function(e){
         console.log($("#paises").val());
             $.ajax({
