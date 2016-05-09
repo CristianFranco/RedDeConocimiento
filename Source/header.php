@@ -3,12 +3,12 @@
         <a href="#" class="brand-logo">RedConocimiento</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
 
-            <li class="col s2 active">
+            <li class="col s2">
                 <!--<i class="material-icons left">search</i>-->
 
                 <div class="input-field col s1">
                     <i class="material-icons right">search</i>
-                    <input id="cajaBuscar" type="text" class="validate white blue-text text-darken-2" style="width:200px;height:30px;" placeholder="Buscar">
+                    <input id="cajaBuscar" type="text" class="validate white blue-text text-darken-2" style="margin-left:25px;width:200px;height:30px;" placeholder="Buscar">
 
                 </div>
                 <a href="#" id="busquedaA" class="blue darken-2 white" style="display:none;">
@@ -22,9 +22,9 @@
             <li><a href="badges.html"><i class="material-icons">home</i></a></li>
             <!-- Si no está logeado-->
             <?php if(!isset($_SESSION['idUsuario'])){ ?>
-                <li><a href="collapsible.html" ><i class="material-icons">person_add</i></a></li>
-            <li><a href="" id="click"><i class="material-icons">exit_to_app</i></a></li>
-                
+                <li><a href="collapsible.html"><i class="material-icons">person_add</i></a></li>
+                <li><a href="" id="click"><i class="material-icons">exit_to_app</i></a></li>
+
 
                 <!--- Si está logeado-->
                 <?php } else{ ?>
