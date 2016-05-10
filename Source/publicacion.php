@@ -9,7 +9,7 @@
     $idPub=1;//$_POST['idPub']
 
     //Conexión y query's a la BD
-    require("connection.php");
+    require("procesos/connection.php");
     $connection=connect();
     $queryPub="SELECT * FROM ";
 ?>
@@ -56,12 +56,10 @@
 
                 <div class="nav-wrapper">
                     <ul id="nav-mobile" class="left hide-on-med-and-down">
-                        <li class="active">
-                            <a href="#">
-                                <i class="material-icons prefix">info</i>
-                            </a>
+                        <li><a><i class="material-icons left">info</i>&nbsp;</a>
+
                         </li>
-                        <li class="active"><a href="#">
+                        <li><a href="#">
                             (<span class="badge">4</span>)
                             <i class="material-icons left">photo_camera</i>    
                         </a></li>
