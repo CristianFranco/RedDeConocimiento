@@ -72,7 +72,7 @@
 <script>
     $("#paises").on("focus",function(e){
         $.ajax({
-                url: "getPaises.php"
+                url: "procesos/getPaises.php"
                 , method: "POST"
                 , dataType: "JSON"
                 , success: function (result) {
@@ -87,7 +87,7 @@
     $("#paises").on("change",function(e){
         console.log($("#paises").val());
             $.ajax({
-                url: "getCiudades.php"
+                url: "procesos/getCiudades.php"
                 , method: "POST"
                 , data: {
                     idPais: $("#paises").val()
