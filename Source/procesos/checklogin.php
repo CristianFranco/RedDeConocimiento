@@ -10,7 +10,8 @@
         $qryInicio="select * from Usuario where Nickname='$usuario' and Password='$pass'";
         $resInicio=$connection->query($query);
         if($resInicio){
-            $row=resInicio->fetch_results();
+            $fila=resInicio->fetch_array(MYSQLI_ASSOC);
+            array_push($respuesta,"","","","");
         }
         else{//error
             
