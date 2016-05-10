@@ -2,8 +2,8 @@
     session_start();
     require("connection.php");
     $connection=connect();
-    //$idPais="AFG";
-
+//    $idPais="AFG";
+    $idPais=$_POST['idPais'];
     echo $_POST['id'];/*
     $query="select * from Ciudad where CodigoPais='$idPais'";
     $result=$connection -> query($query);
