@@ -1,5 +1,6 @@
 <?php 
-    session_start(); 
+    session_start();
+    require("procesos/connection.php");
     
 ?>
 <!DOCTYPE html>
@@ -53,34 +54,39 @@
         </div>
      </div>
      <div class="row">
-        <div class="input-field col s8">
+        <div class="input-field col s7">
           <i class="material-icons prefix">assignment_ind</i>
           <input id="icon_prefix" type="text" class="validate" name="nkname">
           <label for="icon_prefix">NickName</label>
         </div>
      </div>
      <div class="row">
-        <div class="input-field col s8">
+        <div class="input-field col s7">
           <i class="material-icons prefix">vpn_key</i>
           <input id="icon_prefix" type="password" class="validate" name="pass">
           <label for="icon_prefix">Contraseña</label>
         </div>
      </div>
      <div class="row">
-        <div class="input-field col s8">
+        <div class="input-field col s7">
           <i class="material-icons prefix">vpn_key</i>
           <input id="icon_prefix" type="password" class="validate" name="confpass">
           <label for="icon_prefix">Confirmar Contraseña</label>
         </div>
          
      </div>
-     <div class="row">
-     <div  class="input-field col s12">
-     <select name="pais" id="paises">
-            <option disabled selected>Seleccionar Pais...</option>   
-      </select>
+         <div class="input-field col s5">
+        <?php
+            $query='Select * From Pais order by Nombre ASC;';
+            $connection=connect();
+            $result=$connection -> query($query);
+            echo "<select  name='pais' id='paises'>";   
+            while($fila=$result->fetch_array(MYSQLI_ASSOC)){
+            echo "<option value='".$fila['Codigo']."'>".$fila['Nombre']."</option>";
+            }   
+            echo "</select>";
+        ?>
          <label>Pais:</label>
-     </div>
      </div>
      
      
@@ -107,20 +113,6 @@
     
 </div>
 <script>
-    $("#paises").on("focus",function(e){
-        $.ajax({
-                url: "procesos/getPaises.php"
-                , method: "POST"
-                , dataType: "JSON"
-                , success: function (result) {
-                    $("#paises").empty();
-                    for(var x=0;x<result.length;x++){
-                        $("#paises").append('<option value="'+result[x].Id+'">'+result[x].Nombre+'</select>');
-                    }
-                    console.log(result[0].Id+" "+result[0].Nombre);
-                }
-    });
-    })
     $("#paises").on("change",function(e){
         console.log($("#paises").val());
             $.ajax({
@@ -131,6 +123,7 @@
                 }
                 , dataType: "JSON"
                 , success: function (result) {
+                    $('select').material_select()
                     $("#ciudades").empty();
                     for(var x=0;x<result.length;x++){
                         $("#ciudades").append('<option value="'+result[x].Id+'">'+result[x].Nombre+'</select>');
