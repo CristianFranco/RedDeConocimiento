@@ -3,7 +3,7 @@
  require("connection.php");
     $connection=connect();
 //    $idPais="AFG";
-    $query="Select * From RCO.Pais;";
+    $query="Select * From RCO.Pais order by Nombre ASC;";
     $result=$connection -> query($query);
     $paises=array();
     while($row=$result->fetch_array(MYSQLI_ASSOC)){
