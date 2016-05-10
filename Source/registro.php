@@ -29,21 +29,62 @@
 <div class="row">
  <form class="col s12" method="post" name="registro" action="envreg.php">
      <div class="row">
-        <div class="input-field col s8">
+        <div class="input-field col s6">
           <i class="material-icons prefix">account_circle</i>
           <input id="icon_prefix" type="text" class="validate" name="nombre">
           <label for="icon_prefix">Nombre</label>
         </div>
-     <br><br>
-        <label>Apellido:</label>
-        <input type="tex" name="apell" size="60" maxlength="45">
-        <br><br>
-        <label>Email:</label>
-        <input type="tex" name="email" size="60" maxlength="45">
-        <br><br>
-        <label>Telefono:</label>
-        <input type="tex" name="tel" size="60" maxlength="45">
-        <br><br>
+        <div class="input-field col s6">
+            <i class="material-icons prefix">account_circle</i>
+            <input id="icon_prefix" type="text" class="validate" name="apell">
+            <label for="icon_prefix">Apellido</label>
+        </div>
+         </div>
+     <div class="row">
+        <div class="input-field col s7">
+          <i class="material-icons prefix">email</i>
+          <input id="icon_prefix" type="text" class="validate" name="email">
+          <label for="icon_prefix">Email</label>
+        </div>
+        <div class="input-field col s5">
+          <i class="material-icons prefix">phone</i>
+          <input id="icon_prefix" type="text" class="validate" name="tel">
+          <label for="icon_prefix">Telefono</label>
+        </div>
+     </div>
+     <div class="row">
+        <div class="input-field col s8">
+          <i class="material-icons prefix">assignment_ind</i>
+          <input id="icon_prefix" type="text" class="validate" name="nkname">
+          <label for="icon_prefix">NickName</label>
+        </div>
+     </div>
+     <div class="row">
+        <div class="input-field col s8">
+          <i class="material-icons prefix">vpn_key</i>
+          <input id="icon_prefix" type="password" class="validate" name="pass">
+          <label for="icon_prefix">Contraseña</label>
+        </div>
+     </div>
+     <div class="row">
+        <div class="input-field col s8">
+          <i class="material-icons prefix">vpn_key</i>
+          <input id="icon_prefix" type="password" class="validate" name="confpass">
+          <label for="icon_prefix">Confirmar Contraseña</label>
+        </div>
+         
+     </div>
+     <div class="row">
+     <div  class="input-field col s12">
+     <select name="pais" id="paises">
+            <option disabled selected>Seleccionar Pais...</option>   
+      </select>
+         <label>Pais:</label>
+     </div>
+     </div>
+     
+     
+        <!--
      <div  class="input-field col s6">
      <select name="pais" id="paises">
             <option disabled selected>Seleccionar Pais...</option>   
@@ -55,17 +96,13 @@
             <option>Seleccionar Ciudad...</option>
         </select>
          <br><br>
-        <label>NickName:</label>
-        <input type="tex" name="nickname" size="60" maxlength="45">
-        <br><br>
         <label>Contrase&ntilde;a:</label>
         <input type="password" name="pass" size="60" maxlength="45">
         <br><br>
         <label>Confirmar Contrase&ntilde;a:</label>
         <input type="password" name="confpass" size="60" maxlength="32">
       <br><br>
-        <input type="submit"  name="enviar" value="Registrarse">
-     </div>
+        <input type="submit"  name="enviar" value="Registrarse"-->
 </form>
     
 </div>
@@ -105,6 +142,17 @@
     })
 </script>
      <!-- Compiled and minified JavaScript -->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js">
+    </script>
+    <script>$('.dropdown-button').dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      constrain_width: false, // Does not change width of dropdown to that of the activator
+      hover: true, // Activate on hover
+      gutter: 0, // Spacing from edge
+      belowOrigin: false, // Displays dropdown below the button
+      alignment: 'left' // Displays dropdown with edge aligned to the left of button
+    }
+  );</script>
 </body>
 </html>
