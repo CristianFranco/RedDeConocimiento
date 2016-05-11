@@ -55,6 +55,35 @@
                         <label for="icon_prefix">Telefono</label>
                     </div>
                 </div>
+                 <div class="input-field col s6">
+                 <i class="material-icons prefix">my_location</i>
+                    <?php
+            $query='Select * From Pais order by Nombre ASC;';
+            $connection=connect();
+            $result=$connection -> query($query);
+            echo "<select  name='pais' id='paises'>";   
+            while($fila=$result->fetch_array(MYSQLI_ASSOC)){
+            echo "<option value='".$fila['Codigo']."'>".$fila['Nombre']."</option>";
+            }   
+            echo "</select>";
+        ?>
+                        <label>Pais:</label>
+                </div>
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">my_location</i>
+                    <?php
+                        $afg="AFG";
+                        $query="Select * From Ciudad where CodigoPais='AFG' order by Nombre ASC;";
+                        $connection=connect();
+                        $result=$connection -> query($query);
+                        echo "<select  name='ciudades' id='ciudades'>";   
+                        while($fila=$result->fetch_array(MYSQLI_ASSOC)){
+                        echo "<option value='".$fila['ID']."'>".$fila['Nombre']."</option>";
+            }   
+            echo "</select>";
+        ?>
+                    <label>Ciudad:</label>
+                </div>
                 <div class="row">
                     <div class="input-field col s7">
                         <i class="material-icons prefix">assignment_ind</i>
@@ -77,43 +106,8 @@
                     </div>
 
                 </div>
-                <div class="input-field col s5">
-                    <?php
-            $query='Select * From Pais order by Nombre ASC;';
-            $connection=connect();
-            $result=$connection -> query($query);
-            echo "<select  name='pais' id='paises'>";   
-            while($fila=$result->fetch_array(MYSQLI_ASSOC)){
-            echo "<option value='".$fila['Codigo']."'>".$fila['Nombre']."</option>";
-            }   
-            echo "</select>";
-        ?>
-                        <label>Pais:</label>
-                </div>
-                <div class="input-field col s5">
+               
 
-                    <select name="ciudades" id="ciudades">
-                        <option>Seleccionar Ciudad...</option>
-                    </select>
-                    <label>Ciudad:</label>
-                </div>
-
-                <!--
-     <div  class="input-field col s6">
-     <select name="pais" id="paises">
-            <option disabled selected>Seleccionar Pais...</option>   
-      </select>
-         <label>Pais:</label>
-     </div>
-        
-         <br><br>
-        <label>Contrase&ntilde;a:</label>
-        <input type="password" name="pass" size="60" maxlength="45">
-        <br><br>
-        <label>Confirmar Contrase&ntilde;a:</label>
-        <input type="password" name="confpass" size="60" maxlength="32">
-      <br><br>
-        <input type="submit"  name="enviar" value="Registrarse"-->
             </form>
 
         </div>
