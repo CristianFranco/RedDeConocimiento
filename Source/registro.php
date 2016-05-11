@@ -91,10 +91,11 @@
                         <label>Pais:</label>
                 </div>
                 <div class="input-field col s5">
-                    <label>Ciudad:</label>
+
                     <select name="ciudades" id="ciudades">
                         <option>Seleccionar Ciudad...</option>
                     </select>
+                    <label>Ciudad:</label>
                 </div>
 
                 <!--
