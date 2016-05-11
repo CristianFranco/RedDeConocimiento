@@ -56,7 +56,7 @@
                     </div>
                 </div>
                  <div class="input-field col s6">
-                 <i class="material-icons prefix">my_location</i>
+                 <i class="material-icons prefix">location_on</i>
                     <?php
             $query='Select * From Pais order by Nombre ASC;';
             $connection=connect();
@@ -70,7 +70,7 @@
                         <label>Pais:</label>
                 </div>
                 <div class="input-field col s6">
-                    <i class="material-icons prefix">my_location</i>
+                    <i class="material-icons prefix">location_on</i>
                     <?php
                         $afg="AFG";
                         $query="Select * From Ciudad where CodigoPais='AFG' order by Nombre ASC;";
