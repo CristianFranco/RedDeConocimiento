@@ -1,7 +1,7 @@
 <html>
 <?php 
-    session_start(); 
-    
+    session_start();
+    require("procesos/connection.php");  
 ?>
 <head>
     
@@ -10,7 +10,7 @@
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Publicacion</title>
+        <title>Editar Perfil</title>
 
         <!--Import Google Icon Font-->
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -20,81 +20,114 @@
 
         <!--Import jQuery before materialize.js-->
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        
 </head>
-<body>
-    <div class="row">
-      <div class="col s12">This div is 12-columns wide</div>
-      <div class="col s6">This div is 6-columns wide</div>
-      <div class="col s6">This div is 6-columns wide</div>
-    </div>      
+<body>    
     <h1>Editar Perfil</h1>
- <form action"" method="post" class="" name="editar_Perfil">
-        <label>Nickname:</label>
-        <input type="text" name="nickname" size="30" maxlength="20">
-         &nbsp; &nbsp;
-        <label>Password:</label>
-        <input type="password" name="pass" size="30" maxlength="10">
-         &nbsp; &nbsp;
-        <label>Email: &nbsp; &nbsp;  &nbsp;</label>
-        <input type="tex" name="email" size="30" maxlength="30">
-        <br><br>
-        <label>Télefono: &nbsp;</label>
-        <input type="tex" name="telefono" size="30" maxlength="10">
-         &nbsp; &nbsp;
-        <label>Nombre: &nbsp;</label>
-        <input type="tex" name="nombre" size="30" maxlength="20">
-         &nbsp; &nbsp;
-        <label>Apellidos:</label>
-        <input type="tex" name="apellidos" size="30" maxlength="30">
-        <br><br>
-        <label>Pais:&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;</label>
-        <select name="pais" id="paises">
-            <option>Seleccionar</option>   
-        </select>
-         &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;        
-        <label>Ciudad:</label>
-        <select name="ciudades" id="ciudades">
-            <option>Seleccionar</option>            
-        </select>
-        <input type="submit" style="Position:Absolute; left:63%; top:20%" value="Aceptar"/>
-        <input type="submit" style="Position:Absolute; left:68%; top:20%" value="Cancelar"/>
-</form>
-    <script>
-    $("#paises").on("focus",function(e){
-        $.ajax({
-                url: "getPaises.php"
-                , method: "POST"
-                , dataType: "JSON"
-                , success: function (result) {
-                    $("#paises").empty();
-                    for(var x=0;x<result.length;x++){
-                        $("#paises").append('<option value="'+result[x].Id+'">'+result[x].Nombre+'</select>');
+    <div class="row">
+      <form class="col s12" method="post" name="registro" action="envreg.php">
+        <div class="row">
+            <div class="input-field col s4">
+              <i class="material-icons prefix">account_circle</i>
+              <input id="icon_prefix" type="text" class="validate" name="nickname" maxlength="20">
+              <label for="icon_prefix">Nickname</label>
+            </div>
+            <div class="input-field col s4">
+              <i class="material-icons prefix">vpn_key</i>
+              <input id="icon_prefix" type="password" class="validate" name="password" maxlength="20">
+              <label for="icon_prefix">Password</label>
+            </div>
+            <div class="input-field col s4">
+              <i class="material-icons prefix">vpn_key</i>
+              <input id="icon_prefix" type="password" class="validate" name="confirmar" maxlength="20">
+              <label for="icon_prefix">Confirmar Password</label>
+            </div>
+            <div class="input-field col s4">
+              <i class="material-icons prefix">perm_identity</i>
+              <input id="icon_prefix" type="text" class="validate" name="nombre" maxlength="20">
+              <label for="icon_prefix">Nombre</label>
+            </div>
+            <div class="input-field col s4">
+              <i class="material-icons prefix">perm_identity</i>
+              <input id="icon_prefix" type="text" class="validate" name="apellidos" maxlength="20">
+              <label for="icon_prefix">Apellidos</label>
+            </div>
+            <div class="input-field col s4">
+              <i class="material-icons prefix">phone</i>
+              <input id="icon_prefix" type="text" class="validate" name="telefono" maxlength="10">
+              <label for="icon_prefix">Télefono</label>
+            </div>
+        </div>
+          <div class="input-field col s4">
+                 <i class="material-icons prefix">location_on</i>
+                    <?php
+            $query='Select * From Pais order by Nombre ASC;';
+            $connection=connect();
+            $result=$connection -> query($query);
+            echo "<select  name='pais' id='paises'>";   
+            while($fila=$result->fetch_array(MYSQLI_ASSOC)){
+            echo "<option value='".$fila['Codigo']."'>".$fila['Nombre']."</option>";
+            }   
+            echo "</select>";
+        ?>
+           <label>Pais:</label>
+           </div>
+             <div class="input-field col s4">
+              <i class="material-icons prefix">location_on</i>
+               <?php
+                $afg="AFG";
+                $query="Select * From Ciudad where CodigoPais='AFG' order by Nombre ASC;";
+                $connection=connect();
+                $result=$connection -> query($query);
+                echo "<select  name='ciudades' id='ciudades'>";   
+                while($fila=$result->fetch_array(MYSQLI_ASSOC)){
+                echo "<option value='".$fila['ID']."'>".$fila['Nombre']."</option>";
+            }   
+             echo "</select>";
+               ?>
+             <label>Ciudad:</label>
+             </div>
+          <br><br>
+          <div class ="row">
+              <form class="col s12" method="post" name="registro" action="envreg.php">
+            <a class="waves-effect waves-light btn">button</a>
+              </form>
+          </div>
+              
+        </form>
+     </div>
+        <script>
+            $("#paises").on("change", function (e) {
+                console.log($("#paises").val());
+                $.ajax({
+                    url: "procesos/getCiudades.php"
+                    , method: "POST"
+                    , data: {
+                        idPais: $("#paises").val()
                     }
-                    console.log(result[0].Id+" "+result[0].Nombre);
-                }
-    });
-    })
-    $("#paises").on("change",function(e){
-        console.log($("#paises").val());
-            $.ajax({
-                url: "getCiudades.php"
-                , method: "POST"
-                , data: {
-                    idPais: $("#paises").val()
-                }
-                , dataType: "JSON"
-                , success: function (result) {
-                    $("#ciudades").empty();
-                    for(var x=0;x<result.length;x++){
-                        $("#ciudades").append('<option value="'+result[x].Id+'">'+result[x].Nombre+'</select>');
+                    , dataType: "JSON"
+                    , success: function (result) {
+
+                        $("#ciudades").empty();
+                        for (var x = 0; x < result.length; x++) {
+                            $("#ciudades").append('<option value="' + result[x].Id + '">' + result[x].Nombre + '</select>');
+                        }
+                        $('select').material_select()
+                        console.log(result[0].Id + " " + result[0].Nombre);
                     }
-                    console.log(result[0].Id+" "+result[0].Nombre);
-                }
+                });
+
+            })
+        </script>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js">
+        </script>
+        <script>
+            $(document).ready(function () {
+                $('select').material_select();
             });
-                    
-    })
-</script>
-</body>
-    
-</html>
+        </script>
+    </body>
+</html> 
