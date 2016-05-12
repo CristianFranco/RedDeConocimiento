@@ -26,6 +26,7 @@
 </head>
 <body>    
     <h1>Editar Perfil</h1>
+<!--CAMPOS A EDITAR-->
     <div class="row">
       <form class="col s12" method="post" name="registro" action="envreg.php">
         <div class="row">
@@ -60,6 +61,7 @@
               <label for="icon_prefix">Télefono</label>
             </div>
         </div>
+<!--BD CATALOGO DE PAIS-CIUDAD-->
           <div class="input-field col s4">
                  <i class="material-icons prefix">location_on</i>
                     <?php
@@ -72,6 +74,7 @@
             }   
             echo "</select>";
         ?>
+<!--PAISES-->
            <label>Pais:</label>
            </div>
              <div class="input-field col s4">
@@ -87,15 +90,11 @@
             }   
              echo "</select>";
                ?>
+<!--CIUDADES-->
              <label>Ciudad:</label>
              </div>
           <br><br>
-          <div class ="row">
-              <form class="col s12" method="post" name="registro" action="envreg.php">
-            <a class="waves-effect waves-light btn">button</a>
-              </form>
-          </div>
-              
+          <p>           
         </form>
      </div>
         <script>
@@ -121,6 +120,18 @@
 
             })
         </script>
+<!--BOTONES-->
+     <div class ="row">
+       <div class="input-field col s2">
+         <a class="waves-effect waves-light btn" >Habilitar</a>
+       </div>
+       <div class="input-field col s2">
+         <a class="waves-effect waves-light btn" >Aceptar</a>
+       </div>
+       <div class="input-field col s2">
+         <a class="waves-effect waves-light btn" >Cancelar</a>
+        </div>
+      </div>
         <!-- Compiled and minified JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js">
         </script>
