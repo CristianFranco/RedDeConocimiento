@@ -32,32 +32,32 @@
         <div class="row">
             <div class="input-field col s4">
               <i class="material-icons prefix">account_circle</i>
-              <input id="icon_prefix" type="text" class="validate" name="nickname" maxlength="20">
+              <input id="icon_prefix" type="text" class="validate" name="nickname" maxlength="20" disabled="true">
               <label for="icon_prefix">Nickname</label>
             </div>
             <div class="input-field col s4">
               <i class="material-icons prefix">vpn_key</i>
-              <input id="icon_prefix" type="password" class="validate" name="password" maxlength="20">
+              <input id="icon_prefix" type="password" class="validate" name="password" maxlength="20" disabled="true">
               <label for="icon_prefix">Password</label>
             </div>
             <div class="input-field col s4">
               <i class="material-icons prefix">vpn_key</i>
-              <input id="icon_prefix" type="password" class="validate" name="confirmar" maxlength="20">
+              <input id="icon_prefix" type="password" class="validate" name="confirmar" maxlength="20" disabled="true">
               <label for="icon_prefix">Confirmar Password</label>
             </div>
             <div class="input-field col s4">
               <i class="material-icons prefix">perm_identity</i>
-              <input id="icon_prefix" type="text" class="validate" name="nombre" maxlength="20">
+              <input id="icon_prefix" type="text" class="validate" name="nombre" maxlength="20" disabled="true">
               <label for="icon_prefix">Nombre</label>
             </div>
             <div class="input-field col s4">
               <i class="material-icons prefix">perm_identity</i>
-              <input id="icon_prefix" type="text" class="validate" name="apellidos" maxlength="20">
+              <input id="icon_prefix" type="text" class="validate" name="apellidos" maxlength="20" disabled="true">
               <label for="icon_prefix">Apellidos</label>
             </div>
             <div class="input-field col s4">
               <i class="material-icons prefix">phone</i>
-              <input id="icon_prefix" type="text" class="validate" name="telefono" maxlength="10">
+              <input id="icon_prefix" type="text" class="validate" name="telefono" maxlength="10" disabled="true">
               <label for="icon_prefix">Télefono</label>
             </div>
         </div>
@@ -70,7 +70,7 @@
             $result=$connection -> query($query);
             echo "<select  name='pais' id='paises'>";   
             while($fila=$result->fetch_array(MYSQLI_ASSOC)){
-            echo "<option value='".$fila['Codigo']."'>".$fila['Nombre']."</option>";
+            echo "<option value='".$fila['Codigo']."'>".$fila['Nombre']."</option> ";
             }   
             echo "</select>";
         ?>
@@ -124,9 +124,10 @@
      <div class ="row">
        <div class="input-field col s2">
          <a class="waves-effect waves-light btn" >Habilitar</a>
+           
        </div>
        <div class="input-field col s2">
-         <a class="waves-effect waves-light btn" >Aceptar</a>
+         <a class="waves-effect waves-light btn" op>Aceptar</a>
        </div>
        <div class="input-field col s2">
          <a class="waves-effect waves-light btn" >Cancelar</a>
