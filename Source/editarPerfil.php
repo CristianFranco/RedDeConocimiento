@@ -32,35 +32,40 @@
         <div class="row">
             <div class="input-field col s4">
               <i class="material-icons prefix">account_circle</i>
-              <input id="icon_prefix" type="text" class="validate" name="nickname" maxlength="20" disabled="true">
+              <input id="icon_prefix" type="text" class="validate" pattern="[A-Za-z0-9 ]{6,15}" title="Mínimo 6 caracteres, máximo 15 caracteres" name="nickname" required>
               <label for="icon_prefix">Nickname</label>
             </div>
             <div class="input-field col s4">
               <i class="material-icons prefix">vpn_key</i>
-              <input id="icon_prefix" type="password" class="validate" name="password" maxlength="20" disabled="true">
+              <input id="icon_prefix" type="password" class="validate" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Al menos 8 caracteres con un número, una mayúscula y minúscula" name="password" required>
               <label for="icon_prefix">Password</label>
             </div>
             <div class="input-field col s4">
               <i class="material-icons prefix">vpn_key</i>
-              <input id="icon_prefix" type="password" class="validate" name="confirmar" maxlength="20" disabled="true">
+              <input id="icon_prefix" type="password" class="validate"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Al menos 8 caracteres con un número, una mayúscula y minúscula" name="confirmar" required>
               <label for="icon_prefix">Confirmar Password</label>
             </div>
             <div class="input-field col s4">
               <i class="material-icons prefix">perm_identity</i>
-              <input id="icon_prefix" type="text" class="validate" name="nombre" maxlength="20" disabled="true">
+              <input id="icon_prefix" type="text" class="validate" pattern="[A-Za-z ]{6,15}" title="Introduce tu nombre verdadero" name="nombre" required>
               <label for="icon_prefix">Nombre</label>
             </div>
             <div class="input-field col s4">
               <i class="material-icons prefix">perm_identity</i>
-              <input id="icon_prefix" type="text" class="validate" name="apellidos" maxlength="20" disabled="true">
+              <input id="icon_prefix" type="text" class="validate" pattern="[A-Za-z ]{6,20}" title="Introduce tus apellidos" name="apellidos" required>
               <label for="icon_prefix">Apellidos</label>
             </div>
             <div class="input-field col s4">
               <i class="material-icons prefix">phone</i>
-              <input id="icon_prefix" type="text" class="validate" name="telefono" maxlength="10" disabled="true">
+              <input id="icon_prefix" type="text" class="validate" pattern="[0-9]{10,20}" title="Introduce solo datos númericos (lada + télefono)" name="telefono" required>
               <label for="icon_prefix">Télefono</label>
             </div>
         </div>
+          <div class="input-field col s4">
+              <i class="material-icons prefix">assignment</i>
+              <input id="icon_prefix" type="text" class="validate" pattern="[A-Za-z0-9 ]{10,30}" title="Introduce una breve descripción de ti " name="descripcion" required>
+              <label for="icon_prefix">Descripción</label>
+            </div>
 <!--BD CATALOGO DE PAIS-CIUDAD-->
           <div class="input-field col s4">
                  <i class="material-icons prefix">location_on</i>
@@ -70,7 +75,7 @@
             $result=$connection -> query($query);
             echo "<select  name='pais' id='paises'>";   
             while($fila=$result->fetch_array(MYSQLI_ASSOC)){
-            echo "<option value='".$fila['Codigo']."'>".$fila['Nombre']."</option> ";
+            echo "<option value='".$fila['Codigo']."'>".$fila['Nombre']."</option>";
             }   
             echo "</select>";
         ?>
@@ -94,7 +99,18 @@
              <label>Ciudad:</label>
              </div>
           <br><br>
-          <p>           
+          <p>  
+<!--BOTONES-->            
+              <button class="waves-effect waves-light btn" type="submit" name="action">Habilitar
+                <i class="material-icons right">button</i>       
+              </button>
+               <button class="btn waves-effect waves-light" type="submit" name="action">Aceptar
+                <i class="material-icons right">button</i>       
+              </button>
+               <button class="btn waves-effect waves-light" type="submit" name="action">Cancelar
+                <i class="material-icons right">button</i>       
+              </button>
+              <a class="waves-effect waves-light btn" type="submit" name="action">button</a>
         </form>
      </div>
         <script>
@@ -119,20 +135,7 @@
                 });
 
             })
-        </script>
-<!--BOTONES-->
-     <div class ="row">
-       <div class="input-field col s2">
-         <a class="waves-effect waves-light btn" >Habilitar</a>
-           
-       </div>
-       <div class="input-field col s2">
-         <a class="waves-effect waves-light btn" op>Aceptar</a>
-       </div>
-       <div class="input-field col s2">
-         <a class="waves-effect waves-light btn" >Cancelar</a>
-        </div>
-      </div>
+        </script>          
         <!-- Compiled and minified JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js">
         </script>
