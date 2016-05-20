@@ -30,7 +30,7 @@
 
         <h2>Registro de Datos</h2>
         <div class="row">
-            <form class="col s12" method="post" name="registro" action="envreg.php">
+            <form class="col s12" method="post" name="registro" action="./procesos/procReg.php" >
                 <div class="row">
                     <div class="input-field col s6">
                         <i class="material-icons prefix">account_circle</i>
@@ -57,17 +57,17 @@
                 </div>
                  <div class="input-field col s6">
                  <i class="material-icons prefix">location_on</i>
-                    <?php
-            $query='Select * From Pais order by Nombre ASC;';
-            $connection=connect();
-            $result=$connection -> query($query);
-            echo "<select  name='pais' id='paises'>";   
-            while($fila=$result->fetch_array(MYSQLI_ASSOC)){
-            echo "<option value='".$fila['Codigo']."'>".$fila['Nombre']."</option>";
-            }   
-            echo "</select>";
-        ?>
-                        <label>Pais:</label>
+                 <?php
+                     $query='Select * From Pais order by Nombre ASC;';
+                     $connection=connect();
+                     $result=$connection -> query($query);
+                     echo "<select  name='pais' id='paises'>";   
+                     while($fila=$result->fetch_array(MYSQLI_ASSOC)){
+                         echo "<option value='".$fila['Codigo']."'>".$fila['Nombre']."</option>";
+                     }   
+                    echo "</select>";
+                 ?>
+                <label>Pais:</label>
                 </div>
                 <div class="input-field col s6">
                     <i class="material-icons prefix">location_on</i>
@@ -76,39 +76,52 @@
                         $query="Select * From Ciudad where CodigoPais='AFG' order by Nombre ASC;";
                         $connection=connect();
                         $result=$connection -> query($query);
-                        echo "<select  name='ciudades' id='ciudades'>";   
+                        echo "<select  name='ciudad' id='ciudades'>";   
                         while($fila=$result->fetch_array(MYSQLI_ASSOC)){
-                        echo "<option value='".$fila['ID']."'>".$fila['Nombre']."</option>";
-            }   
-            echo "</select>";
-        ?>
-                    <label>Ciudad:</label>
+                            echo "<option value='".$fila['ID']."'>".$fila['Nombre']."</option>";
+                        }   
+                        echo "</select>";
+                    ?>
+                <label>Ciudad:</label>
                 </div>
                 <div class="row">
-                    <div class="input-field col s7">
+                <div class="input-field col s6">
                         <i class="material-icons prefix">assignment_ind</i>
                         <input id="icon_prefix" type="text" class="validate" name="nkname">
                         <label for="icon_prefix">NickName</label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s7">
+                    <div class="input-field col s6">
                         <i class="material-icons prefix">vpn_key</i>
                         <input id="icon_prefix" type="password" class="validate" name="pass">
                         <label for="icon_prefix">Contraseña</label>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s7">
+              <div class="input-field col s6">
                         <i class="material-icons prefix">vpn_key</i>
                         <input id="icon_prefix" type="password" class="validate" name="confpass">
                         <label for="icon_prefix">Confirmar Contraseña</label>
                     </div>
-
                 </div>
-               
-
+                 <div class="row">
+                    <div class="input-field col s12">
+                     <i class="material-icons prefix">list</i>
+                   <textarea id="icon_prefix" class="materialize-textarea" name="desc"></textarea>
+                  <label for="icon_prefix">Descripción</label>
+                 </div>
+                </div>
+                 
+                <div align="right">
+                <button class="btn waves-effect waves-light" name="regresar" onClick="this.form.action='publicacion.php'">Regresar
+                <i class="material-icons left">reply</i>
+                </button>
+                <button class="btn waves-effect waves-light" type="submit" name="enviar">Registrar
+                <i class="material-icons right">forward</i>
+                </button>
+               </div>
+                
             </form>
+            
 
         </div>
         <script>
