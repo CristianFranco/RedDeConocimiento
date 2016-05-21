@@ -10,7 +10,8 @@
      $nombre = $_POST['nombre'];
      $area = $_POST['area'];
      $tag = $_POST['tags'];
-     $radios = $_POST['group1'];
+     echo $tag;
+   //  $radios = $_POST['group1'];
 	 $tags = array();
      $ids = array();
 	 $idsAcepted = array();
