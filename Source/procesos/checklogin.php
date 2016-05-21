@@ -4,7 +4,8 @@
     
     //Parámetros POST
     $usuario=$_POST['usuario'];
-    $pass=$_POST['pass'];
+    $pass=md5($_POST['pass']);
+
     $respuesta=new array();
     if(isset($usuario)&&isset($contraseña)){
         $qryInicio="select * from Usuario where Nickname='$usuario' and Password='$pass'";
@@ -19,7 +20,7 @@
         }
     }
     else{//redireccionar a index.php
-        
+        header('index.php');
     }
 
 

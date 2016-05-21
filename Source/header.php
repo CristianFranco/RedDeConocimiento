@@ -22,8 +22,8 @@
             <li><a href="badges.html"><i class="material-icons">home</i></a></li>
             <!-- Si no está logeado-->
             <?php if(!isset($_SESSION['idUsuario'])){ ?>
-                <li><a href="collapsible.html"><i class="material-icons">person_add</i></a></li>
-                <li><a href="" id="click"><i class="material-icons">exit_to_app</i></a></li>
+                <li><a href="collapsible.html">Iniciar Sesión</a></li>
+                <li><a href="" id="click">Registra</a></li>
 
 
                 <!--- Si está logeado-->
@@ -40,7 +40,14 @@
     </div>
 </nav>
 
-
+<div class="clas2">
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
 <script>
     $("#cajaBuscar").focus(function (e) {
         console.log("hola");
