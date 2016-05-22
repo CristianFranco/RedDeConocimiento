@@ -35,6 +35,10 @@
 
         <!--Import jQuery before materialize.js-->
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script>
+            var estado = <?php if(isset($_SESSION['idUsuario'])) echo "true";else echo "false"; ?>;
+        </script>
+        <script src="../JS/cargarPreferencias.js"></script>
     </head>
 
     <body>
@@ -52,66 +56,66 @@
             </div>
             <!-- Menú de la publicación-->
 
-            <nav class="col s10 offset-s1 blue darken-4">
+            <nav class="col s10 offset-s1 principal">
 
-                <div class="nav-wrapper">
-                    <ul id="nav-mobile" class="left hide-on-med-and-down">
-                        <li><a><i class="material-icons left">info</i>&nbsp;</a>
+                <div class=" nav-wrapper ">
+                    <ul id="nav-mobile " class="left hide-on-med-and-down ">
+                        <li><a><i class="material-icons left ">info</i>&nbsp;</a>
 
                         </li>
-                        <li><a href="#">
-                            (<span class="badge">4</span>)
-                            <i class="material-icons left">photo_camera</i>    
+                        <li><a href="# ">
+                            (<span class="badge ">4</span>)
+                            <i class="material-icons left ">photo_camera</i>    
                         </a></li>
-                        <li><a href="#">
-                            (<span class="badge">4</span>)
-                            <i class="material-icons left">videocam<!--movie--></i>    
+                        <li><a href="# ">
+                            (<span class="badge ">4</span>)
+                            <i class="material-icons left ">videocam<!--movie--></i>    
                         </a></li>
-                        <li><a href="#">
-                            (<span class="badge">4</span>)
-                            <i class="material-icons left">audiotrack</i> 
+                        <li><a href="# ">
+                            (<span class="badge ">4</span>)
+                            <i class="material-icons left ">audiotrack</i> 
                         </a></li>
-                        <li><a href="#">
-                            (<span class="badge">4</span>)
-                            <i class="material-icons left">description</i> 
+                        <li><a href="# ">
+                            (<span class="badge ">4</span>)
+                            <i class="material-icons left ">description</i> 
                         </a></li>
-                        <li><a href="#">
-                            (<span class="badge">4</span>)
-                            <i class="material-icons left">book</i> 
+                        <li><a href="# ">
+                            (<span class="badge ">4</span>)
+                            <i class="material-icons left ">book</i> 
                         </a></li>
-                        <li><a href="#">
-                            (<span class="badge">4</span>)
-                            <i class="material-icons left">sms</i> 
+                        <li><a href="# ">
+                            (<span class="badge ">4</span>)
+                            <i class="material-icons left ">sms</i> 
                         </a></li>
                     </ul>
                 </div>
             </nav>
 
-            <div id="pubDesc" class="col s10 offset-s1 grey lighten-2" style="height:65vh;">
+            <div id="pubDesc " class="col s10 offset-s1 grey lighten-2 " style="height:65vh; ">
 
             </div>
             <!-- Controles de navegación -->
-            <div id="controles" class="col s10 offset-s1 grey lighten-1" style="height:5vh;">
-                <div class="center-align">
-                    <i class="material-icons">first_page</i>
-                    <i class="material-icons">keyboard_arrow_left</i>
+            <div id="controles " class="col s10 offset-s1 grey lighten-1 " style="height:5vh; ">
+                <div class="center-align ">
+                    <i class="material-icons ">first_page</i>
+                    <i class="material-icons ">keyboard_arrow_left</i>
                     <span>1 2 3 4</span>
-                    <i class="material-icons">keyboard_arrow_right</i>
-                    <i class="material-icons">last_page</i>
+                    <i class="material-icons ">keyboard_arrow_right</i>
+                    <i class="material-icons ">last_page</i>
 
                 </div>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row ">
 
         </div>
 
-        <?php require("footer.php");?>
+        <?php require("footer.php ");?>
 
 
             <!-- Compiled and minified JavaScript -->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js "></script>
 
     </body>
 
