@@ -7,8 +7,8 @@
 <nav class="principal">
     <div class="nav-wrapper">
         <a href="#" class="brand-logo">RedConocimiento</a>
-        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-      
+        <a id="mobileButton" href="#" data-activates="mobile-navbar" class="button-collapse"><i class="material-icons">menu</i></a>
+
         <ul id="nav-mobile" class="right hide-on-med-and-down">
 
             <li class="col s2">
@@ -48,15 +48,42 @@
                     </li>
                     <?php } ?>
         </ul>
-        <ul class="side-nav" id="mobile-demo">
-        <li><a href="sass.html">Sass</a></li>
-        <li><a href="badges.html">Components</a></li>
-        <li><a href="collapsible.html">Javascript</a></li>
-        <li><a href="mobile.html">Mobile</a></li>
-      </ul>
+        <ul class="side-nav" id="mobile-navbar">
+
+            <li>
+                <div class="input-field">
+                    <i class="material-icons prefix black-text">search</i>
+                    <input id="cajaBuscar2" type="text" class="validate white black-text" placeholder="Buscar">
+                    <label for="cajaBuscar2 black"></label>
+                </div>
+            </li>
+            <li><a href="badges.html"><i class="material-icons left">home</i>Inicio</a></li>
+            <li>
+                <a href="#" id="busquedaA">
+                        Busqueda Avanzada
+                </a>
+            </li>
+
+            <!-- Si no está logeado-->
+            <?php if(!isset($_SESSION['idUsuario'])){ ?>
+                <li><a id="loginBoton" href="#login" class="modal-trigger">Iniciar Sesión</a></li>
+                <li><a href="" id="click">Registrarse</a></li>
+
+
+                <!--- Si está logeado-->
+                <?php } else{ ?>
+                    <li><a href="sass.html">Sass</a></li>
+                    <li><a href="badges.html"><i class="material-icons">message</i></a></li>
+                    <li>
+                        <a class="dropdown-button" href="#!" data-activates="perfilDropDown">Bienvenido 
+                            <?=$_SESSION['nickname']?><i class="material-icons right">arrow_drop_down</i></a>
+                        </a>
+                    </li>
+                    <?php } ?>
+        </ul>
     </div>
 </nav>
-<script>
+
 <div id="login" class="modal ">
     <form action="" id="formLogin" class="">
         <div class="">
@@ -91,44 +118,3 @@
         </div>
     </form>
 </div>
-<script>
-    $("#cajaBuscar").focus(function (e) {
-        console.log("hola");
-        $("#busquedaA").attr('style', 'display:block');
-        $("#busquedaA").attr('style', 'position:absolute');
-    });
-    $("#cajaBuscar").focusout(function (e) {
-        console.log("hola");
-        $("#busquedaA").attr('style', 'display:none');
-
-    });
-    $(document).ready(function () {
-        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-        $('.modal-trigger').leanModal();
-    });
-    $("#formLogin").on("submit", function (e) {
-        e.preventDefault();
-        $("#loginMsn").hide();
-        $.ajax({
-            url: "procesos/checklogin.php"
-            , method: "POST"
-            , data: {
-                usuario: $("#usuario").val()
-                , pass: $("#pass").val()
-            }
-            , dataType: "JSON"
-            , success: function (result) {
-                if (result.estado) {
-                    window.location = "index.php";
-                } else {
-                    $("#loginMsn").text(result.msn);
-                    $("#loginMsn").show();
-                    //window.location = "index.php";
-                }
-            }
-        });
-    });
-    $("#loginBoton").on("click", function (e) {
-        $("#loginMsn").hide();
-    });
-</script>
