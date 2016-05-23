@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -17,7 +20,7 @@
             <?php require("header.php")?>
         </header>
 		<?php
-     session_start();
+     
      $nombre = $_POST['nombre'];
      $area = $_POST['area'];
      $tag = $_POST['tags'];
