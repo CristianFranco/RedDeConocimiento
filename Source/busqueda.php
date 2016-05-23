@@ -20,7 +20,7 @@
             <?php require("header.php")?>
         </header>
 	<div class="container">
-		<form action="./procesos/AlgoritmoBusqueda.php" method="POST" id='subFor'>
+		<form action="./resultadosDeBusqueda.php" method="POST" id='subFor'>
 			<div class="input-field" >
 				<label for="nombre">Busqueda por nombre de grupo o persona:</label>
 				<input type="text" id="nombre" name="nombre" ></input>
