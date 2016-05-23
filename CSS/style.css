@@ -1,0 +1,23 @@
+
+.container{
+	padding: 30px;
+}
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+  /*
+.bcPrincipal {
+    background-color: white;
+}
+
+.bcSecundario {}
+
+.txtPrincipal {}
+
+.txtSecundario {}*/
