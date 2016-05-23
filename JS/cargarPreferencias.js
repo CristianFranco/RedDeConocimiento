@@ -33,12 +33,12 @@ function crearEstilo() {
 
 function cargarDefault(tipo) {
     strEstilo = '<style type="text/css">' + /************************/
-        '.principal,nav ul li a div,button,.container input[type="submit"].btn,a.btn,a.btn:hover' +
+        '.principal,nav ul li a div,button,.container pinput[type="submit"].btn,a.btn,a.btn:hover' +
         ',.principal .dropdown-content li>a,.container .dropdown-content li>span{' +
         'background-color:' + estilos[tipo].bcPrincipal + ';' +
         'color:' + estilos[tipo].tcPrincipal + ';' +
         '}' +
-        'nav.principal ul a:hover{' +
+        'nav.principal ul a:hover,nav.principal ul a.selected{' +
         'background-color:' + estilos[tipo].tcPrincipal + ';' +
         'color:' + estilos[tipo].bcPrincipal + ';' +
         'opacity:1;' +
