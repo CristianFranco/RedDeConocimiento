@@ -46,6 +46,7 @@
             var estado = <?php if(isset($_SESSION['idUsuario'])) echo "true";else echo "false"; ?>;
         </script>
         <script src="../JS/cargarPreferencias.js"></script>
+        <link rel="stylesheet" type="text/css" href="../CSS/style.css">
     </head>
 
     <body>
