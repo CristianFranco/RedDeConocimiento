@@ -10,7 +10,6 @@
      $nombre = $_POST['nombre'];
      $area = $_POST['area'];
      $tag = $_POST['tags'];
-     echo $tag;
    //  $radios = $_POST['group1'];
 	 $tags = array();
      $ids = array();
@@ -27,7 +26,6 @@
     	$extraido = mysqli_fetch_array($result);
      }
     $idsAcepted = getArray($cont, $tag, $tags, $ids);
-     echo "<br><br>";
     $queryTags="select * from AreaConocimiento;";
      $result = $conexion ->query($queryTags);
      $extraido = mysqli_fetch_array($result);
@@ -66,12 +64,31 @@
         Publica.idPublicacion = Publicacion.idPublicacion and
         Publica.idGrupo = Grupo.idGrupo) ;";
 
+    $finalQuery2 = "select distinct Usuario.* from Usuario, Publica, Publicacion_Etiqueta,Etiqueta, Publicacion
+         where LOWER(Usuario.Nickname) like LOWER('%".$nombre."%')
+        or (
+        Etiqueta.idEtiqueta in ".$str." and
+        Publica.idUsuario = Usuario.idUsuario and
+        Publicacion_Etiqueta.idEtiqueta = Etiqueta.idEtiqueta and
+        Publicacion_Etiqueta.idPublicacion = Publicacion.idPublicacion and
+        Publica.idPublicacion = Publicacion.idPublicacion
+        );";
+
     $result = $conexion ->query($finalQuery);
     $extraido = mysqli_fetch_array($result);
     $contFinal = 0;
     $grupoUsuarios = array();
      while($extraido != NULL){
-        $registro=array("Id"=>$extraido["idGrupo"],"Nombre"=>$extraido["Nombre"]);
+        $registro=array("Id"=>$extraido["idGrupo"],"Nombre"=>$extraido["Nombre"], "Tipo" => 1);
+        array_push($grupoUsuarios,$registro);
+        $extraido = mysqli_fetch_array($result);
+     }
+
+     $result = $conexion ->query($finalQuery2);
+    $extraido = mysqli_fetch_array($result);
+    $contFinal = 0;
+     while($extraido != NULL){
+        $registro=array("Id"=>$extraido["idUsuario"],"Nombre"=>$extraido["Nickname"], "Tipo" => 2);
         array_push($grupoUsuarios,$registro);
         $extraido = mysqli_fetch_array($result);
      }
