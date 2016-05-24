@@ -132,8 +132,7 @@
 
     <!DOCTYPE html>
     <html lang="es">
-
-    <head>
+<head>
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -146,12 +145,17 @@
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
         <!-- Compiled and minified CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+        <link rel="stylesheet" href="../frameworks/css/materialize.min.css">
 
         <!--Import jQuery before materialize.js-->
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-2.1.0.min.js" integrity="sha256-8oQ1OnzE2X9v4gpRVRMb1DWHoPHJilbur1LP9ykQ9H0=" crossorigin="anonymous"></script>
+        
+        <script>
+            var estado = <?php if(isset($_SESSION['idUsuario'])) echo "true";else echo "false"; ?>;
+        </script>
+        <script src="../JS/cargarPreferencias.js"></script>
+        <link rel="stylesheet" type="text/css" href="../CSS/style.css">
     </head>
-
     <body>
         <!-- Header -->
         <header>
@@ -159,8 +163,9 @@
         </header>
 
         <!--Contenido de la página principal de @usuario -->
-        <div class="row">
-        </div>
+        <main>
+        
+        
         <div class="container">
             <?php
             // SI SE BUSCA UN USUARIO SE REALIZA EL SIGUIETE CODIGO
@@ -168,10 +173,10 @@
             $n;
             for($n=0;$n<count($result);$n++){
             //SE IMPRIMEN LOS DATOS DEL USUARIO DENTRO DE UNA TARJETA
-            echo "<div class=\"row\">
+            echo "<div class=\"row \">
                 <div>
-                  <div class=\"card blue darken-1\">
-                    <div class=\"card-content white-text \">
+                  <div class=\"card\">
+                    <div class=\"card-content principal\">
                       <span class=\"card-title\">".$usuario[$n]['Nickname']."</span>
                       <p>".$usuario[$n]['Nombre']." ". $usuario[$n]['Apellidos']."
                       <br>Correo: ".$usuario[$n]['Email']." 
@@ -185,8 +190,8 @@
             //SE IMIPRIMEN LOS COMENTARIOS DEL USUARIO DENTRO DE UNA SOLA TARJETA
             echo "<div class=\"row\">
                 <div>
-                  <div class=\"card grey lighten-5\">
-                    <div class=\"card-content grey-text\">
+                  <div class=\"card \">
+                    <div class=\"card-content secundario\">
                       <span class=\"card-title\">Ultimos comentarios</span>";
             //SI EXISTE COMENTARIOS LOS IMPRIME
             if($comentarios!=null){
@@ -213,8 +218,8 @@
             for($n=0;$n<count($result);$n++){
                 echo "<div class=\"row\">
                 <div>
-                  <div class=\"card blue darken-1\">
-                    <div class=\"card-content white-text \">
+                  <div class=\"card\">
+                    <div class=\"card-content principal \">
                       <span class=\"card-title\">".$usuario[$n]['NomGrupo']."</span>
                       <p>".$usuario[$n]['descrip']."
                       <br>Area de Conocimiento: ".$usuario[$n]['Nombre']."
@@ -228,8 +233,8 @@
                 //imprime los miembros del grupo en una tarjeta blanca
              echo "<div class=\"row\">
             <div>
-              <div class=\"card grey lighten-5\">
-                <div class=\"card-content grey-text\">
+              <div class=\"card\">
+                <div class=\"card-content secundario\">
                   <span class=\"card-title\">Miembros del Grupo</span>";
             //SI EXISTEN MIEMBROS EN EL GRUPO LOS IMPRIME EN LA TARJETA
             if($miembros!=null){
@@ -257,8 +262,8 @@
                 for($n=0;$n<count($result2);$n++){
                 echo "<div class=\"row\">
                     <div>
-                      <div class=\"card blue lighten-5\">
-                        <div class=\"card-content \">
+                      <div class=\"card \">
+                        <div class=\"card-content secundario\">
                           <span class=\"card-title\">".$publicacion[$n]['Nickname']." publicó ".$publicacion[$n]['Titulo']."</span>
                           <p>El ".$publicacion[$n]['Fecha']." 
                           <br>Descripcion: ".$publicacion[$n]['descrip']." 
@@ -283,8 +288,8 @@
                     for($n=0;$n<count($result2);$n++){
                     echo "<div class=\"row\">
                         <div>
-                          <div class=\"card blue lighten-5\">
-                            <div class=\"card-content \">
+                          <div class=\"card \">
+                            <div class=\"card-content secundario\">
                               <span class=\"card-title\">".$publicacion[$n]['Nickname']." publicó ".$publicacion[$n]['Titulo']."</span>
                               <p>El ".$publicacion[$n]['Fecha']." 
                               <br>Descripcion: ".$publicacion[$n]['descrip']." 
@@ -303,8 +308,8 @@
                 //SI NO SE TIENEN PUBLICACIONES ENTONCES SE MUESTRA LO SIGUIENTE
                 echo "<div class=\"row\">
                 <div>
-                  <div class=\"card blue lighten-5\">
-                    <div class=\"card-content \">
+                  <div class=\"card blue \">
+                    <div class=\"card-content secundario \">
                       <span class=\"card-title\">".$publicacion[0]['Nickname']." no cuenta con publicaciones.</span>
                     </div>
                     <div class=\"card-action\">
@@ -321,12 +326,10 @@
         <div class="row">
 
         </div>
-
+            </main>
         <?php require("footer.php");?>
-
-
-            <!-- Compiled and minified JavaScript -->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    <script src="../frameworks/js/materialize.min.js"></script>
+            <script src="../JS/header.js"></script>
 
     </body>
 
