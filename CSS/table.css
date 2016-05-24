@@ -1,0 +1,56 @@
+.asunto{
+    max-width: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.textColumn{
+    max-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.imgColumn{
+    width: 7%;
+}
+.userColumn{
+    width: 10%;
+}
+.noColumn{
+    width: 7%;
+}
+.remove{
+    width: 2%;
+}
+.report{
+    width: 2%;
+}
+.date{
+    width: 23%;
+    max-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.deleteIcon{
+    width: 1.5rem;
+    height: 1.5rem;
+}
+table.highlight > tbody > tr{
+    transition: background-color .25s ease;
+}
+table.highlight > tbody > tr:hover{
+    background-color: #64b5f6;
+}
+tr{
+    height: 40px;
+}
+span.badge.new{
+    background-color: #1565c0;
+}
+i.icon-warn{
+    color: yellow;
+}
+a.big{
+    font-size: 10px;
+}

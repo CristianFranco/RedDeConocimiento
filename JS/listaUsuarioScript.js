@@ -27,6 +27,6 @@
             }
 
             function sendGrPe(id, tipo){
-                    $.redirect('mostrar.php', {'uid ': id, 'tipo': tipo});
+                    $.redirect('mostrar.php', {'uid': id, 'tipo': tipo});
             }
 sendCall();

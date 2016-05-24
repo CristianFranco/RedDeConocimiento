@@ -7,6 +7,7 @@
     <html lang="es">
 
     <head>
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!--Let browser know website is optimized for mobile-->
@@ -18,17 +19,26 @@
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
         <!-- Compiled and minified CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+        <link rel="stylesheet" href="../frameworks/css/materialize.min.css">
 
         <!--Import jQuery before materialize.js-->
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-
-
+        <script src="https://code.jquery.com/jquery-2.1.0.min.js" integrity="sha256-8oQ1OnzE2X9v4gpRVRMb1DWHoPHJilbur1LP9ykQ9H0=" crossorigin="anonymous"></script>
+        
+        <script>
+            var estado = <?php if(isset($_SESSION['idUsuario'])) echo "true";else echo "false"; ?>;
+        </script>
+        <script src="../JS/cargarPreferencias.js"></script>
+        <link rel="stylesheet" type="text/css" href="../CSS/style.css">
     </head>
 
     <body>
-
-        <h2>Registro de Datos</h2>
+        <header>
+            <?php require("header.php")?>
+        </header>
+        <main>
+        
+            <div class="container secundario">
+                <h2>Registro de Datos</h2>
         <div class="row">
             <form class="col s12" method="post" name="registro" action="./procesos/procReg.php">
                 <div class="row">
@@ -124,6 +134,11 @@
 
 
         </div>
+                </div>
+            </main>
+        <?php require("footer.php");?>
+    <script src="../frameworks/js/materialize.min.js"></script>
+            <script src="../JS/header.js"></script>
         <script>
             $("#paises").on("change", function (e) {
                 console.log($("#paises").val());
@@ -146,9 +161,6 @@
                 });
 
             })
-        </script>
-        <!-- Compiled and minified JavaScript -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js">
         </script>
         <script>
             $(document).ready(function () {

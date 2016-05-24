@@ -1,0 +1,42 @@
+<?php
+    $mensajes=json_decode($_COOKIE["Mensajes"],true);
+    $idMensaje=$_GET["idMensaje"];
+    $mensaje=$mensajes[$idMensaje];
+    $box=$_GET["box"];
+    $img=strtolower($mensaje["Nombre"][0]);
+    require('connection.php');
+    $connection=connect();
+    $query="SELECT U.idUsuario
+            FROM Usuario U
+            WHERE U.Nickname='$mensaje[Nombre]';";
+    $result=$connection->query($query);
+    $row=$result->fetch_array(MYSQLI_ASSOC);
+    $idEnviar=$row["idUsuario"];
+    echo "<div class='modal-content'>";
+    echo "<div class='row'>";
+    echo "<div class='col s2'>";
+    echo "<img src='../IMG/Avatar/$img.png'>";
+    echo "</div>";
+    echo "<div class='col s8'>";
+    echo "<h6>$mensaje[Nombre]</h6>";
+    echo "<h3 class='asunto'>$mensaje[Asunto]</h3>";
+    echo "</div>";
+    echo "<div class='col s2'>";
+    echo "<h5>$mensaje[Fecha]</h5>";
+    echo "</div>";
+    echo "</div>";
+    echo "<div class='divider'></div>";
+    echo "<div class='col s12' style='word-wrap:break-word'>";
+    echo "<p>";
+    echo nl2br($mensaje["Mensaje"]);
+    echo "</p>";
+    echo "</div>";
+    echo "</div>";
+    if($box!=1){
+        echo "<div class='modal-footer'>";
+        echo "<a id='resp' class='modal-action waves-effect waves-blue btn-flat'><i class='material-icons'>reply</i></a>";
+        echo "</div>";
+    }
+    echo "<input type='hidden' id='idEnviar' value='$idEnviar'>";
+    echo "<input type='hidden' id='asnt' value='$mensaje[Asunto]'>";
+?>
