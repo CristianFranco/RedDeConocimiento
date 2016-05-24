@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <?php 
     session_start();
     require("procesos/connection.php"); 
@@ -10,29 +11,35 @@
     $usuario = $result -> fetch_assoc();
 ?>
 <head>
-    
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Editar Perfil</title>
+        <title>Publicacion</title>
 
         <!--Import Google Icon Font-->
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
         <!-- Compiled and minified CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+        <link rel="stylesheet" href="../frameworks/css/materialize.min.css">
+
         <!--Import jQuery before materialize.js-->
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>-->
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-            <!-- Compiled and minified JavaScript -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js">
-        </script>
+        <script src="https://code.jquery.com/jquery-2.1.0.min.js" integrity="sha256-8oQ1OnzE2X9v4gpRVRMb1DWHoPHJilbur1LP9ykQ9H0=" crossorigin="anonymous"></script>
         
-</head>
+        <script>
+            var estado = <?php if(isset($_SESSION['idUsuario'])) echo "true";else echo "false"; ?>;
+        </script>
+        <script src="../JS/cargarPreferencias.js"></script>
+        <link rel="stylesheet" type="text/css" href="../CSS/style.css">
+    </head>
 <body>    
+    <header>
+            <?php require("header.php")?>
+        </header>
+    <main>
+        <div class="container secundario">
     <h1>Editar Perfil</h1>
     <?php
         /*echo $usuario ['Nickname'];
@@ -126,12 +133,19 @@
              </div>
           <br><br>
           <p>  
-<!--BOTONES-->            
+<!--BOTONES-->    
+              <form class="col s12" method="post" name="registro" action="envreg.php">
               <a class="waves-effect waves-light btn" id="habilitar" type="button" name="action">Habilitar</a>
               <a class="waves-effect waves-light btn" id="aceptar" type="submit" name="action">Aceptar</a>
               <a class="waves-effect waves-light btn" id="cancelar" type="button" name="action">Cancelar</a>
+              </form>
         </form>
      </div>
+            </div>
+    </main>
+        <?php require("footer.php");?>
+    <script src="../frameworks/js/materialize.min.js"></script>
+            <script src="../JS/header.js"></script>
         <script>
             $("#paises").on("change", function (e) {
                 console.log($("#paises").val());
