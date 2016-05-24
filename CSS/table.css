@@ -27,6 +27,10 @@
 }
 .date{
     width: 23%;
+    max-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .deleteIcon{
     width: 1.5rem;
