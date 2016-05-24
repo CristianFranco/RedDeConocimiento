@@ -4,88 +4,128 @@
     //Parámetros de sesión
     $idUsr=1;//$_SESSION["idUsuario"];
     $acceso=1;//$_SESSION['tipo'];
-    
+    $uid=null;
+    $tipo=null;
+    $bandera=false; //la publicación fue echa en un grupo
     //Parámetros externos
     $idPub=1;//$_POST['idPub']
-    $uid=1;//$_POST['']
-    $tipo="usuario";//$_POST['tipo']
+    $uid=$_POST['uid'];
+    $tipo=$_POST['tipo'];
     //Conexión y query's a la BD
     require("procesos/connection.php");
     $connection=connect();
     if($tipo=="grupo"){
-        //OBTIENE LOS DATOS DEL GRUPO DE LA BASE DE DATOS Y LAS PUBLICACIONES DE ESTE
-    $sql="SELECT idGrupo, Grupo.Nombre as NomGrupo, Grupo.Descripcion as descrip, AreaConocimiento.Nombre, AreaConocimiento.Descripcion FROM RCO.Grupo inner join  RCO.AreaConocimiento on  Grupo.IdAreaDeConocimiento=AreaConocimiento.idAreaConocimiento and Grupo.idGrupo=$uid;";
-    $result=$connection->query($sql);
-    $n=0;
-     while($fila=$result->fetch_assoc()){
-                        $usuario[$n]=$fila;
-                        $n++;
-                    }
-        $sql2="SELECT 
-        Usuario.Nickname,
-        Fecha,
-        Titulo,
-        Publicacion.Descripcion as descrip,
-        Grupo.Nombre,
-        Grupo.Descripcion
-    FROM
-        Publicacion,
-        Publica,
-        Grupo,
-        Usuario
-    WHERE
-        Usuario.idUsuario = Publica.idUsuario
-            AND Publicacion.idPublicacion = Publica.idPublicacion
-            AND Grupo.idGrupo = Publica.idGrupo
-            AND Grupo.idGrupo=$uid;";
+            //OBTIENE LOS DATOS DEL GRUPO DE LA BASE DE DATOS Y LAS PUBLICACIONES DE ESTE
+            //OBTIENE LOS DATOS DEL GRUPO
+        $sql="SELECT idGrupo, Grupo.Nombre as NomGrupo, Grupo.Descripcion as descrip, AreaConocimiento.Nombre, AreaConocimiento.Descripcion FROM RCO.Grupo inner join  RCO.AreaConocimiento on  Grupo.IdAreaDeConocimiento=AreaConocimiento.idAreaConocimiento and Grupo.idGrupo=$uid;";
+        $result=$connection->query($sql);
+        $n=0;
+         while($fila=$result->fetch_assoc()){
+                            $usuario[$n]=$fila;
+                            $n++;
+                        }
+            //OBTIENE LAS PUBLICACIONES QUE SE HAN HECHO EN ESTE GRUPO
+            $sql2="SELECT 
+            Publicacion.idPublicacion,
+            Usuario.Nickname,
+            Fecha,
+            Titulo,
+            Publicacion.Descripcion as descrip,
+            Grupo.Nombre,
+            Grupo.Descripcion,
+            Grupo.idGrupo
+        FROM
+            Publicacion,
+            Publica,
+            Grupo,
+            Usuario
+        WHERE
+            Usuario.idUsuario = Publica.idUsuario
+                AND Publicacion.idPublicacion = Publica.idPublicacion
+                AND Grupo.idGrupo = Publica.idGrupo
+                AND Grupo.idGrupo=$uid;";
+            $result2=$connection->query($sql2);
+             $n=0;
+            $publicacion=null;
+             while($fila=$result2->fetch_assoc()){
+                                $publicacion[$n]=$fila;
+                                $n++;
+                            }
+        //OBTIENE LOS USUARIOS DENTRO DEL GRUPO
+        $sql3="SELECT Usuario.idUsuario, Usuario.Nickname from  Usuario_Grupo, Usuario, Grupo where Usuario_Grupo.idGrupo=Grupo.idGrupo and Usuario_Grupo.idUsuario=Usuario.idUsuario and Usuario_Grupo.idGrupo=$uid and Usuario_Grupo.Estado=1 limit 10;";
+        $result3=$connection->query($sql3);
+        $n=0;
+        $miembros=null;
+        while($fila=$result3->fetch_assoc()){
+            $miembros[$n]=$fila;
+            $n++;
+        }
+    }else{
+        //OBTIENE LOS DATOS DEL USUARIO DE LA BASE DE DATOS Y SUS PUBLICACIONES
+        //OBTIENE LOS DATOS DEL USUARIO
+        $sql="SELECT idUsuario, Nickname,Email,Telefono,Nombre,Apellidos FROM Usuario where idUsuario like $uid;";
+        $result=$connection->query($sql);
+        $n=0;
+         while($fila=$result->fetch_assoc()){
+                            $usuario[$n]=$fila;
+                            $n++;
+                        }
+        //OBTIENE LAS PUBLICACIONES DEL USUARIO
+        $sql2="SELECT
+                    Publicacion.idPublicacion,
+                    Usuario.Nickname,
+                    Fecha,
+                    Titulo,
+                    Publicacion.Descripcion as descrip,
+                    Grupo.Nombre,
+                    Grupo.Descripcion,
+                    Grupo.idGrupo
+                FROM
+                    Publicacion,
+                    Publica,
+                    Grupo,
+                    Usuario
+                WHERE
+                    Usuario.idUsuario = Publica.idUsuario
+                        AND Publicacion.idPublicacion = Publica.idPublicacion
+                        AND Grupo.idGrupo = Publica.idGrupo
+                        AND Usuario.idUsuario=$uid;";
         $result2=$connection->query($sql2);
+            if($result2==null){
+                $sql2="SELECT DISTINCT
+                            Publicacion.idPublicacion,
+                            Usuario.Nickname,
+                            Fecha,
+                            Titulo,
+                            Publicacion.Descripcion AS descrip
+                        FROM
+                            Publicacion,
+                            Publica,
+                            Grupo,
+                            Usuario
+                        WHERE
+                            Usuario.idUsuario = Publica.idUsuario
+                                AND Publicacion.idPublicacion = Publica.idPublicacion
+                                AND Usuario.idUsuario = $uid;";  
+                $result2=$connection->query($sql2);
+                $bandera=true;//publicación hecha sin grupo
+            }
          $n=0;
         $publicacion=null;
          while($fila=$result2->fetch_assoc()){
                             $publicacion[$n]=$fila;
                             $n++;
                         }
-    }else{
-        //OBTIENE LOS DATOS DEL USUARIO DE LA BASE DE DATOS Y SUS PUBLICACIONES
-    $sql="SELECT idUsuario, Nickname,Email,Telefono,Nombre,Apellidos FROM Usuario where idUsuario like $uid;";
-    $result=$connection->query($sql);
-    $n=0;
-     while($fila=$result->fetch_assoc()){
-                        $usuario[$n]=$fila;
-                        $n++;
-                    }
-    $sql2="SELECT
-    Usuario.Nickname,
-    Fecha,
-    Titulo,
-    Publicacion.Descripcion as descrip,
-    Grupo.Nombre,
-    Grupo.Descripcion
-FROM
-    Publicacion,
-    Publica,
-    Grupo,
-    Usuario
-WHERE
-    Usuario.idUsuario = Publica.idUsuario
-        AND Publicacion.idPublicacion = Publica.idPublicacion
-        AND Grupo.idGrupo = Publica.idGrupo
-        AND Usuario.idUsuario=$uid;";
-    $result2=$connection->query($sql2);
-     $n=0;
-    $publicacion=null;
-     while($fila=$result2->fetch_assoc()){
-                        $publicacion[$n]=$fila;
-                        $n++;
-                    }
-    $sql3="SELECT idUsuario, idPublicacion, Comentario from  RCO.Comenta where idUsuario=$uid order by idPublicacion desc LIMIT 10;";
-    $result3=$connection->query($sql3);
-    $n=0;
-    $comentarios=null;
-    while($fila=$result3->fetch_assoc()){
-        $comentarios[$n]=$fila;
-        $n++;
-    }
+
+        //OBTIENE LOS COMENTARIOS QUE HA REALIZADO EL USUARIO ULTIMAMENTE
+            $sql3="SELECT idUsuario, idPublicacion, Comentario from  RCO.Comenta where idUsuario=$uid order by idPublicacion desc LIMIT 10;";
+            $result3=$connection->query($sql3);
+            $n=0;
+            $comentarios=null;
+            while($fila=$result3->fetch_assoc()){
+                $comentarios[$n]=$fila;
+                $n++;
+            }
     }
 ?>
 
@@ -123,10 +163,11 @@ WHERE
         </div>
         <div class="container">
             <?php
-            
+            // SI SE BUSCA UN USUARIO SE REALIZA EL SIGUIETE CODIGO
             if($tipo=="usuario"){
             $n;
             for($n=0;$n<count($result);$n++){
+            //SE IMPRIMEN LOS DATOS DEL USUARIO DENTRO DE UNA TARJETA
             echo "<div class=\"row\">
                 <div>
                   <div class=\"card blue darken-1\">
@@ -141,27 +182,36 @@ WHERE
                 </div>
               </div>";
             }
+            //SE IMIPRIMEN LOS COMENTARIOS DEL USUARIO DENTRO DE UNA SOLA TARJETA
             echo "<div class=\"row\">
                 <div>
                   <div class=\"card grey lighten-5\">
                     <div class=\"card-content grey-text\">
                       <span class=\"card-title\">Ultimos comentarios</span>";
+            //SI EXISTE COMENTARIOS LOS IMPRIME
             if($comentarios!=null){
             $n;
             for($n=0;$n<count($result);$n++){
-            echo "<p>".$comentarios[n]['Comentario']."</p>";
+            echo "<p>".$comentarios[$n]['Comentario']."</p><form method=\"POST\">
+                            <input type=\"hidden\" name=\"uid\" value=\"".$comentarios[$n]['idPublicacion']."\"> 
+                          <input class=\"btn\" type=\"submit\" formaction=\"mostrar.php\" value=\"Ver Usuario\">
+                        </form>\";";
                 } 
             }else{
+                //SI NO IMPRIME LO SIGUIENTE
                 echo "<p>".$usuario[0]['Nickname']." no ha realizado comentarios recientemente</p>";
             }
                 echo "</div>
                   </div>
                 </div>
               </div>";
+                
+            //SI SE BUSCA UN GRUPO SE REALIZA EL SIGUIENTE CÓDIGO    
             }else{
              $n;
+            //SE MUESTRAN LOS DATOS DEL GRUPO EN UNA TARJETA AZUL OBSCURO
             for($n=0;$n<count($result);$n++){
-            echo "<div class=\"row\">
+                echo "<div class=\"row\">
                 <div>
                   <div class=\"card blue darken-1\">
                     <div class=\"card-content white-text \">
@@ -174,30 +224,83 @@ WHERE
                   </div>
                 </div>
               </div>";
-            }   
             }
-            if($publicacion!=null){
-            for($n=0;$n<count($result2);$n++){
-            echo "<div class=\"row\">
-                <div>
-                  <div class=\"card blue lighten-5\">
-                    <div class=\"card-content \">
-                      <span class=\"card-title\">".$publicacion[$n]['Nickname']." publicó ".$publicacion[$n]['Titulo']."</span>
-                      <p>El ".$publicacion[$n]['Fecha']." 
-                      <br>Descripcion: ".$publicacion[$n]['descrip']." 
-                      <br>Nombre Grupo: ". $publicacion[$n]['Nombre']."
-                      <br>Descripcion: ". $publicacion[$n]['Descripcion']."
-                      </p>
-                    </div>
-                    <div class=\"card-action\">
-                      <a href=\"#\">Ver Publicación</a>
-                      <a href=\"#\">Ver Grupo</a>
-                    </div>
+                //imprime los miembros del grupo en una tarjeta blanca
+             echo "<div class=\"row\">
+            <div>
+              <div class=\"card grey lighten-5\">
+                <div class=\"card-content grey-text\">
+                  <span class=\"card-title\">Miembros del Grupo</span>";
+            //SI EXISTEN MIEMBROS EN EL GRUPO LOS IMPRIME EN LA TARJETA
+            if($miembros!=null){
+            $n;
+            for($n=0;$n<count($result);$n++){
+            echo "<p>".$miembros[$n]['Nickname']."</p><form method=\"POST\">
+                            <input type=\"hidden\" name=\"tipo\" value=\"usuario\" />
+                            <input type=\"hidden\" name=\"uid\" value=\"".$miembros[$n]['idUsuario']."\"> 
+                          <input class=\"btn\" type=\"submit\" formaction=\"mostrar.php\" value=\"Ver Usuario\">
+                        </form></p>";
+                }
+            //SI NO, IMPRIME LO SIGUIENTE
+            }else{
+                echo "<p>".$usuario[0]['NomGrupo']." no tiene miembros aún</p>";
+            }
+                echo "</div>
                   </div>
                 </div>
               </div>";
+                
             }
+           //IMPRIME LA PUBLICACION YA SEA DE UN USUARIO O DE UN GRUPO
+            if($publicacion!=null){
+                if($bandera==false){
+                for($n=0;$n<count($result2);$n++){
+                echo "<div class=\"row\">
+                    <div>
+                      <div class=\"card blue lighten-5\">
+                        <div class=\"card-content \">
+                          <span class=\"card-title\">".$publicacion[$n]['Nickname']." publicó ".$publicacion[$n]['Titulo']."</span>
+                          <p>El ".$publicacion[$n]['Fecha']." 
+                          <br>Descripcion: ".$publicacion[$n]['descrip']." 
+                          <br>Nombre Grupo: ". $publicacion[$n]['Nombre']."
+                          <br>Descripcion: ". $publicacion[$n]['Descripcion']."
+                          </p>
+                        </div>
+                        <div class=\"card-action\">
+                        <form method=\"POST\">
+                            <input type=\"hidden\" name=\"tipo\" value=\"grupo\" />
+                            <input type=\"hidden\" name=\"idPublicacion\" value=\"".$publicacion[$n]['idPublicacion']."\">
+                            <input type=\"hidden\" name=\"uid\" value=\"".$publicacion[$n]['idGrupo']."\"> 
+                          <input class=\"btn\" type=\"submit\" formaction=\"publicacion.php\" value=\"Ver Publicación\">
+                          <input class=\"btn\" type=\"submit\" formaction=\"mostrar.php\" value=\"Ver Grupo\">
+                        </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>";
+                }
+                }else{
+                    for($n=0;$n<count($result2);$n++){
+                    echo "<div class=\"row\">
+                        <div>
+                          <div class=\"card blue lighten-5\">
+                            <div class=\"card-content \">
+                              <span class=\"card-title\">".$publicacion[$n]['Nickname']." publicó ".$publicacion[$n]['Titulo']."</span>
+                              <p>El ".$publicacion[$n]['Fecha']." 
+                              <br>Descripcion: ".$publicacion[$n]['descrip']." 
+                              </p>
+                            </div>
+                            <div class=\"card-action\">
+                              <a href=\"#\">Ver Publicación</a>
+                              <a href=\"#\">Ver Grupo</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>";
+                    }
+                }
             }else{
+                //SI NO SE TIENEN PUBLICACIONES ENTONCES SE MUESTRA LO SIGUIENTE
                 echo "<div class=\"row\">
                 <div>
                   <div class=\"card blue lighten-5\">
