@@ -80,7 +80,7 @@
                     <!--</div>-->
                 </div>
                 <div class="col s3 m3">
-                    <a class="col s12 m12 waves-effect waves-light btn-large red accent-4">Redactar</a>
+                    <a class="col s12 m12 waves-effect waves-light btn-large red accent-4" onclick="redactar();">Redactar</a>
                     <br>
                     <br>
                     <a style="font-size:13px;" id="marcar" class="col s12 m12 waves-effect waves-light btn-large grey">Marcar&nbsp;Todo&nbsp;Como&nbsp;Leido</a>
