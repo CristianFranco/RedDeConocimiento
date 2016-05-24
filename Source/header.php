@@ -1,9 +1,4 @@
-<ul id="perfilDropDown" class="dropdown-content">
-    <li><a href="#!">Editar Perfil</a></li>
-    <li><a href="#!">Personalizar</a></li>
-    <li class="divider"></li>
-    <li><a href="procesos/salir.php">Salir</a></li>
-</ul>
+
 <nav class="principal">
     <div class="nav-wrapper">
         <a href="#" class="brand-logo">RedConocimiento</a>
@@ -42,9 +37,21 @@
                     <li><a href="sass.html">Sass</a></li>
                     <li><a href="badges.html"><i class="material-icons">message</i></a></li>
                     <li>
-                        <a class="dropdown-button" href="#!" data-activates="perfilDropDown">Bienvenido 
+                       <ul id="perfilDropDown" class="dropdown-content">
+                            <li><a href="#!">Editar Perfil</a></li>
+                            <li><a href="#!">Personalizar</a></li>
+                            <li class="divider"></li>
+                            <li><a href="procesos/salir.php">Salir</a></li>
+                        </ul>
+                        <ul id="perfilDropDown2" class="dropdown-content">
+                            <li><a href="#!">Editar Perfil</a></li>
+                            <li><a href="#!">Personalizar</a></li>
+                            <li class="divider"></li>
+                            <li><a href="procesos/salir.php">Salir</a></li>
+                        </ul>
+                        <a id="dropdown-button-normal" class="dropdown-button" href="#!" data-activates="perfilDropDown">Bienvenido 
                             <?=$_SESSION['nickname']?><i class="material-icons right">arrow_drop_down</i></a>
-                        </a>
+                        
                     </li>
                     <?php } ?>
         </ul>
@@ -75,7 +82,7 @@
                     <li><a href="sass.html">Sass</a></li>
                     <li><a href="badges.html"><i class="material-icons">message</i></a></li>
                     <li>
-                        <a class="dropdown-button" href="#!" data-activates="perfilDropDown">Bienvenido 
+                        <a id="dropdown-button-mobile" class="dropdown-button" href="#!" data-activates="perfilDropDown2">Bienvenido 
                             <?=$_SESSION['nickname']?><i class="material-icons right">arrow_drop_down</i></a>
                         </a>
                     </li>
