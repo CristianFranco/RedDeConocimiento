@@ -36,6 +36,7 @@
             var estado = <?php if(isset($_SESSION['idUsuario'])) echo "true";else echo "false"; ?>;
         </script>
         <script src="../JS/cargarPreferencias.js"></script>
+        <link rel="stylesheet" href="../CSS/style.css">
         <!--Import jQuery before materialize.js-->
 
     </head>

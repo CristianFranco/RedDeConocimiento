@@ -8,10 +8,7 @@ $("#cajaBuscar").focusout(function (e) {
     $("#busquedaA").attr('style', 'display:none');
 
 });
-$(document).ready(function () {
-    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-    $('.modal-trigger').leanModal();
-});
+$('.modal-trigger').leanModal();
 $("#formLogin").on("submit", function (e) {
     e.preventDefault();
     $("#loginMsn").hide();

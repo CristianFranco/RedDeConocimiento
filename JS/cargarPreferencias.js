@@ -27,7 +27,7 @@ function crearEstilo() {
         //Si es un usuario
 
     } else { //cargar tema por default
-        cargarDefault('negro');
+        cargarDefault('default');
     }
 }
 
