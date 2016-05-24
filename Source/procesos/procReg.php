@@ -157,7 +157,7 @@ $mail->Timeout=30;
 $mail->AddAddress("omar_cortesp@hotmail.com");        
 $mail->CharSet    = 'UTF-8';
 
-$mail->Port = 25; // or 587 465
+//$mail->Port = 25; // or 587 465
 //$mail->IsHTML(true);
 $mail->Subject = "Test";
 $mail->Body = "hello";
