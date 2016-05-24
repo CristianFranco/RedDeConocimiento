@@ -1,15 +1,14 @@
 <?php
     session_start();
     //require("class.phpmailer.php");
-include_once("class.phpmailer.php");
+    require("class.phpmailer.php");
     require("connection.php");
-    include_once("class.smtp.php");
-    //require("class.phpmailer.php");
+    //require("class.smtp.php");
     //Sacaremos los nombres de usuario registrados para ver que no se repitan
     $connection=connect();
     $query="select Nickname from Usuario";
     $result=$connection -> query($query);
-    $ciudades=array();
+    //$ciudades=array();
     //Variables usadas para recoger los datos del formulario 
     $nombre=$_POST['nombre'];
     //echo $nombre;
@@ -133,30 +132,58 @@ include_once("class.phpmailer.php");
         else{
         echo "Tu cuenta ha sido registrada, sin embargo, esta requiere que la confirmes desde el email que ingresaste en el registro.";
         }*/
-       
-         $mail = new PHPMailer(); // create a new object
+       //Damos de alta
+        $connectionr=connect();
+        $query="INSERT INTO Usuario (Nickname,Password,Email,Telefono,Nombre,Apellidos,idCiudad,Descripcion) VALUES ('".$nickname."','".$pass."','".$email."','".$telefono."','".$nombre."','".$apellido."',".$ciudad.",'".$desc."');";
+        echo $query;
+        /*if($connectionr -> query($query)){
+            echo "registro correcto";
+        }else{
+            echo "error";
+        */
+         $mail = new phpmailer(); // create a new object
 $mail->IsSMTP(); // enable SMTP
-//$mail->Mailer = "smtp";
-$mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
+$mail->PluginDir="";
+$mail->Mailer='mail';
+$mail->Host = "smtp.gmail.com" ;
+//$mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
 $mail->SMTPAuth = true; // authentication enabled
-$mail->SMTPSecure = "ssl"; // secure transfer enabled REQUIRED for Gmail
-$mail->Host = "smtp.gmail.com";
-$mail->Port = "465"; // or 587 465
-//$mail->IsHTML(true);
-$mail->AddAddress($email,"lol");
 $mail->Username = "omar.edcortesp@gmail.com";
 $mail->Password = "123Italia";
-$mail->From="From: omar <omar_cortesp@hotmail.com>";
-//$mail->FromName="live.com";
+$mail->From="<omar.edcortesp@gmail.com>";
+$mail->FromName="Omar Cortes";
+$mail->Timeout=30;
+//$mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
+$mail->AddAddress("omar_cortesp@hotmail.com");        
+$mail->CharSet    = 'UTF-8';
+
+$mail->Port = 25; // or 587 465
+//$mail->IsHTML(true);
 $mail->Subject = "Test";
 $mail->Body = "hello";
-$mail->MsgHtml("hola");
+$mail->AltBody = "Mensaje de prueba mandado con phpmailer en formato solo texto";
+$exito = $mail->Send();
+$intentos=1; 
+  while ((!$exito) && ($intentos < 5)) {
+	sleep(5);
+     	//echo $mail->ErrorInfo;
+     	$exito = $mail->Send();
+     	$intentos=$intentos+1;
+        echo "<br/>".$mail->ErrorInfo.$mail->From;
+	
+   }
+//$mail->MsgHtml("hola");
 //$mail->Send();
-if(!$mail->Send()) {
-    echo "<br> Mailer Error: " . $mail->ErrorInfo;
- } else {
-    echo "Message has been sent";
- }
+if(!$exito)
+   {
+	echo "Problemas enviando correo electrónico a ";
+	echo "<br/>".$mail->ErrorInfo;	
+    echo "<br/> intentos ".$intentos;
+   }
+   else
+   {
+	echo "Mensaje enviado correctamente";
+   } 
  
  //echo 'El Mensaje a sido enviado. ha '.$email;
     }else{
