@@ -17,6 +17,15 @@
     if($tipo=="grupo"){
             //OBTIENE LOS DATOS DEL GRUPO DE LA BASE DE DATOS Y LAS PUBLICACIONES DE ESTE
             //OBTIENE LOS DATOS DEL GRUPO
+        $check="SELECT idUsuario, idGrupo, Estado, Notificar FROM RCO.Usuario_Grupo where idUsuario=$idUsr;";
+        $result4=$connection->query($check);
+        $n=0;
+        $admin;
+         while($fila=$result4->fetch_assoc()){
+                            $admin[$n]=$fila;
+                            $n++;
+                        }
+        
         $sql="SELECT idGrupo, Grupo.Nombre as NomGrupo, Grupo.Descripcion as descrip, AreaConocimiento.Nombre, AreaConocimiento.Descripcion FROM RCO.Grupo inner join  RCO.AreaConocimiento on  Grupo.IdAreaDeConocimiento=AreaConocimiento.idAreaConocimiento and Grupo.idGrupo=$uid;";
         $result=$connection->query($sql);
         $n=0;
@@ -200,7 +209,7 @@
             echo "<p>".$comentarios[$n]['Comentario']."</p><form method=\"POST\">
                             <input type=\"hidden\" name=\"uid\" value=\"".$comentarios[$n]['idPublicacion']."\"> 
                           <input class=\"btn\" type=\"submit\" formaction=\"mostrar.php\" value=\"Ver Usuario\">
-                        </form>\";";
+                        </form>";
                 } 
             }else{
                 //SI NO IMPRIME LO SIGUIENTE
@@ -224,12 +233,23 @@
                       <p>".$usuario[$n]['descrip']."
                       <br>Area de Conocimiento: ".$usuario[$n]['Nombre']."
                       <br>Descripción: ".$usuario[$n]['Descripcion']."
-                      </p>
-                    </div>
+                      </p>";
+                         //si es el admin del grupo se imprime la opción de eliminarl el grupo
+                       if($admin[$n]['idUsuario']==$idUsr and $admin[$n]['Estado']==2){
+                      echo "<form method=\"POST\">
+                            <input type=\"hidden\" name=\"idGrupo\" value=\"".$admin[$n]['idGrupo']."\"> 
+                          <input class=\"btn\" type=\"submit\" formaction=\"borrarGrupo.php\" value=\"Eliminar Grupo\">
+                        </form>";
+                        }
+                    echo "</div>
                   </div>
                 </div>
               </div>";
+              
             }
+           
+              
+                
                 //imprime los miembros del grupo en una tarjeta blanca
              echo "<div class=\"row\">
             <div>
