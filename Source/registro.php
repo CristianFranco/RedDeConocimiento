@@ -56,7 +56,7 @@
                         <div class="row">
                             <div class="input-field col s7">
                                 <i class="material-icons prefix">email</i>
-                                <input id="icon_prefix" type="text" class="validate" name="email" pattern="[a-zA-Z0-9._@- ]{12,*}" title="debe ser mail@dominio.com, solo acepta caracteres especiales (.-_@ )" required>
+                                <input id="icon_prefix" type="email" class="validate" name="email" pattern="[a-zA-Z0-9._@- ]{12,*}" title="debe ser mail@dominio.com, solo acepta caracteres especiales (.-_@ )" required>
                                 <label for="icon_prefix">Email</label>
                             </div>
                             <div class="input-field col s5">
@@ -168,14 +168,19 @@
                         url: "procesos/procReg.php"
                         , type: "POST"
                         , data: postData
+                        ,dataType:'json'
                         , success: function (data, textStatus, jqXHR) {
-                            //console.log(data[0].Est + " que es esto "+ data[0].Mensaje);
-                            data: return data from server
+                           //console.log(data.estado + " que es esto "+ data.msg);
+                            console.log(data);
+                            if(data.estado==false){
+                                 Materialize.toast(String(data.msg), 6000);
+                            }else{
+                                Materialize.toast("Se envio un correo de confirmacion a su correo",6000);
+                            }
+                           // data: return data from server
                         }
                     });
 
-                    //return false;
-                    //e.preventDefault();
                 });
             </script>
             <script>
