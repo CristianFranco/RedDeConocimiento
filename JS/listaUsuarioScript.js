@@ -9,24 +9,37 @@
                     }
                     , dataType: "JSON"
                     , success: function (result) {
-                    	for (var x = 0; x < result.length; x++) {
+                        for (var x = 0; x < result.length; x++) {
+                            var contGrupo = 0;
                             if(result[x].Tipo === 1){
-                                $("#tabla").append("<tr onClick='sendGrPe("+result[x].Id+",\"grupo\")'><td>" + result[x].Nombre+"<br><font size='1'>Red de"
-                                +" conocimiento: programación | 14 Miembros </font></td></tr>");
+                                contGrupo++;
+                                var seg = "Miembros";
+                                if(result[x].seguidores === '1'){
+                                    seg = "Miembro";
+                                }
+                                $("#tabla").append("<tr onClick='sendGrPe("+result[x].Id+",\"grupo\")'><td style='width:20%;'><img src=../IMG/avatar/"+result[x].Nombre[0].toLowerCase()+".png></img></td><td style='width:80%;'>" + result[x].Nombre+"<br><font size='1'>Red de"
+                                +" conocimiento: programación | "+result[x].seguidores+" "+seg+" </font></td></tr>");
                             }else{
-                                tablaPersona
-                                $("#tablaPersona").append("<tr onClick='sendGrPe("+result[x].Id+",\"usuario\")'><td>" + result[x].Nombre+" lol<br><font size='1'>Red de"
-                                +"14 seguidores </font></td></tr>");
+                                var seg = "Seguidores";
+                                if(result[x].seguidores === '1'){
+                                    seg = "Seguidor";
+                                }
+                                $("#tablaPersona").append("<tr onClick='sendGrPe("+result[x].Id+",\"usuario\")'><td style='width:20%;'><img src=../IMG/avatar/"+result[x].Nombre[0].toLowerCase()+".png></img></td><td style='width:80%;'>" + result[x].Nombre+" lol<br><font size='1'>"
+                                +result[x].seguidores+" "+seg+"</font></td></tr>");
+                            }
+                            if(contGrupo == 0){
+                                $("#tabla").append("No ");
+                                
                             }
                         }
                     },
                     error: function(res,res2){
-                    	alert(res2);
+                        alert(res2);
                     }
                 });
             }
 
             function sendGrPe(id, tipo){
-                    $.redirect('mostrar.php', {'uid': id, 'tipo': tipo});
+                    $.redirect('mostrar.php', {'uid ': id, 'tipo': tipo});
             }
 sendCall();
