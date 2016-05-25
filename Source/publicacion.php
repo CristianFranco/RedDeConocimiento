@@ -43,7 +43,7 @@
         <script src="https://code.jquery.com/jquery-2.1.0.min.js" integrity="sha256-8oQ1OnzE2X9v4gpRVRMb1DWHoPHJilbur1LP9ykQ9H0=" crossorigin="anonymous"></script>
         <script src="../frameworks/js/jquery.mobile-1.4.5.min.js"></script>
         <script>
-            var estado = <?php if(isset($_SESSION['idUsuario'])) echo "true";else echo "false"; ?>;
+            var idEstilo = <?php if(isset($_SESSION['idUsuario'])) echo $_SESSION['idUsuario']; else echo 0; ?>;
         </script>
         <script src="../JS/cargarPreferencias.js"></script>
         <link rel="stylesheet" type="text/css" href="../CSS/style.css">
@@ -97,10 +97,6 @@
                             (<span class="badge ">4</span>)
                             <i class="material-icons left ">description</i> 
                         </a></li>
-                            <li><a href="# ">
-                            (<span class="badge ">4</span>)
-                            <i class="material-icons left ">book</i> 
-                        </a></li>
                             <li><a href="" id="pubComButton">
                             (<span class="badge ">4</span>)
                             <i class="material-icons left ">sms</i> 
@@ -125,11 +121,7 @@
                             <li><a href="# ">
                             (<span class="badge ">4</span>)
                             <i class="material-icons left ">description</i> 
-                        </a></li>
-                            <li><a href="# ">
-                            (<span class="badge ">4</span>)
-                            <i class="material-icons left ">book</i> 
-                        </a></li>
+                        </a></li>¿
                             <li><a href="# ">
                             (<span class="badge ">4</span>)
                             <i class="material-icons left ">sms</i> 
@@ -143,7 +135,7 @@
                     </p>
 
                 </div>
-                <div id="pubImg" class="col s12 grey lighten-2 " style="min-height:65vh; ">
+                <div id="pubImg" class="col s12 grey lighten-2 " style="min-height:65vh;display:none; ">
                     <video width="400" controls>
                         <source src="../publicaciones/Kamisama%20Onegai%20-Kamisama%20Hajimemashita%20(Ending)%20(Kurama%20Version)%20(with%20Lyrics)%20(720p).mp4" type="video/mp4">
                     </video>
@@ -154,7 +146,7 @@
 
 
                 </div>
-                <div id="pubVid" class="col s12 grey lighten-2 " style="min-height:65vh; ">
+                <div id="pubVid" class="col s12 grey lighten-2 " style="min-height:65vh;display:none; ">
                     <video width="400" controls>
                         <source src="../publicaciones/Kamisama%20Onegai%20-Kamisama%20Hajimemashita%20(Ending)%20(Kurama%20Version)%20(with%20Lyrics)%20(720p).mp4" type="video/mp4">
                     </video>
@@ -165,7 +157,7 @@
 
 
                 </div>
-                <div id="pubAud" class="col s12 grey lighten-2 " style="min-height:65vh; ">
+                <div id="pubAud" class="col s12 grey lighten-2 " style="min-height:65vh;display:none; ">
                     <video width="400" controls>
                         <source src="../publicaciones/Kamisama%20Onegai%20-Kamisama%20Hajimemashita%20(Ending)%20(Kurama%20Version)%20(with%20Lyrics)%20(720p).mp4" type="video/mp4">
                     </video>
@@ -176,7 +168,7 @@
 
 
                 </div>
-                <div id="pubDoc" class="col s12 grey lighten-2 " style="min-height:65vh; ">
+                <div id="pubDoc" class="col s12 grey lighten-2 " style="min-height:65vh;display:none; ">
                     <video width="400" controls>
                         <source src="../publicaciones/Kamisama%20Onegai%20-Kamisama%20Hajimemashita%20(Ending)%20(Kurama%20Version)%20(with%20Lyrics)%20(720p).mp4" type="video/mp4">
                     </video>
@@ -187,7 +179,7 @@
 
 
                 </div>
-                <div id="pubCom" class="col s12 grey lighten-2 " style="min-height:65vh; ">
+                <div id="pubCom" class="col s12 grey lighten-2 " style="min-height:65vh;display:none; ">
                     <video width="400" controls>
                         <source src="../publicaciones/Kamisama%20Onegai%20-Kamisama%20Hajimemashita%20(Ending)%20(Kurama%20Version)%20(with%20Lyrics)%20(720p).mp4" type="video/mp4">
                     </video>
