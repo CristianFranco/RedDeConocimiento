@@ -104,7 +104,7 @@ function mostrar(idMensaje) {
             button.onclick=function(){
                 var asunto=document.getElementById('asnt').value;
                 var idEnviar=document.getElementById('idEnviar').value;
-                window.location.href='../Source/mensaje.php?asunto='+asunto+'&idEnviar='+idEnviar;
+                window.location.href='../Source/mensaje.php?asunto='+asunto+'&idDestinatario='+idEnviar;
             }
         }
 
@@ -318,7 +318,7 @@ function enter(element, ev) {
 }
 
 function redactar(){
-    window.location.href='../Source/mensaje.php?asunto=&idEnviar=0';
+    window.location.href='../Source/mensaje.php?asunto=&idDestinatario=0';
 }
 function responder(){
     
