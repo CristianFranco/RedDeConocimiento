@@ -30,10 +30,48 @@
 ?>
 
  		<header>
-            <?php require("header.php")?>
+            <?php require("header.php") ?>
         </header>
         <main>
+
 	<div class="container secundario">
+
+	<div class="row">
+		<div class="col s10"></div>
+			<div class="col s1 offset-s11">
+	        			<a href="#modal" class="material-icons modal-trigger">live_help</a>
+	        </div>
+        </div>
+
+        <div class="modal" id ="modal">
+        	<div class="container">
+        	<br>
+        	<h4> Esta informacion para que compreda mejor el uso de la busqueda avanzada</h4>
+        	<br><br>
+<ul style="list-style-type:square">
+        	<li>&#8226; En el campo de Busqueda o persona busca las personas que contengan las palabras especificadas.</li>
+        	<br><br>
+
+        	<li>&#8226; La busqueda por area de conocimiento es para traer los grupos los cuales se encuentran en esa area de conociemiento.</li>
+
+        	<br><br>
+        	<li>&#8226; La busqueda por contendio de publicaciones trae los grupos que contienen publicaciones de ese contenido y los usuarios que han publicado ese tipo de publicaciones.</li>
+<br><br>
+        	<li>&#8226; Al tener activada la opcion de Grupos que contengan el tipo de publicación trae los grupos que se encuentren en un area de conocimiento y que contengan los contenidos de publicaciones que se especifica.</li>
+<br><br>
+        	<li>&#8226; Al tener activada la opcion Grupos o publicaciones trae los grupos que se encuentren en esa area de conocimiento y tambien los grupos que contengan publicaciones por busqueda de contenido.</li>
+<br>
+</ul>
+<div class="row">
+<div class= "col s2 offset-s10">
+        	<div class="action-bar">
+        		<a href="#" class="btn-flat modal-action modal-close">Entendido</a>
+        	</div>
+        </div>
+        </div>
+        	</div>
+        </div>
+
 		<form action="./resultadosDeBusqueda.php" method="POST" id='subFor'>
 			<div class="input-field" >
 				<label for="nombre">Busqueda por nombre de grupo o persona:</label>
@@ -57,7 +95,6 @@
 				<input type="text" id="tags"  name="tags"></input>
 			</div>
 
-			
 			<button class="btn waves-effect waves-light blue darken-3 col s6 " type="submit" name="action">Buscar
                 <i class="material-icons right">search</i>
             </button>
@@ -67,4 +104,10 @@
         <?php require("footer.php");?>
     <script src="../frameworks/js/materialize.min.js"></script>
             <script src="../JS/header.js"></script>
+
+            <script type="text/javascript">
+            	$(document).ready(function(){
+            		$(".modal-trigger").leanModal();
+            	});
+            </script>
 </body>

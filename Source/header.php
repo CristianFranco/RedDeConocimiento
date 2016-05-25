@@ -23,7 +23,7 @@
 
             </li>
             <li>
-                <a href=""><i class="material-icons right">search</i></a>
+               <i class="material-icons right" id="buscar">search</i>
             </li>
             <li><a href="badges.html"><i class="material-icons">home</i></a></li>
             <!-- Si no está logeado-->
@@ -125,3 +125,6 @@
         </div>
     </form>
 </div>
+
+        <script type="text/javascript" src = "../JS/Redirect/jquery.redirect.js"></script>
+
