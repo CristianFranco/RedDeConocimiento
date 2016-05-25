@@ -52,7 +52,7 @@ function crearEstilo() {
 
 function cargarDefault(tipo) {
     strEstilo = '<style type="text/css">' + /************principal************/
-        '.principal,nav ul li a div,button,.container pinput[type="submit"].btn' +
+        '.principal,.principal:hover,nav ul li a div,button,.container pinput[type="submit"].btn' +
         ',.principal .dropdown-content li>a,.container .dropdown-content li>span{' +
         'background-color:' + estilos[tipo].bcPrincipal + '!important;' +
         'color:' + estilos[tipo].tcPrincipal + '!important;' +
@@ -85,7 +85,21 @@ function cargarDefault(tipo) {
         'font-family:' + estilos[tipo].fuente + ';' +
         'font-size:' + estilos[tipo].tamFuente + ';' +
         '}' +
-
+        '.icoP{' +
+        'color:' + estilos[tipo].bcPrincipal + '!important;' +
+        '}' +
+        '.inpP{' +
+        'border-bottom: 1px solid ' + estilos[tipo].bcPrincipal + "!important;" +
+        'box-shadow: 0 1px 0 0 ' + estilos[tipo].bcPrincipal + "!important;" +
+        '}' +
+        '.inpP:focus.valid,.inpP.valid{' +
+        'border-bottom: 1px solid #4CAF50' + "!important;" +
+        'box-shadow: 0 1px 0 0 #4CAF50' + "!important;" +
+        '}' +
+        '.inpP:focus.invalid,.inpP.invalid{' +
+        'border-bottom: 1px solid #F44336' + "!important;" +
+        'box-shadow: 0 1px 0 0 #F44336' + "!important;" +
+        '}' +
         '</style>';
     $(document.head).prepend($(strEstilo));
 }

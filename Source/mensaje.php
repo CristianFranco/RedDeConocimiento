@@ -43,7 +43,7 @@
         <script src="https://code.jquery.com/jquery-2.1.0.min.js" integrity="sha256-8oQ1OnzE2X9v4gpRVRMb1DWHoPHJilbur1LP9ykQ9H0=" crossorigin="anonymous"></script>
 
         <script>
-            var estado = <?php if(isset($_SESSION['idUsuario'])) echo "true";else echo "false"; ?>;
+            var idEstilo = <?php if(isset($_SESSION['idUsuario'])) echo $_SESSION['idUsuario']; else echo 0; ?>;
         </script>
         <script src="../JS/cargarPreferencias.js"></script>
         <link rel="stylesheet" type="text/css" href="../CSS/style.css">
@@ -55,29 +55,33 @@
             <?php require("header.php")?>
         </header>
         <main>
-            <div class="container secundario">
 
-                <form class="col s12" id="formMensaje" method="POST">
+
+            <form class="col s12" id="formMensaje" method="POST">
+                <div class="container secundario">
                     <div class="row">
                         <div class="input-field col s6">
-                            <i class="material-icons prefix">account_circle</i>
-                            <input id="asunto" type="text" class="validate" name="asunto" value="<?=$asunto?>">
-                            <label for="icon_prefix">Asunto</label>
+                            <i class="icoP material-icons prefix">account_circle</i>
+                            <input id="asunto" type="text" class="inpP validate" name="asunto" value="<?=$asunto?>">
+                            <label class="icoP" for="icon_prefix">Asunto</label>
                         </div>
 
                     </div>
                     <div class="row">
                         <div class="col s12">
-                            <a class="waves-effect waves-light btn modal-trigger" href="#modalAgregar">Agregar</a>
+                            <a class="waves-effect waves-light btn modal-trigger principal" href="#modalAgregar">Agregar</a>
                         </div>
                     </div>
                     <div class="row" id="para">
                         <h5>Para:</h5>
                     </div>
+                </div>
+                <br>
+                <div class="container secundario">
                     <div class="row">
                         <div class="input-field col s12">
-                            <textarea id="mensaje" class="materialize-textarea" name="mensaje"></textarea>
-                            <label for="textarea1">Contenido</label>
+                            <textarea id="mensaje" class="inpP materialize-textarea" name="mensaje"></textarea>
+                            <label class="icoP" for="mensaje">Contenido</label>
                         </div>
                     </div>
 
@@ -124,8 +128,9 @@
                             <i class="material-icons right">send</i>
                         </button>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
+
         </main>
         <?php require("footer.php");?>
 
@@ -137,7 +142,7 @@
                 function agregarDest(val) {
                     if (val != 0) {
                         dest[val] = val;
-                        $("#para").append('<a onclick="eliminar(' + val + ')"  class="label waves-effect waves-light btn" id="para_' + val + '">' + $("#nickname_" + val).text() + '<i class="material-icons left">close</i></a>');
+                        $("#para").append('<a onclick="eliminar(' + val + ')"  class="principal label waves-effect waves-light btn" id="para_' + val + '">' + $("#nickname_" + val).text() + '<i class="material-icons left">close</i></a>');
                     }
                 }
 
