@@ -1,17 +1,23 @@
-
-.container{
-	padding: 30px;
+.container {
+    padding: 30px;
 }
+
 body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-  }
+}
 
-  main {
+main {
     flex: 1 0 auto;
-  }
-  /*
+}
+
+.label {
+    margin: 5px;
+}
+
+
+/*
 .bcPrincipal {
     background-color: white;
 }
