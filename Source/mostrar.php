@@ -61,7 +61,9 @@
                                 $n++;
                             }
         //OBTIENE LOS USUARIOS DENTRO DEL GRUPO
-        $sql3="SELECT Usuario.idUsuario, Usuario.Nickname from  Usuario_Grupo, Usuario, Grupo where Usuario_Grupo.idGrupo=Grupo.idGrupo and Usuario_Grupo.idUsuario=Usuario.idUsuario and Usuario_Grupo.idGrupo=$uid and Usuario_Grupo.Estado=1 limit 10;";
+        $sql3="SELECT 
+    Usuario.idUsuario, Usuario.Nickname FROM Usuario_Grupo, Usuario, Grupo WHERE Usuario_Grupo.idGrupo = Grupo.idGrupo
+     AND Usuario_Grupo.idUsuario = Usuario.idUsuario AND Usuario_Grupo.idGrupo = 1 AND Usuario_Grupo.Estado in (1,2) LIMIT 10;";
         $result3=$connection->query($sql3);
         $n=0;
         $miembros=null;
@@ -160,7 +162,7 @@
         <script src="https://code.jquery.com/jquery-2.1.0.min.js" integrity="sha256-8oQ1OnzE2X9v4gpRVRMb1DWHoPHJilbur1LP9ykQ9H0=" crossorigin="anonymous"></script>
         
         <script>
-            var estado = <?php if(isset($_SESSION['idUsuario'])) echo "true";else echo "false"; ?>;
+            var idEstilo = <?php if(isset($_SESSION['idUsuario'])) echo $_SESSION['idUsuario']; else echo 0; ?>;
         </script>
         <script src="../JS/cargarPreferencias.js"></script>
         <link rel="stylesheet" type="text/css" href="../CSS/style.css">
@@ -205,10 +207,10 @@
             //SI EXISTE COMENTARIOS LOS IMPRIME
             if($comentarios!=null){
             $n;
-            for($n=0;$n<count($result);$n++){
+            for($n=0;$n<=count($result3);$n++){
             echo "<p>".$comentarios[$n]['Comentario']."</p><form method=\"POST\">
                             <input type=\"hidden\" name=\"uid\" value=\"".$comentarios[$n]['idPublicacion']."\"> 
-                          <input class=\"btn\" type=\"submit\" formaction=\"mostrar.php\" value=\"Ver Usuario\">
+                          <input class=\"btn icoP\" type=\"submit\" formaction=\"mostrar.php\" value=\"Ver Usuario\">
                         </form>";
                 } 
             }else{
@@ -258,9 +260,8 @@
                   <span class=\"card-title\">Miembros del Grupo</span>";
             //SI EXISTEN MIEMBROS EN EL GRUPO LOS IMPRIME EN LA TARJETA
             if($miembros!=null){
-            $n;
-            for($n=0;$n<count($result);$n++){
-            echo "<p>".$miembros[$n]['Nickname']."</p><form method=\"POST\">
+            for($n=0;$n<=count($result3);$n++){
+            echo "<p>".$miembros[$n]['Nickname']."<form method=\"POST\">
                             <input type=\"hidden\" name=\"tipo\" value=\"usuario\" />
                             <input type=\"hidden\" name=\"uid\" value=\"".$miembros[$n]['idUsuario']."\"> 
                           <input class=\"btn\" type=\"submit\" formaction=\"mostrar.php\" value=\"Ver Usuario\">
