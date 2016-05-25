@@ -1,31 +1,3 @@
-<!DOCTYPE html>
-    <html lang="es">
-
-    <head>
-
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <!--Let browser know website is optimized for mobile-->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Registro</title>
-
-        <!--Import Google Icon Font-->
-        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-        <!-- Compiled and minified CSS -->
-        <link rel="stylesheet" href="../frameworks/css/materialize.min.css">
-
-        <!--Import jQuery before materialize.js-->
-        <script src="https://code.jquery.com/jquery-2.1.0.min.js" integrity="sha256-8oQ1OnzE2X9v4gpRVRMb1DWHoPHJilbur1LP9ykQ9H0=" crossorigin="anonymous"></script>
-        
-        <script>
-            var estado = <?php if(isset($_SESSION['idUsuario'])) echo "true";else echo "false"; ?>;
-        </script>
-        <script src="../JS/cargarPreferencias.js"></script>
-        <link rel="stylesheet" type="text/css" href="../CSS/style.css">
-    </head>
-<body>
 <?php
     session_start();
     //require("class.phpmailer.php");
@@ -65,7 +37,7 @@
     //Comprobamos que errores este vacio para cargar a la base
     //if(count($errores)==0){
         //echo "Registro correcto";
-        $codigoverificacion = rand(0000000000,9999999999); // Conseguimos un codigo aleatorio de 10 digitos.
+        $codigoverificacion = 10;//rand(0000000000,9999999999); // Conseguimos un codigo aleatorio de 10 digitos.
        //Damos de alta
         $connectionr=connect();
         $query="INSERT INTO Usuario (Nickname,Password,Email,Telefono,Nombre,Apellidos,idCiudad,Descripcion) VALUES ('".$nickname."','".$pass."','".$email."','".$telefono."','".$nombre."','".$apellido."',".$ciudad.",'".$desc."');";
@@ -94,7 +66,7 @@
             Para confirmarlo debe hacer click en el siguiente enlace: \n 
             http://localhost:3030/ROC/Source/index.php  ".$codigoverificacion; 
             $mail->Body = $mensaje;
-            $mail->AltBody = "Mensaje de prueba mandado con phpmailer en formato solo texto";
+            $mail->AltBody = "Mensaje de prueba mandado con pbhpmailer en formato solo texto";
             $exito = $mail->Send();
             if(!$exito)
                {
@@ -103,7 +75,7 @@
                }
                else
                {
-                echo "Se ha enviado un correo de confirmación a la cuenta ".$email.;
+                echo "Se ha enviado un correo de confirmación a la cuenta ".$email;
                } 
 
              //echo 'El Mensaje a sido enviado. ha '.$email;
@@ -114,5 +86,3 @@
         
         
 ?>
-    </body>
-</html>
