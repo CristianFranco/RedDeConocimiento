@@ -52,12 +52,12 @@ session_start();
 
 			</ul>
 				<div class="col s12" id="grupo">
-					<table id = "tabla" class="bordered hoverable responsive-table">
+					<table id = "tabla" class="bordered hoverable ">
 								
 					</table>
 				</div>
 				<div class="col s12" id="persona">
-					<table id = "tablaPersona" class="bordered hoverable responsive-table">
+					<table id = "tablaPersona" class="bordered hoverable">
 								
 					</table>
 				</div>

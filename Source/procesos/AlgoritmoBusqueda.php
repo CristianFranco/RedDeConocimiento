@@ -7,6 +7,9 @@
      $queryTags="select * from Etiqueta;";
      $result = $conexion ->query($queryTags);
 	 $extraido = mysqli_fetch_array($result);
+
+//busquedaGen
+
      $nombre = $_POST['nombre'];
      $area = $_POST['area'];
      $tag = $_POST['tags'];
@@ -15,6 +18,7 @@
      $ids = array();
 	 $idsAcepted = array();
      $idsAceptedArea = array();
+     $hashMap = array();
      $cont = 0;
 
      if($nombre == ""){
@@ -33,6 +37,8 @@
      while($extraido != NULL){
         $tags[$cont2]=$extraido["Nombre"];
         $ids[$cont2++] = $extraido["idAreaConocimiento"];
+        $hashMap[$extraido["idAreaConocimiento"]] = $extraido["Nombre"];
+
         $extraido = mysqli_fetch_array($result);
      }
      $idsAceptedArea = getArray($cont2, $area, $tags, $ids);
@@ -55,7 +61,7 @@
      }
      $finalQuery = "select DISTINCT  Grupo.* from Grupo,Publicacion, Publicacion_Etiqueta, Publica, Etiqueta
         where   
-        Grupo.Nombre like '%".$nombre."%' or
+        LOWER(Grupo.Nombre) like LOWER('%".$nombre."%') or
         Grupo.IdAreaDeConocimiento in ".$str2." or
         (
         Etiqueta.idEtiqueta in ".$str." and
@@ -79,7 +85,16 @@
     $contFinal = 0;
     $grupoUsuarios = array();
      while($extraido != NULL){
-        $registro=array("Id"=>$extraido["idGrupo"],"Nombre"=>$extraido["Nombre"], "Tipo" => 1);
+        $queryCount = "select count(*) as cont from Usuario_Grupo where idGrupo =".$extraido["idGrupo"].";";
+        $rest2 = $conexion ->query($queryCount);
+        $extraido2 = mysqli_fetch_array($rest2);
+        $con = 0;
+        if($extraido2 != NULL){
+            $con = $extraido2["cont"];
+        }
+
+        $registro=array("Id"=>$extraido["idGrupo"],"Nombre"=>$extraido["Nombre"], "Tipo" => 1, "seguidores" => $con,"area"=>
+            $hashMap[$extraido["IdAreaDeConocimiento"]]);
         array_push($grupoUsuarios,$registro);
         $extraido = mysqli_fetch_array($result);
      }
@@ -88,7 +103,15 @@
     $extraido = mysqli_fetch_array($result);
     $contFinal = 0;
      while($extraido != NULL){
-        $registro=array("Id"=>$extraido["idUsuario"],"Nombre"=>$extraido["Nickname"], "Tipo" => 2);
+        $queryCount = "select count(*) as cont from Sigue where idUsuario = ".$extraido["idUsuario"].";";
+        $rest2 = $conexion ->query($queryCount);
+        $extraido2 = mysqli_fetch_array($rest2);
+        $con = 0;
+        if($extraido2 != NULL){
+            $con = $extraido2["cont"];
+        }
+    
+        $registro=array("Id"=>$extraido["idUsuario"],"Nombre"=>$extraido["Nickname"], "Tipo" => 2, "seguidores" => $con,"area"=>"null");
         array_push($grupoUsuarios,$registro);
         $extraido = mysqli_fetch_array($result);
      }
@@ -115,7 +138,7 @@
                     $acum++;
                 }
             }
-            if($acum *100 / $aux >= 80){
+            if($acum *100 / $aux >= 80){                
                 $idsAcepted[$cont12++] = $ids[$i];
             }
             $acum = 0;
@@ -123,21 +146,4 @@
      }
     return $idsAcepted;
 }
-
-/*
-
-
-
-select DISTINCT  Grupo.* from Grupo,Publicacion, Publicacion_Etiqueta, Publica, Etiqueta
-where 
-Grupo.Nombre like '%z%' or
-Grupo.IdAreaDeConocimiento in (2) or
-(
-Etiqueta.idEtiqueta in (1) and
-Publicacion_Etiqueta.idEtiqueta = Etiqueta.idEtiqueta and
-Publicacion.idPublicacion = Publicacion_Etiqueta.idPublicacion and
-Publica.idPublicacion = Publicacion.idPublicacion and
-Publica.idGrupo = Grupo.idGrupo) ;
-
-*/
     ?>

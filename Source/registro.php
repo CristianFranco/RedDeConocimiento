@@ -169,8 +169,8 @@
                         , type: "POST"
                         , data: postData
                         , success: function (data, textStatus, jqXHR) {
-
-                            //data: return data from server
+                            //console.log(data[0].Est + " que es esto "+ data[0].Mensaje);
+                            data: return data from server
                         }
                     });
 

@@ -11,7 +11,7 @@
     //Conexión y query's a la BD
     require("procesos/connection.php");
     $connection=connect();
-    $queryPub="SELECT * FROM ";
+    //$queryPub="SELECT * FROM ";
 ?>
 
 

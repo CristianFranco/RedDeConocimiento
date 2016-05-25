@@ -8,7 +8,7 @@
     $connection=connect();
     $query="select Nickname from Usuario";
     $result=$connection -> query($query);
-    //$ciudades=array();
+    $errores=array();
     //Variables usadas para recoger los datos del formulario 
     $nombre=$_POST['nombre'];
     //echo $nombre;
@@ -33,6 +33,12 @@
     $errores=array();
     //Bandera si existe el NickName en la BD o no existe
     define('band',FALSE);
+    //$result=$connection->query($query);
+    while($row=$result->fetch_array(MYSQLI_ASSOC) && !$band){
+        if($row['Nickname']==$nickname){
+            $errores[]="El NickName ya esta en uso por otro usuario";
+        }
+    }
     //Secuencias de caracteres permitidos en los campos
     //Comprobamos que errores este vacio para cargar a la base
     //if(count($errores)==0){
@@ -66,23 +72,37 @@
             Para confirmarlo debe hacer click en el siguiente enlace: \n 
             http://localhost:3030/ROC/Source/index.php  ".$codigoverificacion; 
             $mail->Body = $mensaje;
-            $mail->AltBody = "Mensaje de prueba mandado con pbhpmailer en formato solo texto";
+            //$mail->AltBody = "Mensaje de prueba mandado con pbhpmailer en formato solo texto";
             $exito = $mail->Send();
             if(!$exito)
                {
-                echo "Problemas enviando correo electrónico a ".$email." actualize la pagina";
-                echo "<br/>".$mail->ErrorInfo;	
+                //echo "Problemas enviando correo electrónico a ".$email." actualize la pagina";
+                //echo "<br/>".$mail->ErrorInfo;	
+                $errores[]="La direccion de correo ".$email." no es valida ";
                }
                else
                {
-                echo "Se ha enviado un correo de confirmación a la cuenta ".$email;
+                //echo "Se ha enviado un correo de confirmación a la cuenta ".$email;
                } 
 
              //echo 'El Mensaje a sido enviado. ha '.$email;
 
         }else{
-            echo "error";
+            //echo "error";
+            $errores[]="Fallo al registrar el usuario, intentelo de nuevo";
         }
-        
+        header('Content-Type: application/json');
+        if(count($errores)>0){
+        $conta=count($errores);
+        $est=0;
+        $listerr=array();
+        while($conta>$est){
+            $error=array("Est"=>'o',"Mensaje"=>'jol');
+            array_push($listerr,$error);
+            $est=$est+1;
+        }
+            echo json_encode($listerr);
+        }
+     
         
 ?>
