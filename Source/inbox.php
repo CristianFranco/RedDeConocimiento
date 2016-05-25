@@ -58,12 +58,12 @@
         <main>
         <div class="container secundario">
             <div class="row">
-                <div style="background-color: #eeeeee;" class="col s12 m6 valign-wrapper">
+                <div style="background-color: #eeeeee;" class="col s12 m12 valign-wrapper">
                     <!--<div class="card-panel grey lighten-4">-->
-                    <div class="col s2 m1">
-                        <a class="btn waves-effect waves-light blue lighten-3" onclick="reloadPage();"><i class="material-icons">replay</i></a>
+                    <div class="col s2 m2">
+                        <a class="col s12 m12 btn waves-effect waves-light blue lighten-3" onclick="reloadPage();"><i class="material-icons">replay</i></a>
                     </div>
-                    <div class="input-field col s7 m3 offset-s1">
+                    <div class="input-field col s6 m6">
                         <i class="material-icons prefix">search</i>
                         <!--<span>-->
                         <input id="icon_prefix" data-delay='50' data-position='top' data-tooltip='Buscar en Bandeja' type="text" class="validate tooltipped" onkeydown="enter(this,event);">
@@ -71,25 +71,27 @@
                         <!--</span>-->
                     </div>
 
-                    <div class="col s3 m1 offset-s1">
-                        <a class="btn waves-effect waves-light right-align blue lighten-3 disabled" id="prev"><i class="material-icons">skip_previous</i></a>
-                        <a class="btn waves-effect waves-light right-align blue lighten-3" id="next"><i class="material-icons">skip_next</i></a>
+                    <div class="col s2 m2">
+                        <a class="col s12 m12 btn waves-effect waves-light right-align blue lighten-3 disabled" id="prev"><i class="material-icons">skip_previous</i></a>
+                    </div>
+                    <div class="col s2 m2">
+                        <a class="col s12 m12 btn waves-effect waves-light right-align blue lighten-3" id="next"><i class="material-icons">skip_next</i></a>
                     </div>
                     <!--</div>-->
                 </div>
-                <div class="col s1 m1">
-                    <a style="width:202px;" class="waves-effect waves-light btn-large red accent-4">Redactar</a>
+                <div class="col s3 m3">
+                    <a class="col s12 m12 waves-effect waves-light btn-large red accent-4" onclick="redactar();">Redactar</a>
                     <br>
                     <br>
-                    <a id="marcar" class="waves-effect waves-light btn-large big grey">Marcar&nbsp;Todo&nbsp;Como&nbsp;Leido</a>
+                    <a style="font-size:13px;" id="marcar" class="col s12 m12 waves-effect waves-light btn-large grey">Marcar&nbsp;Todo&nbsp;Como&nbsp;Leido</a>
                     <br>
                     <br>
-                    <a id="vaciar" style="width:202px;" class="waves-effect waves-light btn-large grey" >Vaciar&nbsp;Bandeja</a>
+                    <a id="vaciar" class="col s12 m12 waves-effect waves-light btn-large grey" >Vaciar&nbsp;Bandeja</a>
                     <br>
                     <br>
-                    <a style="width:202px;font-size:12px;" class="waves-effect waves-light btn-large grey" id="bandeja">Mensajes&nbsp;Enviados</a>
+                    <a class="col s12 m12 waves-effect waves-light btn-large grey" id="bandeja">Mensajes&nbsp;Enviados</a>
                 </div>
-                <div style="height: 550px;" class="col s9 m4 push-s2" id="tabla">
+                <div style="height: 550px;" class="col s9 m9" id="tabla">
                 </div>
             </div>
             <div id="elimina" style="height: 25%;" class="modal modal-fixed-footer">
