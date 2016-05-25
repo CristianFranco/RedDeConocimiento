@@ -44,24 +44,24 @@
                 <div class="row">
                     <div class="input-field col s6">
                         <i class="material-icons prefix">account_circle</i>
-                        <input id="icon_prefix" type="text" class="validate" name="nombre">
+                        <input id="icon_prefix" type="text" class="validate" name="nombre" pattern="[A-Za-z ]{6,15}" title="Mínimo 6 caracteres, máximo 15 caracteres" required>
                         <label for="icon_prefix">Nombre</label>
                     </div>
                     <div class="input-field col s6">
                         <i class="material-icons prefix">account_circle</i>
-                        <input id="icon_prefix" type="text" class="validate" name="apell">
+                        <input id="icon_prefix" type="text" class="validate" name="apell" pattern="[A-Za-z ]{6,15}" title="Mínimo 6 caracteres, máximo 15 caracteres" required>
                         <label for="icon_prefix">Apellido</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s7">
                         <i class="material-icons prefix">email</i>
-                        <input id="icon_prefix" type="text" class="validate" name="email">
+                        <input id="icon_prefix" type="text" class="validate" name="email" pattern="[a-zA-Z0-9._@- ]{12,*}" title="debe ser mail@dominio.com, solo acepta caracteres especiales (.-_@ )" required>
                         <label for="icon_prefix">Email</label>
                     </div>
                     <div class="input-field col s5">
                         <i class="material-icons prefix">phone</i>
-                        <input id="icon_prefix" type="text" class="validate" name="tel">
+                        <input id="icon_prefix" type="text" class="validate" name="tel" pattern="[0-9 ]{10,20}" title="Introduce solo datos númericos (lada + télefono)" require>
                         <label for="icon_prefix">Telefono</label>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
                 <div class="input-field col s6">
                     <i class="material-icons prefix">location_on</i>
                     <?php
-                        $afg="AFG";
+                        //$afg="AFG";
                         $query="Select * From Ciudad where CodigoPais='AFG' order by Nombre ASC;";
                         $connection=connect();
                         $result=$connection -> query($query);
@@ -97,26 +97,26 @@
                 <div class="row">
                     <div class="input-field col s6">
                         <i class="material-icons prefix">assignment_ind</i>
-                        <input id="icon_prefix" type="text" class="validate" name="nkname">
+                        <input id="icon_prefix" type="text" class="validate" name="nkname" pattern="[A-Za-z0-9._- ]{6,15}" title="Mínimo 6 caracteres, máximo 15 caracteres" required>
                         <label for="icon_prefix">NickName</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
                         <i class="material-icons prefix">vpn_key</i>
-                        <input id="icon_prefix" type="password" class="validate" name="pass">
+                        <input id="icon_prefix" type="password" class="validate" name="pass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Al menos 8 caracteres con un número, una mayúscula y minúscula" required onchange="form.confpass.pattern = this.value;">
                         <label for="icon_prefix">Contraseña</label>
                     </div>
                     <div class="input-field col s6">
                         <i class="material-icons prefix">vpn_key</i>
-                        <input id="icon_prefix" type="password" class="validate" name="confpass">
+                        <input id="icon_prefix" type="password" class="validate" name="confpass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Al menos 8 caracteres con un número, una mayúscula y minúscula, Debe ser igual al campo contraseña" required>
                         <label for="icon_prefix">Confirmar Contraseña</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="material-icons prefix">list</i>
-                        <textarea id="icon_prefix" class="materialize-textarea" name="desc"></textarea>
+                   <textarea id="icon_prefix" class="materialize-textarea" name="desc" pattern="[a-ZA-Z0-9,.-_ ]$" title="Puede mencionar alguna descripcion de usted o dejarla en blanco"></textarea>
                         <label for="icon_prefix">Descripción</label>
                     </div>
                 </div>
