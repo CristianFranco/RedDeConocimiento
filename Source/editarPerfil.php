@@ -29,7 +29,8 @@
         <script src="https://code.jquery.com/jquery-2.1.0.min.js" integrity="sha256-8oQ1OnzE2X9v4gpRVRMb1DWHoPHJilbur1LP9ykQ9H0=" crossorigin="anonymous"></script>
         
         <script>
-            var estado = <?php if(isset($_SESSION['idUsuario'])) echo "true";else echo "false"; ?>;
+            var idEstilo = <?php if(isset($_SESSION['idUsuario'])) echo $_SESSION['idUsuario']; else echo 0; ?>;
+            //var estado = <?php if(isset($_SESSION['idUsuario'])) echo "true";else echo "false"; ?>;
         </script>
         <script src="../JS/cargarPreferencias.js"></script>
         <link rel="stylesheet" type="text/css" href="../CSS/style.css">
@@ -40,7 +41,7 @@
         </header>
     <main>
         <div class="container secundario">
-    <h1>Editar Perfil</h1>
+    <h2>Editar Perfil</h2>
     <?php
         /*echo $usuario ['Nickname'];
         echo $password ['Password'];
@@ -62,12 +63,12 @@
             </div>
             <div class="input-field col m4">
               <i class="material-icons prefix">vpn_key</i>
-              <input id="password" type="password" class="validate" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Al menos 8 caracteres con un número, una mayúscula y minúscula" name="password" required value="<?php echo $usuario ['Password'];?>" disabled>
+              <input id="password" type="password" class="validate" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Al menos 8 caracteres con un número, una mayúscula y minúscula" name="password" required value="<?php echo $usuario ['Password'];?>" disabled onchange="form.conf_pass.pattern = this.value;">
               <label for="password">Password</label>
             </div>
             <div class="input-field col m4">
               <i class="material-icons prefix">vpn_key</i>
-              <input id="conf_pass" type="password" class="validate"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Al menos 8 caracteres con un número, una mayúscula y minúscula" name="conf_pass" required disabled>
+              <input id="conf_pass" type="password" class="validate"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Los password no coinciden" name="conf_pass" required disabled>
               <label for="conf_pass">Confirmar Password</label>
             </div>
             <div class="input-field col m4">
@@ -137,13 +138,13 @@
               <div class="row">
               <form class="col m12" method="post" name="registro" action="envreg.php">
               <div class="input-field col m2"> 
-                  <a class="waves-effect waves-light btn" id="habilitar" type="button" name="action">Habilitar</a>
+                  <button class="waves-effect waves-light btn" id="habilitar" type="button" name="action">Habilitar</button>
               </div>
               <div class="input-field col m2">
-                  <a class="waves-effect waves-light btn" id="aceptar" type="submit" name="action">Aceptar</a>
+                  <button class="waves-effect waves-light btn" id="aceptar" type="submit" name="action" disabled>Aceptar</button >
               </div>
               <div class="input-field col m2">
-                  <a class="waves-effect waves-light btn" id="cancelar" type="button" name="action">Cancelar</a>
+                  <button class="waves-effect waves-light btn" id="cancelar" type="button" name="action" disabled>Cancelar</button>
               </div>
               </form>
               </div>
@@ -190,6 +191,8 @@
                 $('#paises').removeAttr('disabled');
                 $('#ciudades').removeAttr('disabled');
                 $('select').material_select();
+                $('#aceptar').removeAttr("disabled");
+                $('#cancelar').removeAttr("disabled");
             });
 //CANCELAR
             $("#cancelar").on("click",function(e){
