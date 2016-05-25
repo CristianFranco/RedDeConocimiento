@@ -210,7 +210,7 @@
             for($n=0;$n<=count($result3);$n++){
             echo "<p>".$comentarios[$n]['Comentario']."</p><form method=\"POST\">
                             <input type=\"hidden\" name=\"uid\" value=\"".$comentarios[$n]['idPublicacion']."\"> 
-                          <input class=\"btn icoP\" type=\"submit\" formaction=\"mostrar.php\" value=\"Ver Usuario\">
+                          <input class=\"btn principal\" type=\"submit\" formaction=\"mostrar.php\" value=\"Ver Usuario\">
                         </form>";
                 } 
             }else{
@@ -240,7 +240,7 @@
                        if($admin[$n]['idUsuario']==$idUsr and $admin[$n]['Estado']==2){
                       echo "<form method=\"POST\">
                             <input type=\"hidden\" name=\"idGrupo\" value=\"".$admin[$n]['idGrupo']."\"> 
-                          <input class=\"btn\" type=\"submit\" formaction=\"borrarGrupo.php\" value=\"Eliminar Grupo\">
+                          <input class=\"btn secundario\" type=\"submit\" formaction=\"borrarGrupo.php\" value=\"Eliminar Grupo\">
                         </form>";
                         }
                     echo "</div>
@@ -264,7 +264,7 @@
             echo "<p>".$miembros[$n]['Nickname']."<form method=\"POST\">
                             <input type=\"hidden\" name=\"tipo\" value=\"usuario\" />
                             <input type=\"hidden\" name=\"uid\" value=\"".$miembros[$n]['idUsuario']."\"> 
-                          <input class=\"btn\" type=\"submit\" formaction=\"mostrar.php\" value=\"Ver Usuario\">
+                          <input class=\"btn principal\" type=\"submit\" formaction=\"mostrar.php\" value=\"Ver Usuario\">
                         </form></p>";
                 }
             //SI NO, IMPRIME LO SIGUIENTE
@@ -297,8 +297,8 @@
                             <input type=\"hidden\" name=\"tipo\" value=\"grupo\" />
                             <input type=\"hidden\" name=\"idPublicacion\" value=\"".$publicacion[$n]['idPublicacion']."\">
                             <input type=\"hidden\" name=\"uid\" value=\"".$publicacion[$n]['idGrupo']."\"> 
-                          <input class=\"btn\" type=\"submit\" formaction=\"publicacion.php\" value=\"Ver Publicación\">
-                          <input class=\"btn\" type=\"submit\" formaction=\"mostrar.php\" value=\"Ver Grupo\">
+                          <input class=\"btn principal\" type=\"submit\" formaction=\"publicacion.php\" value=\"Ver Publicación\">
+                          <input class=\"btn principal\" type=\"submit\" formaction=\"mostrar.php\" value=\"Ver Grupo\">
                         </form>
                         </div>
                       </div>
