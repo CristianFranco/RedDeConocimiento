@@ -52,6 +52,8 @@
         echo $descripcion ['descripcion'];*/
         
     ?>
+            <div class="modal" id ="modal"> escribe todo</div>
+            
 <!--CAMPOS A EDITAR-->
     <div class="row">
       <form class="col s12" method="post" name="registro" action="envreg.php">
