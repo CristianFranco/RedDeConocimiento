@@ -28,7 +28,7 @@
                                 +result[x].seguidores+" "+seg+"</font></td></tr>");
                             }
                             if(contGrupo == 0){
-                                $("#tabla").append("No ");
+                                //$("#tabla").append("No ");
                                 
                             }
                         }
@@ -40,6 +40,6 @@
             }
 
             function sendGrPe(id, tipo){
-                    $.redirect('mostrar.php', {'uid ': id, 'tipo': tipo});
+                    $.redirect('mostrar.php', {'uid': id, 'tipo': tipo});
             }
 sendCall();
