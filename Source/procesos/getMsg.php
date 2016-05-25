@@ -4,6 +4,14 @@
     $mensaje=$mensajes[$idMensaje];
     $box=$_GET["box"];
     $img=strtolower($mensaje["Nombre"][0]);
+    require('connection.php');
+    $connection=connect();
+    $query="SELECT U.idUsuario
+            FROM Usuario U
+            WHERE U.Nickname='$mensaje[Nombre]';";
+    $result=$connection->query($query);
+    $row=$result->fetch_array(MYSQLI_ASSOC);
+    $idEnviar=$row["idUsuario"];
     echo "<div class='modal-content'>";
     echo "<div class='row'>";
     echo "<div class='col s2'>";
@@ -26,7 +34,9 @@
     echo "</div>";
     if($box!=1){
         echo "<div class='modal-footer'>";
-        echo "<a class='modal-action waves-effect waves-blue btn-flat'><i class='material-icons'>reply</i></a>";
+        echo "<a id='resp' class='modal-action waves-effect waves-blue btn-flat'><i class='material-icons'>reply</i></a>";
         echo "</div>";
     }
+    echo "<input type='hidden' id='idEnviar' value='$idEnviar'>";
+    echo "<input type='hidden' id='asnt' value='$mensaje[Asunto]'>";
 ?>

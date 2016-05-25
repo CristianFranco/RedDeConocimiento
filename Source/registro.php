@@ -7,6 +7,7 @@
     <html lang="es">
 
     <head>
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!--Let browser know website is optimized for mobile-->
@@ -18,46 +19,55 @@
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
         <!-- Compiled and minified CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+        <link rel="stylesheet" href="../frameworks/css/materialize.min.css">
 
         <!--Import jQuery before materialize.js-->
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-2.1.0.min.js" integrity="sha256-8oQ1OnzE2X9v4gpRVRMb1DWHoPHJilbur1LP9ykQ9H0=" crossorigin="anonymous"></script>
 
-
+        <script>
+            var idEstilo = <?php if(isset($_SESSION['idUsuario'])) echo $_SESSION['idUsuario']; else echo 0; ?>;
+        </script>
+        <script src="../JS/cargarPreferencias.js"></script>
+        <link rel="stylesheet" type="text/css" href="../CSS/style.css">
     </head>
 
     <body>
+        <header>
+            <?php require("header.php")?>
+        </header>
+        <main>
 
-        <h2>Registro de Datos</h2>
-        <div class="row">
-            <form class="col s12" method="post" name="registro" action="./procesos/procReg.php" >
+            <div class="container secundario">
+                <h2>Registro de Datos</h2>
                 <div class="row">
-                    <div class="input-field col s6">
-                        <i class="material-icons prefix">account_circle</i>
-                        <input id="icon_prefix" type="text" class="validate" name="nombre">
-                        <label for="icon_prefix">Nombre</label>
-                    </div>
-                    <div class="input-field col s6">
-                        <i class="material-icons prefix">account_circle</i>
-                        <input id="icon_prefix" type="text" class="validate" name="apell">
-                        <label for="icon_prefix">Apellido</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s7">
-                        <i class="material-icons prefix">email</i>
-                        <input id="icon_prefix" type="text" class="validate" name="email">
-                        <label for="icon_prefix">Email</label>
-                    </div>
-                    <div class="input-field col s5">
-                        <i class="material-icons prefix">phone</i>
-                        <input id="icon_prefix" type="text" class="validate" name="tel">
-                        <label for="icon_prefix">Telefono</label>
-                    </div>
-                </div>
-                 <div class="input-field col s6">
-                 <i class="material-icons prefix">location_on</i>
-                 <?php
+                    <form id="formRegistro" class="col s12" method="post" name="registro" action="./procesos/procReg.php">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input id="icon_prefix" type="text" class="validate" name="nombre" pattern="[A-Za-z ]{6,15}" title="Mínimo 6 caracteres, máximo 15 caracteres" required>
+                                <label for="icon_prefix">Nombre</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input id="icon_prefix" type="text" class="validate" name="apell" pattern="[A-Za-z ]{6,15}" title="Mínimo 6 caracteres, máximo 15 caracteres" required>
+                                <label for="icon_prefix">Apellido</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s7">
+                                <i class="material-icons prefix">email</i>
+                                <input id="icon_prefix" type="text" class="validate" name="email" pattern="[a-zA-Z0-9._@- ]{12,*}" title="debe ser mail@dominio.com, solo acepta caracteres especiales (.-_@ )" required>
+                                <label for="icon_prefix">Email</label>
+                            </div>
+                            <div class="input-field col s5">
+                                <i class="material-icons prefix">phone</i>
+                                <input id="icon_prefix" type="text" class="validate" name="tel" pattern="[0-9 ]{10,20}" title="Introduce solo datos númericos (lada + télefono)" require>
+                                <label for="icon_prefix">Telefono</label>
+                            </div>
+                        </div>
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">location_on</i>
+                            <?php
                      $query='Select * From Pais order by Nombre ASC;';
                      $connection=connect();
                      $result=$connection -> query($query);
@@ -67,12 +77,12 @@
                      }   
                     echo "</select>";
                  ?>
-                <label>Pais:</label>
-                </div>
-                <div class="input-field col s6">
-                    <i class="material-icons prefix">location_on</i>
-                    <?php
-                        $afg="AFG";
+                                <label>Pais:</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">location_on</i>
+                            <?php
+                        //$afg="AFG";
                         $query="Select * From Ciudad where CodigoPais='AFG' order by Nombre ASC;";
                         $connection=connect();
                         $result=$connection -> query($query);
@@ -82,79 +92,97 @@
                         }   
                         echo "</select>";
                     ?>
-                <label>Ciudad:</label>
-                </div>
-                <div class="row">
-                <div class="input-field col s6">
-                        <i class="material-icons prefix">assignment_ind</i>
-                        <input id="icon_prefix" type="text" class="validate" name="nkname">
-                        <label for="icon_prefix">NickName</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s6">
-                        <i class="material-icons prefix">vpn_key</i>
-                        <input id="icon_prefix" type="password" class="validate" name="pass">
-                        <label for="icon_prefix">Contraseña</label>
-                    </div>
-              <div class="input-field col s6">
-                        <i class="material-icons prefix">vpn_key</i>
-                        <input id="icon_prefix" type="password" class="validate" name="confpass">
-                        <label for="icon_prefix">Confirmar Contraseña</label>
-                    </div>
-                </div>
-                 <div class="row">
-                    <div class="input-field col s12">
-                     <i class="material-icons prefix">list</i>
-                   <textarea id="icon_prefix" class="materialize-textarea" name="desc"></textarea>
-                  <label for="icon_prefix">Descripción</label>
-                 </div>
-                </div>
-                 
-                <div align="right">
-                <button class="btn waves-effect waves-light" name="regresar" onClick="this.form.action='publicacion.php'">Regresar
-                <i class="material-icons left">reply</i>
-                </button>
-                <button class="btn waves-effect waves-light" type="submit" name="enviar">Registrar
-                <i class="material-icons right">forward</i>
-                </button>
-               </div>
-                
-            </form>
-            
+                                <label>Ciudad:</label>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">assignment_ind</i>
+                                <input id="icon_prefix" type="text" class="validate" name="nkname" pattern="[A-Za-z0-9._- ]{6,15}" title="Mínimo 6 caracteres, máximo 15 caracteres" required>
+                                <label for="icon_prefix">NickName</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">vpn_key</i>
+                                <input id="icon_prefix" type="password" class="validate" name="pass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Al menos 8 caracteres con un número, una mayúscula y minúscula" required onchange="form.confpass.pattern = this.value;">
+                                <label for="icon_prefix">Contraseña</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">vpn_key</i>
+                                <input id="icon_prefix" type="password" class="validate" name="confpass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Al menos 8 caracteres con un número, una mayúscula y minúscula, Debe ser igual al campo contraseña" required>
+                                <label for="icon_prefix">Confirmar Contraseña</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">list</i>
+                                <textarea id="icon_prefix" class="materialize-textarea" name="desc" pattern="[a-ZA-Z0-9,.-_ ]$" title="Puede mencionar alguna descripcion de usted o dejarla en blanco"></textarea>
+                                <label for="icon_prefix">Descripción</label>
+                            </div>
+                        </div>
 
-        </div>
-        <script>
-            $("#paises").on("change", function (e) {
-                console.log($("#paises").val());
-                $.ajax({
-                    url: "procesos/getCiudades.php"
-                    , method: "POST"
-                    , data: {
-                        idPais: $("#paises").val()
-                    }
-                    , dataType: "JSON"
-                    , success: function (result) {
+                        <div align="right">
+                            <button class="btn waves-effect waves-light" name="regresar" onClick="this.form.action='publicacion.php'">Regresar
+                                <i class="material-icons left">reply</i>
+                            </button>
+                            <button id="enviarRegistro" class="btn waves-effect waves-light" type="submit" name="enviar">Registrar
+                                <i class="material-icons right">forward</i>
+                            </button>
+                        </div>
 
-                        $("#ciudades").empty();
-                        for (var x = 0; x < result.length; x++) {
-                            $("#ciudades").append('<option value="' + result[x].Id + '">' + result[x].Nombre + '</select>');
+                    </form>
+
+
+                </div>
+            </div>
+        </main>
+        <?php require("footer.php");?>
+            <script src="../frameworks/js/materialize.min.js"></script>
+            <script src="../JS/header.js"></script>
+            <script>
+                $("#paises").on("change", function (e) {
+                    console.log($("#paises").val());
+                    $.ajax({
+                        url: "procesos/getCiudades.php"
+                        , method: "POST"
+                        , data: {
+                            idPais: $("#paises").val()
                         }
-                        $('select').material_select()
-                        console.log(result[0].Id + " " + result[0].Nombre);
-                    }
-                });
+                        , dataType: "JSON"
+                        , success: function (result) {
 
-            })
-        </script>
-        <!-- Compiled and minified JavaScript -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js">
-        </script>
-        <script>
-            $(document).ready(function () {
-                $('select').material_select();
-            });
-        </script>
+                            $("#ciudades").empty();
+                            for (var x = 0; x < result.length; x++) {
+                                $("#ciudades").append('<option value="' + result[x].Id + '">' + result[x].Nombre + '</select>');
+                            }
+                            $('select').material_select()
+                            console.log(result[0].Id + " " + result[0].Nombre);
+                        }
+                    });
+
+                })
+                $("#formRegistro").submit(function (e) {
+                    e.preventDefault();
+                    var postData = $(this).serializeArray();
+                    $.ajax({
+                        url: "procesos/procReg.php"
+                        , type: "POST"
+                        , data: postData
+                        , success: function (data, textStatus, jqXHR) {
+
+                            //data: return data from server
+                        }
+                    });
+
+                    //return false;
+                    //e.preventDefault();
+                });
+            </script>
+            <script>
+                $(document).ready(function () {
+                    $('select').material_select();
+                });
+            </script>
     </body>
 
     </html>

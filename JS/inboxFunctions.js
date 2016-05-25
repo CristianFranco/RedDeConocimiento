@@ -93,8 +93,22 @@ function reportar(idMensaje) {
 }
 
 function mostrar(idMensaje) {
-    $('#mensaje').load('../Source/procesos/getMsg.php?idMensaje='+idMensaje+"&box="+box);
-    $('#mensaje').openModal();
+    $.ajax({
+        url: '../Source/procesos/getMsg.php?idMensaje='+idMensaje+"&box="+box,
+        dataType: 'html',
+        async: false,
+        success: function (data) {
+            $('#mensaje').html(data);
+            $('#mensaje').openModal();
+            var button=document.getElementById('resp');
+            button.onclick=function(){
+                var asunto=document.getElementById('asnt').value;
+                var idEnviar=document.getElementById('idEnviar').value;
+                window.location.href='../Source/mensaje.php?asunto='+asunto+'&idDestinatario='+idEnviar;
+            }
+        }
+
+    });
 }
 
 function nextIndex() {
@@ -301,4 +315,11 @@ function enter(element, ev) {
             $('#next').removeClass('disabled');
         }
     }
+}
+
+function redactar(){
+    window.location.href='../Source/mensaje.php?asunto=&idDestinatario=0';
+}
+function responder(){
+    
 }
