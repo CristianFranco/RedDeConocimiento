@@ -3,10 +3,9 @@
 <?php 
     session_start();
     require("procesos/connection.php"); 
-    
     $Uid= 1;
     $connection = connect();
-    $sql = "SELECT u.Nickname, u.Password, u.Telefono, u.Nombre, u.Apellidos, u.Descripcion, c.CodigoPais,u.idCiudad from Usuario u,Ciudad c WHERE u.idUsuario = $Uid and u.idCiudad=c.ID;";
+    $sql = "SELECT u.idUsuario,u.Nickname, u.Password, u.Telefono, u.Nombre, u.Apellidos, u.Descripcion, c.CodigoPais,u.idCiudad from Usuario u,Ciudad c WHERE u.idUsuario = $Uid and u.idCiudad=c.ID;";
     $result = $connection -> query($sql);
     $usuario = $result -> fetch_assoc();
 ?>
@@ -18,7 +17,7 @@
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Publicacion</title>
+        <title>Editar Perfil</title>
 
         <!--Import Google Icon Font-->
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -55,9 +54,10 @@
     ?>
                     <!--CAMPOS A EDITAR-->
                     <div class="row">
-                        <form class="col s12" method="post" name="registro" action="envreg.php">
+                        <form id="formEPerfil" class="col s12" >
                             <div class="row">
                                 <div class="input-field col m4">
+                                    <input type="text" style="display:none;" name="idUsuario" value="<?=$usuario['idUsuario']?>">
                                     <i class="icoP material-icons prefix">account_circle</i>
                                     <input id="nickname" type="text" class="validate inpP " pattern="[A-Za-z0-9 ]{6,15}" title="Mínimo 6 caracteres, máximo 15 caracteres" name="nickname" required value="<?php echo $usuario ['Nickname'];?>" disabled>
                                     <label class="icoP" for="nickname">Nickname</label>
@@ -139,7 +139,7 @@
                                 <!--BOTONES-->
                                 <div class="row">
                                     <form class="col m12" method="post" name="registro" action="envreg.php">
-                                        <div class="input-field col m2">
+                                        <div class="input-field col m2 offset-m6">
                                             <button class="waves-effect waves-light btn" id="habilitar" type="button" name="action">Habilitar</button>
                                         </div>
                                         <div class="input-field col m2">
@@ -181,6 +181,7 @@
                     })
                     //HABILITAR CAMPOS
                 $("#habilitar").on("click", function (e) {
+                    alert("no");
                     //  $("#nickname").removeAttr("disabled");
                     /* $("#password").removeAttr("disabled");
                      $("#conf_pass").removeAttr("disabled");
@@ -199,6 +200,32 @@
                 //CANCELAR
                 $("#cancelar").on("click", function (e) {
                     window.location = "editarPerfil.php";
+                });
+                //PROCESO METER DATOS A BD  
+                $("#formEPerfil").submit(function (e) {
+                    //alert('FORM');
+                    e.preventDefault();
+                    var postData = $(this).serializeArray();
+                    $.ajax({
+                        url: "procesos/editPerfil.php"
+                         , type: "POST"
+                        , data: postData
+                        ,dataType:'json'
+                        , success: function (data, textStatus, jqXHR) {
+                            //console.log(data[0].Est + " que es esto "+ data[0].Mensaje);
+                            if(data.estado==true){
+                                
+                            }
+                            else{
+                                
+                            }
+                        },
+                        error: function(res,res2){
+                        //alert(res2);
+                    }
+                    });
+                    //return false;
+                    //e.preventDefault();
                 });
             </script>
 
