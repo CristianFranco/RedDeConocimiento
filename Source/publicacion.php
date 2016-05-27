@@ -16,8 +16,18 @@
     $filaPub=$resPub->fetch_array(MYSQLI_ASSOC);
     $fecha = $filaPub['Fecha'];
     $dt = new DateTime($fecha);
+//->num_rows;
 
-
+    $query="select * from Elemento where Tipo=1 and idPublicacion=$idPub ;";
+//1 archivo, 2 images, 3 video y 4 audio
+    $documentos=$connection->query($query);
+    $query="select * from Elemento where Tipo=2 and idPublicacion=$idPub ;";
+    $imagenes=$connection->query($query);
+    $query="select * from Elemento where Tipo=3 and idPublicacion=$idPub ;";
+    $videos=$connection->query($query);
+    $query="select * from Elemento where Tipo=4 and idPublicacion=$idPub ;";
+    $audios=$connection->query($query);
+   
 ?>
 
 
@@ -32,6 +42,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <title>Publicacion</title>
+        <link rel="stylesheet" href="../CSS/swiper.min.css">
 
         <!--Import Google Icon Font-->
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -41,7 +52,6 @@
 
         <!--Import jQuery before materialize.js-->
         <script src="https://code.jquery.com/jquery-2.1.0.min.js" integrity="sha256-8oQ1OnzE2X9v4gpRVRMb1DWHoPHJilbur1LP9ykQ9H0=" crossorigin="anonymous"></script>
-        <script src="../frameworks/js/jquery.mobile-1.4.5.min.js"></script>
         <script>
             var idEstilo = <?php if(isset($_SESSION['idUsuario'])) echo $_SESSION['idUsuario']; else echo 0; ?>;
         </script>
@@ -78,26 +88,26 @@
                     <div class=" nav-wrapper ">
                         <a id="mobilePubButton" href="#" data-activates="mobilePub" class="button-collapse"><i class="material-icons">menu</i></a>
                         <ul id="navPub " class="left hide-on-med-and-down ">
-                            <li><a href="" id="pubDescButton"><i class="material-icons left" >info</i>&nbsp;</a>
+                            <li><a id="pubDescButton"><i class="material-icons left" >info</i>&nbsp;</a>
 
                             </li>
-                            <li><a href="" id="pubImgButton">
+                            <li><a id="pubImgButton">
                             (<span class="badge ">4</span>)
                             <i class="material-icons left ">photo_camera</i>    
                         </a></li>
-                            <li><a href="" id="pubVidButton">
+                            <li><a id="pubVidButton">
                             (<span class="badge ">4</span>)
                             <i class="material-icons left ">videocam<!--movie--></i>    
                         </a></li>
-                            <li><a href="" id="pubAudButton">
+                            <li><a id="pubAudButton">
                             (<span class="badge ">4</span>)
                             <i class="material-icons left ">audiotrack</i> 
                         </a></li>
-                            <li><a href="" id="pubDocButton">
+                            <li><a id="pubDocButton">
                             (<span class="badge ">4</span>)
                             <i class="material-icons left ">description</i> 
                         </a></li>
-                            <li><a href="" id="pubComButton">
+                            <li><a id="pubComButton">
                             (<span class="badge ">4</span>)
                             <i class="material-icons left ">sms</i> 
                         </a></li>
@@ -106,23 +116,23 @@
                             <li><a href="#"><i class="material-icons left" >info</i>&nbsp;</a>
 
                             </li>
-                            <li><a href="# ">
+                            <li><a>
                             (<span class="badge ">4</span>)
                             <i class="material-icons left ">photo_camera</i>    
                         </a></li>
-                            <li><a href="# ">
+                            <li><a>
                             (<span class="badge ">4</span>)
                             <i class="material-icons left ">videocam<!--movie--></i>    
                         </a></li>
-                            <li><a href="# ">
+                            <li><a>
                             (<span class="badge ">4</span>)
                             <i class="material-icons left ">audiotrack</i> 
                         </a></li>
-                            <li><a href="# ">
+                            <li><a>
                             (<span class="badge ">4</span>)
                             <i class="material-icons left ">description</i> 
                         </a></li>¿
-                            <li><a href="# ">
+                            <li><a>
                             (<span class="badge ">4</span>)
                             <i class="material-icons left ">sms</i> 
                         </a></li>
@@ -130,95 +140,126 @@
                     </div>
                 </nav>
 
-                <div id="pubDesc" class="col s12 grey lighten-2 " style="min-height:65vh; ">
-                    <p>
-                    </p>
-
-                </div>
-                <div id="pubImg" class="col s12 grey lighten-2 " style="min-height:65vh;display:none; ">
-                    <video width="400" controls>
-                        <source src="../publicaciones/Kamisama%20Onegai%20-Kamisama%20Hajimemashita%20(Ending)%20(Kurama%20Version)%20(with%20Lyrics)%20(720p).mp4" type="video/mp4">
-                    </video>
-
-                    <a href="../publicaciones/Kamisama%20Onegai%20-Kamisama%20Hajimemashita%20(Ending)%20(Kurama%20Version)%20(with%20Lyrics)%20(720p).mp4" target="_blank">Ver en pantalla completa en una nueva ventana</a>.
-                    <br>
-                    <a href="../publicaciones/Kamisama%20Onegai%20-Kamisama%20Hajimemashita%20(Ending)%20(Kurama%20Version)%20(with%20Lyrics)%20(720p).mp4" download>Descargar</a>.
-
-
-                </div>
-                <div id="pubVid" class="col s12 grey lighten-2 " style="min-height:65vh;display:none; ">
-                    <video width="400" controls>
-                        <source src="../publicaciones/Kamisama%20Onegai%20-Kamisama%20Hajimemashita%20(Ending)%20(Kurama%20Version)%20(with%20Lyrics)%20(720p).mp4" type="video/mp4">
-                    </video>
-
-                    <a href="../publicaciones/Kamisama%20Onegai%20-Kamisama%20Hajimemashita%20(Ending)%20(Kurama%20Version)%20(with%20Lyrics)%20(720p).mp4" target="_blank">Ver en pantalla completa en una nueva ventana</a>.
-                    <br>
-                    <a href="../publicaciones/Kamisama%20Onegai%20-Kamisama%20Hajimemashita%20(Ending)%20(Kurama%20Version)%20(with%20Lyrics)%20(720p).mp4" download>Descargar</a>.
-
-
-                </div>
-                <div id="pubAud" class="col s12 grey lighten-2 " style="min-height:65vh;display:none; ">
-                    <video width="400" controls>
-                        <source src="../publicaciones/Kamisama%20Onegai%20-Kamisama%20Hajimemashita%20(Ending)%20(Kurama%20Version)%20(with%20Lyrics)%20(720p).mp4" type="video/mp4">
-                    </video>
-
-                    <a href="../publicaciones/Kamisama%20Onegai%20-Kamisama%20Hajimemashita%20(Ending)%20(Kurama%20Version)%20(with%20Lyrics)%20(720p).mp4" target="_blank">Ver en pantalla completa en una nueva ventana</a>.
-                    <br>
-                    <a href="../publicaciones/Kamisama%20Onegai%20-Kamisama%20Hajimemashita%20(Ending)%20(Kurama%20Version)%20(with%20Lyrics)%20(720p).mp4" download>Descargar</a>.
-
-
-                </div>
-                <div id="pubDoc" class="col s12 grey lighten-2 " style="min-height:65vh;display:none; ">
-                    <video width="400" controls>
-                        <source src="../publicaciones/Kamisama%20Onegai%20-Kamisama%20Hajimemashita%20(Ending)%20(Kurama%20Version)%20(with%20Lyrics)%20(720p).mp4" type="video/mp4">
-                    </video>
-
-                    <a href="../publicaciones/Kamisama%20Onegai%20-Kamisama%20Hajimemashita%20(Ending)%20(Kurama%20Version)%20(with%20Lyrics)%20(720p).mp4" target="_blank">Ver en pantalla completa en una nueva ventana</a>.
-                    <br>
-                    <a href="../publicaciones/Kamisama%20Onegai%20-Kamisama%20Hajimemashita%20(Ending)%20(Kurama%20Version)%20(with%20Lyrics)%20(720p).mp4" download>Descargar</a>.
-
-
-                </div>
-                <div id="pubCom" class="col s12 grey lighten-2 " style="min-height:65vh;display:none; ">
-                    <video width="400" controls>
-                        <source src="../publicaciones/Kamisama%20Onegai%20-Kamisama%20Hajimemashita%20(Ending)%20(Kurama%20Version)%20(with%20Lyrics)%20(720p).mp4" type="video/mp4">
-                    </video>
-
-                    <a href="../publicaciones/Kamisama%20Onegai%20-Kamisama%20Hajimemashita%20(Ending)%20(Kurama%20Version)%20(with%20Lyrics)%20(720p).mp4" target="_blank">Ver en pantalla completa en una nueva ventana</a>.
-                    <br>
-                    <a href="../publicaciones/Kamisama%20Onegai%20-Kamisama%20Hajimemashita%20(Ending)%20(Kurama%20Version)%20(with%20Lyrics)%20(720p).mp4" download>Descargar</a>.
-
-
-                </div>
-                <!-- Controles de navegación -->
-                <div id="controles " class="col s12 grey lighten-1 " style="height:5vh; ">
-                    <div class="center-align ">
-                        <i class="material-icons ">first_page</i>
-                        <i class="material-icons ">keyboard_arrow_left</i>
-                        <span>1 2 3 4</span>
-                        <i class="material-icons ">keyboard_arrow_right</i>
-                        <i class="material-icons ">last_page</i>
-
+            </div>
+            <div class="swiper-container row secundario" id="pubDesc">
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide col s12">
+                        container 1
                     </div>
                 </div>
+                <!-- If we need pagination -->
+                <div class="swiper-pagination"></div>
+
+                <!-- If we need navigation buttons -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+
+                <!-- If we need scrollbar -->
+                <div class="swiper-scrollbar"></div>
+            </div>
+            <div class="swiper-container row secundario" id="pubImg" >
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    <?php while($fila=$imagenes->fetch_array(MYSQLI_ASSOC)){?>
+                    <div class="swiper-slide col s12">
+                        <?=$fila['Descripcion']?>
+                    </div>
+                    <?php } ?>
+                </div>
+                <!-- If we need pagination -->
+                <div class="swiper-pagination"></div>
+
+                <!-- If we need navigation buttons -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+
+                <!-- If we need scrollbar -->
+                <div class="swiper-scrollbar"></div>
+            </div>
+            <div class="swiper-container row secundario" id="pubVid" >
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    <?php while($fila=$videos->fetch_array(MYSQLI_ASSOC)){ ?>
+                    <div class="swiper-slide col s12">
+                        <?=$fila['Descripcion']?>
+                    </div>
+                    <?php } ?>
+                </div>
+                <!-- If we need pagination -->
+                <div class="swiper-pagination"></div>
+
+                <!-- If we need navigation buttons -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+
+                <!-- If we need scrollbar -->
+                <div class="swiper-scrollbar"></div>
+            </div>
+            <div class="swiper-container row secundario" id="pubAud">
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    <?php while($fila=$audios->fetch_array(MYSQLI_ASSOC)){?>
+                    <div class="swiper-slide col s12">
+                        <?=$fila['Descripcion']?>
+                    </div>
+                    <?php } ?>
+                </div>
+                <!-- If we need pagination -->
+                <div class="swiper-pagination"></div>
+
+                <!-- If we need navigation buttons -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+
+                <!-- If we need scrollbar -->
+                <div class="swiper-scrollbar"></div>
+            </div>
+            <div class="swiper-container row secundario" id="pubDoc" >
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    <?php while($fila=$documentos->fetch_array(MYSQLI_ASSOC)){?>
+                    <div class="swiper-slide col s12">
+                        <?=$fila['Descripcion']?>
+                    </div>
+                    <?php } ?>
+                </div>
+                <!-- If we need pagination -->
+                <div class="swiper-pagination"></div>
+
+                <!-- If we need navigation buttons -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+
+                <!-- If we need scrollbar -->
+                <div class="swiper-scrollbar"></div>
             </div>
         </div>
-        <div class="row ">
+        <div class="container">
 
         </div>
+
+
 
         <?php require("footer.php ");?>
 
 
             <!-- Compiled and minified JavaScript -->
             <script src="../frameworks/js/materialize.min.js"></script>
+            <script src="../JS/header.js"></script>
             <script>
                 var textoDesc = "<?=$filaPub['Descripcion']?>";
                 var palabras = textoDesc.split(/(\s+)/);
             </script>
             <script src="../JS/publicacion.js"></script>
-            <script src="../JS/header.js"></script>
 
+
+
+            <script src="../JS/swiper.jquery.min.js"></script>
     </body>
 
     </html>

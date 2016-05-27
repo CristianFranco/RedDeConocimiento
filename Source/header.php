@@ -1,4 +1,3 @@
-
 <nav class="principal">
     <div class="nav-wrapper">
         <a href="#" class="brand-logo">RedConocimiento</a>
@@ -23,7 +22,7 @@
 
             </li>
             <li>
-               <i class="material-icons right" id="buscar">search</i>
+                <i class="material-icons right" id="buscar">search</i>
             </li>
             <li><a href="badges.html"><i class="material-icons">home</i></a></li>
             <!-- Si no está logeado-->
@@ -37,7 +36,7 @@
                     <li><a href="sass.html">Sass</a></li>
                     <li><a href="badges.html"><i class="material-icons">message</i></a></li>
                     <li>
-                       <ul id="perfilDropDown" class="dropdown-content">
+                        <ul id="perfilDropDown" class="dropdown-content">
                             <li><a href="#!">Editar Perfil</a></li>
                             <li><a href="#!">Personalizar</a></li>
                             <li class="divider"></li>
@@ -51,7 +50,7 @@
                         </ul>
                         <a id="dropdown-button-normal" class="dropdown-button" href="#!" data-activates="perfilDropDown">Bienvenido 
                             <?=$_SESSION['nickname']?><i class="material-icons right">arrow_drop_down</i></a>
-                        
+
                     </li>
                     <?php } ?>
         </ul>
@@ -126,5 +125,4 @@
     </form>
 </div>
 
-        <script type="text/javascript" src = "../JS/Redirect/jquery.redirect.js"></script>
-
+<script type="text/javascript" src="../JS/Redirect/jquery.redirect.js"></script>

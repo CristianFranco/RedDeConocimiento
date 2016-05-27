@@ -16,6 +16,15 @@ main {
     margin: 5px;
 }
 
+.swiper-container {
+    margin-top: -20px;
+    min-height: 65vh;
+}
+
+.swiper-wrapper {
+    padding: 50px;
+}
+
 
 /*
 .bcPrincipal {

@@ -1,10 +1,52 @@
-$('a').on("click", function (e) {
+/*$('a').on("click", function (e) {
 
     $(this).addClass("selected");
 });
 $('a').on("blur", function (e) {
     $(this).removeClass("selected");
+});*/
+
+$("#pubDescButton").click(function (e) {
+    deseleccionar();
+    $("#pubDescButton").addClass("selected");
+    $("#pubDesc").show();
 });
+$("#pubImgButton").click(function (e) {
+    deseleccionar();
+    $("#pubImgButton").addClass("selected");
+    $("#pubImg").show();
+});
+$("#pubVidButton").click(function (e) {
+    deseleccionar();
+    $("#pubVidButton").addClass("selected");
+    $("#pubVid").show();
+});
+$("#pubDocButton").click(function (e) {
+    deseleccionar();
+    $("#pubDocButton").addClass("selected");
+    $("#pubDoc").show();
+});
+$("#pubComButton").click(function (e) {
+    deseleccionar();
+    $("#pubComButton").addClass("selected");
+    $("#pubCom").show();
+});
+$("#pubAudButton").click(function (e) {
+    deseleccionar();
+    $("#pubAudButton").addClass("selected");
+    $("#pubAud").show();
+});
+
+function deseleccionar(e) {
+    $("#pubDescButton").removeClass("selected");
+    $("#pubImgButton").removeClass("selected");
+    $("#pubVidButton").removeClass("selected");
+    $("#pubDocButton").removeClass("selected");
+    $("#pubComButton").removeClass("selected");
+    $("#pubAudButton").removeClass("selected");
+    ocultar();
+
+}
 var actual = 1;
 var paginas = 0;
 var acp = 0;
@@ -56,22 +98,59 @@ $(window).resize(function () {
 
     paginar();
 });
-$(window).on("load", function (e) {
+$(window).on("ready", function (e) {
     paginar();
+    //var desc = getSwiper(".s1");
+    // var img = getSwiper(".s2");
+    /*var vid = getSwiper("#pubVid");
+    var aud = getSwiper("#pubAud");
+    var doc = getSwiper("#pubDoc");
+    var com = getSwiper("#pubCom");
+    
+    
+*/
+    $(".swiper-container").each(function (index, element) {
+        var $this = $(this);
+        $this.addClass("instance-" + index);
+        $this.find(".swiper-button-prev").addClass("btn-prev-" + index);
+        $this.find(".swiper-button-next").addClass("btn-next-" + index);
+        $this.find(".swiper-pagination").addClass("pagination-" + index);
+        var swiper = new Swiper(".instance-" + index, {
+            // your settings ...
+            pagination: '.pagination-' + index
+            , paginationClickable: true
+            , nextButton: ".btn-next-" + index
+            , prevButton: ".btn-prev-" + index
+        });
+    });
+    /*Ocultar swipers*/
+    $("#pubImg").hide();
+    $("#pubVid").hide();
+    $("#pubAud").hide();
+    $("#pubDoc").hide();
+    $("#pubCom").hide();
+
+    function getSwiper(id) {
+        return new Swiper(id, {
+            direction: 'horizontal'
+            , loop: false,
+
+            // If we need pagination
+            pagination: '.swiper-pagination',
+
+            // Navigation arrows
+            nextButton: '.swiper-button-next'
+            , prevButton: '.swiper-button-prev',
+
+            // And if we need scrollbar
+            scrollbar: '.swiper-scrollbar'
+        , });
+    }
 });
 
-$("#pubDesc p").on("swiperight", function (e) {
-    actual--;
-    cargar();
-});
-$("#pubDesc p").on("swipeleft", function (e) {
-    actual++;
-    cargar();
-});
 
-$.mobile.loading("hide");
-// (or presumably as submitted by @Pnct)
-$.mobile.loading().hide();
+
+
 $("#mobilePubButton").sideNav();
 
 function ocultar() {
@@ -82,30 +161,8 @@ function ocultar() {
     $("#pubDoc").hide();
     $("#pubCom").hide();
 }
-$("#pubDescButton").click(function (e) {
-    ocultar();
-    $("#pubDesc").show();
-});
-$("#pubImgButton").click(function (e) {
-    ocultar();
-    $("#pubImg").show();
-});
-$("#pubVidButton").click(function (e) {
-    ocultar();
-    $("#pubVid").show();
-});
-$("#pubAudButton").click(function (e) {
-    ocultar();
-    $("#pubAud").show();
-});
-$("#pubDocButton").click(function (e) {
-    ocultar();
-    $("#pubDoc").show();
-});
-$("#pubComButton").click(function (e) {
-    ocultar();
-    $("#pubCom").show();
-});
+
+//initialize swiper when document ready  
 
 
 
