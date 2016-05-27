@@ -43,6 +43,9 @@
             break;
         }
     }
+    if(empty($ciudad) or empty($pais)){
+        $errores=array("estado"=>false,"msg"=>"No se selcciono Pais");
+    }
     //if(count($errores)==0){
         //echo "Registro correcto";
     if(count($errores)==0){
@@ -80,7 +83,8 @@
             $mail->Subject = "Confirmacion Cuenta Red Conocimiento";
             $mensaje = "Usted solicito un registro en Red de Conocimiento, \n 
             Para confirmarlo debe hacer click en el siguiente enlace: \n 
-            http://localhost:3030/ROC/Source/confirmacion.php?confirmacion=".$codigoAc."&IdUsr=".$row['IdUsuario']; //enviamos url con 
+            http://localhost:3030/ROC/Source/confirmacion.php?confirmacion=".$codigoAc."&IdUsr=".$row['IdUsuario']."\n
+            Usuario:".$nickname."\n Password=".$pass; //enviamos url con 
             $mail->Body = $mensaje;
             //$mail->AltBody = "Mensaje de prueba mandado con pbhpmailer en formato solo texto";
             $exito = $mail->Send();

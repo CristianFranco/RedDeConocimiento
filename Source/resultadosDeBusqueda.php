@@ -21,7 +21,7 @@ session_start();
         <!--Import jQuery before materialize.js-->
         <script src="https://code.jquery.com/jquery-2.1.0.min.js" integrity="sha256-8oQ1OnzE2X9v4gpRVRMb1DWHoPHJilbur1LP9ykQ9H0=" crossorigin="anonymous"></script>
         <script>
-            var estado = <?php if(isset($_SESSION['idUsuario'])) echo "true";else echo "false"; ?>;
+            var idEstilo = <?php if(isset($_SESSION['idUsuario'])) echo $_SESSION['idUsuario']; else echo 0; ?>;
         </script>
         <script src="../JS/cargarPreferencias.js"></script>
         <link rel="stylesheet" type="text/css" href="../CSS/style.css">
@@ -46,8 +46,8 @@ session_start();
 		<div class="container secundario">
 		<div class="row">
 		<div class="col s12">
-			<ul class="tabs">
-				<li class="tab col s6"><a href="#grupo">Grupos</a></li>
+			<ul class="tabs inpP">
+				<li class=" tab col s6"><a href="#grupo">Grupos</a></li>
 				<li class="tab col s6"><a href="#persona">Personas</a></li>
 
 			</ul>

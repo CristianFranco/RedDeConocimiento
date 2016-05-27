@@ -19,7 +19,7 @@
         <script src="https://code.jquery.com/jquery-2.1.0.min.js" integrity="sha256-8oQ1OnzE2X9v4gpRVRMb1DWHoPHJilbur1LP9ykQ9H0=" crossorigin="anonymous"></script>
         
         <script>
-            var estado = <?php if(isset($_SESSION['idUsuario'])) echo "true";else echo "false"; ?>;
+            var idEstilo = <?php if(isset($_SESSION['idUsuario'])) echo $_SESSION['idUsuario']; else echo 0; ?>;
         </script>
         <script src="../JS/cargarPreferencias.js"></script>
         <link rel="stylesheet" type="text/css" href="../CSS/style.css">
@@ -74,25 +74,25 @@
 
 		<form action="./resultadosDeBusqueda.php" method="POST" id='subFor'>
 			<div class="input-field" >
-				<label for="nombre">Busqueda por nombre de grupo o persona:</label>
-				<input type="text" id="nombre" name="nombre" ></input>
+				<label class="icoP" for="nombre">Busqueda por nombre de grupo o persona:</label>
+				<input class="inpP" type="text" id="nombre" name="nombre" ></input>
 			</div>
 
 			<div class="input-field" >
-			<label for="area">Busqueda por area de conocimiento:</label>
-				<input type="text" id="area" name="area"></input>
+			<label class="icoP" for="area">Busqueda por area de conocimiento:</label>
+				<input class="inpP" type="text" id="area" name="area"></input>
 			</div>
 			<p>
-			      <input name="group1" type="radio" value = "1" id="and" checked />
-			      <label for="and">Grupos que contengan el tipo de publicación</label>
+			      <input class="icoP" name="group1" type="radio" value = "1" id="and" checked />
+			      <label class="icoP" for="and">Grupos que contengan el tipo de publicación</label>
 			    </p>
 			    <p>
-			      <input name="group1" type="radio" id="or" value = "2" />
-			      <label for="or">Grupos o publicaciones</label>
+			      <input class="principal" name="group1" type="radio" id="or" value = "2" />
+			      <label class="icoP" for="or">Grupos o publicaciones</label>
 			    </p>
 			<div class="input-field" >
-			<label for="tags">Busqueda por contenido de publicaciones:</label>
-				<input type="text" id="tags"  name="tags"></input>
+			<label class="icoP" for="tags">Busqueda por contenido de publicaciones:</label>
+				<input class="inpP" type="text" id="tags"  name="tags"></input>
 			</div>
 
 			<button class="btn waves-effect waves-light blue darken-3 col s6 " type="submit" name="action">Buscar
