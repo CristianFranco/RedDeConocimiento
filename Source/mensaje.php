@@ -3,12 +3,12 @@
     session_start();
     //Parámetros de sesión
     $idUsuario=1;//$_SESSION['idUsuario'];
-    $idDest=2;
-    if(isset($POST_['idDest']))
-        $idDest=$_POST['idDest'];
+    $idDest=0;
+    if(isset($_GET['idDest']))
+        $idDest=$_GET['idDest'];
     $asunto="";
-    if(isset($_POST['asunto']))
-        $asunto=$_POST['asunto'];
+    if(isset($_GET['asunto']))
+        $asunto=$_GET['asunto'];
    
         
 
