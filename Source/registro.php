@@ -13,7 +13,7 @@
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Registro</title>
+        <title>Publicacion</title>
 
         <!--Import Google Icon Font-->
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -23,7 +23,6 @@
 
         <!--Import jQuery before materialize.js-->
         <script src="https://code.jquery.com/jquery-2.1.0.min.js" integrity="sha256-8oQ1OnzE2X9v4gpRVRMb1DWHoPHJilbur1LP9ykQ9H0=" crossorigin="anonymous"></script>
-
         <script>
             var idEstilo = <?php if(isset($_SESSION['idUsuario'])) echo $_SESSION['idUsuario']; else echo 0; ?>;
         </script>
@@ -56,7 +55,7 @@
                         <div class="row">
                             <div class="input-field col s7">
                                 <i class="material-icons prefix">email</i>
-                                <input id="icon_prefix" type="text" class="validate" name="email" pattern="[a-zA-Z0-9._@- ]{12,*}" title="debe ser mail@dominio.com, solo acepta caracteres especiales (.-_@ )" required>
+                                <input id="icon_prefix" type="email" class="validate" name="email" pattern="[a-zA-Z0-9._@- ]{12,*}" title="debe ser mail@dominio.com, solo acepta caracteres especiales (.-_@ )" required>
                                 <label for="icon_prefix">Email</label>
                             </div>
                             <div class="input-field col s5">
@@ -136,7 +135,7 @@
                 </div>
             </div>
         </main>
-        <?php require("footer.php");?>
+         <?php require("footer.php");?>
             <script src="../frameworks/js/materialize.min.js"></script>
             <script src="../JS/header.js"></script>
             <script>
@@ -168,14 +167,19 @@
                         url: "procesos/procReg.php"
                         , type: "POST"
                         , data: postData
+                        ,dataType:'json'
                         , success: function (data, textStatus, jqXHR) {
-                            //console.log(data[0].Est + " que es esto "+ data[0].Mensaje);
-                            data: return data from server
+                           //console.log(data.estado + " que es esto "+ data.msg);
+                            console.log(data);
+                            if(data.estado==false){
+                                 Materialize.toast(String(data.msg), 6000);
+                            }else{
+                                Materialize.toast("Se envio un correo de confirmacion a su correo",6000);
+                            }
+                           // data: return data from server
                         }
                     });
 
-                    //return false;
-                    //e.preventDefault();
                 });
             </script>
             <script>
