@@ -18,6 +18,8 @@
 }
 .noColumn{
     width: 7%;
+    max-width: 0;
+    overflow: hidden;
 }
 .remove{
     width: 2%;
@@ -36,17 +38,8 @@
     width: 1.5rem;
     height: 1.5rem;
 }
-table.highlight > tbody > tr{
-    transition: background-color .25s ease;
-}
-table.highlight > tbody > tr:hover{
-    background-color: #64b5f6;
-}
 tr{
     height: 40px;
-}
-span.badge.new{
-    background-color: #1565c0;
 }
 i.icon-warn{
     color: yellow;
