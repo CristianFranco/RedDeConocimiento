@@ -37,7 +37,7 @@
         <main>
 
             <div class="container secundario">
-                <h2>Registro de Datos</h2>
+                <h4 class="icoP">Registro de Datos</h4>
                 <div class="row">
                     <form id="formRegistro" class="col s12" method="post" name="registro" action="./procesos/procReg.php">
                         <div class="row">
@@ -81,7 +81,7 @@
                               <label class="icoP">Pais:</label>
                         </div>
                         <div class="input-field col s6">
-                        <i class="icoP material-icons prefix">location_on</i>
+                        <i class="icoP  material-icons prefix">location_on</i>
                         <?php
                         //$afg="AFG";
                         $query="Select * From Ciudad where CodigoPais='AFG' order by Nombre ASC;";

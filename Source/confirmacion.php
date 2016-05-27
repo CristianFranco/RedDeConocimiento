@@ -64,6 +64,7 @@
                     echo "<h4 class='icoP'>Su cuenta de la red de conocimiento ha sido activada con exito.....</h4>";
                     echo"</br><h4 class='icoP'>Espere mientras se redirecciona a la pagina principal</h4>";
                 }
+                $connection=disconnect($connection);
             ?>
         </div>
     </div>
