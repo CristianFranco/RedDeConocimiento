@@ -1,6 +1,7 @@
 <?php
     session_start();
     //require("class.phpmailer.php");
+    header('Content-Type: application/json');
     require("class.phpmailer.php");
     require("connection.php");
     //require("class.smtp.php");
@@ -32,24 +33,33 @@
     //Arreglo de errores
     $errores=array();
     //Bandera si existe el NickName en la BD o no existe
-    define('band',FALSE);
+    //define('band',FALSE);
     //$result=$connection->query($query);
-    while($row=$result->fetch_array(MYSQLI_ASSOC) && !$band){
+    //Checamos el que el NIckName no exista
+    while($row=$result->fetch_array(MYSQLI_ASSOC)){
         if($row['Nickname']==$nickname){
-            $errores[]="El NickName ya esta en uso por otro usuario";
+            $errores=array("estado"=>false,"msg"=>"El NickName ".$nickname." ya esta en uso por otro usuario");
+          //  $erores[]="lol";
+            break;
         }
     }
-    //Secuencias de caracteres permitidos en los campos
-    //Comprobamos que errores este vacio para cargar a la base
     //if(count($errores)==0){
         //echo "Registro correcto";
-        $codigoverificacion = 10;//rand(0000000000,9999999999); // Conseguimos un codigo aleatorio de 10 digitos.
+    if(count($errores)==0){
+        $codigoAc =mt_rand(0000000000,9999999999); // Conseguimos un codigo aleatorio de 10 digitos.
+        //echo $codigoAc;
        //Damos de alta
         $connectionr=connect();
-        $query="INSERT INTO Usuario (Nickname,Password,Email,Telefono,Nombre,Apellidos,idCiudad,Descripcion) VALUES ('".$nickname."','".$pass."','".$email."','".$telefono."','".$nombre."','".$apellido."',".$ciudad.",'".$desc."');";
-        //echo $query;
+        $query="INSERT INTO Usuario (Nickname,Password,Email,Telefono,Nombre,Apellidos,idCiudad,Descripcion,CodigoAc) VALUES ('".$nickname."','".$pass."','".$email."','".$telefono."','".$nombre."','".$apellido."',".$ciudad.",'".$desc."',".$codigoAc.");";
+       // echo "<br/>".$query;
+        //Verificamos que se hizo la consulta
         if($connectionr -> query($query)){
             //echo "registro correcto";
+            //Sacamos el id de usuario que se acaba de agregar
+            $query="SELECT IdUsuario FROM Usuario order by IdUsuario DESC LIMIT 1;";
+            $result=$connection->query($query);
+            $row=$result->fetch_array(MYSQLI_ASSOC);
+            //Proceso para el correo
             $mail = new phpmailer(); // create a new object
             $mail->IsSMTP(); // enable SMTP
             $mail->PluginDir="";
@@ -70,7 +80,7 @@
             $mail->Subject = "Confirmacion Cuenta Red Conocimiento";
             $mensaje = "Usted solicito un registro en Red de Conocimiento, \n 
             Para confirmarlo debe hacer click en el siguiente enlace: \n 
-            http://localhost:3030/ROC/Source/index.php  ".$codigoverificacion; 
+            http://localhost:3030/ROC/Source/confirmacion.php?confirmacion=".$codigoAc."&IdUsr=".$row['IdUsuario']; //enviamos url con 
             $mail->Body = $mensaje;
             //$mail->AltBody = "Mensaje de prueba mandado con pbhpmailer en formato solo texto";
             $exito = $mail->Send();
@@ -78,7 +88,7 @@
                {
                 //echo "Problemas enviando correo electrónico a ".$email." actualize la pagina";
                 //echo "<br/>".$mail->ErrorInfo;	
-                $errores[]="La direccion de correo ".$email." no es valida ";
+                $errores=array("estado"=>false,"msg"=>"La direccion de correo ".$email." no es valida ");
                }
                else
                {
@@ -89,20 +99,10 @@
 
         }else{
             //echo "error";
-            $errores[]="Fallo al registrar el usuario, intentelo de nuevo";
+            $errores=array("estado"=>false,"msg"=>"Fallo al registrar el usuario, intentelo de nuevo");
         }
-        header('Content-Type: application/json');
-        if(count($errores)>0){
-        $conta=count($errores);
-        $est=0;
-        $listerr=array();
-        while($conta>$est){
-            $error=array("Est"=>'o',"Mensaje"=>'jol');
-            array_push($listerr,$error);
-            $est=$est+1;
-        }
-            echo json_encode($listerr);
-        }
+    }
+     echo json_encode($errores);   
      
         
 ?>

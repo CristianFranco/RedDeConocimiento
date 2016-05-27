@@ -17,6 +17,15 @@
     if($tipo=="grupo"){
             //OBTIENE LOS DATOS DEL GRUPO DE LA BASE DE DATOS Y LAS PUBLICACIONES DE ESTE
             //OBTIENE LOS DATOS DEL GRUPO
+        $check="SELECT idUsuario, idGrupo, Estado, Notificar FROM RCO.Usuario_Grupo where idUsuario=$idUsr;";
+        $result4=$connection->query($check);
+        $n=0;
+        $admin;
+         while($fila=$result4->fetch_assoc()){
+                            $admin[$n]=$fila;
+                            $n++;
+                        }
+        
         $sql="SELECT idGrupo, Grupo.Nombre as NomGrupo, Grupo.Descripcion as descrip, AreaConocimiento.Nombre, AreaConocimiento.Descripcion FROM RCO.Grupo inner join  RCO.AreaConocimiento on  Grupo.IdAreaDeConocimiento=AreaConocimiento.idAreaConocimiento and Grupo.idGrupo=$uid;";
         $result=$connection->query($sql);
         $n=0;
@@ -52,7 +61,9 @@
                                 $n++;
                             }
         //OBTIENE LOS USUARIOS DENTRO DEL GRUPO
-        $sql3="SELECT Usuario.idUsuario, Usuario.Nickname from  Usuario_Grupo, Usuario, Grupo where Usuario_Grupo.idGrupo=Grupo.idGrupo and Usuario_Grupo.idUsuario=Usuario.idUsuario and Usuario_Grupo.idGrupo=$uid and Usuario_Grupo.Estado=1 limit 10;";
+        $sql3="SELECT 
+    Usuario.idUsuario, Usuario.Nickname FROM Usuario_Grupo, Usuario, Grupo WHERE Usuario_Grupo.idGrupo = Grupo.idGrupo
+     AND Usuario_Grupo.idUsuario = Usuario.idUsuario AND Usuario_Grupo.idGrupo = 1 AND Usuario_Grupo.Estado in (1,2) LIMIT 10;";
         $result3=$connection->query($sql3);
         $n=0;
         $miembros=null;
@@ -151,7 +162,7 @@
         <script src="https://code.jquery.com/jquery-2.1.0.min.js" integrity="sha256-8oQ1OnzE2X9v4gpRVRMb1DWHoPHJilbur1LP9ykQ9H0=" crossorigin="anonymous"></script>
         
         <script>
-            var estado = <?php if(isset($_SESSION['idUsuario'])) echo "true";else echo "false"; ?>;
+            var idEstilo = <?php if(isset($_SESSION['idUsuario'])) echo $_SESSION['idUsuario']; else echo 0; ?>;
         </script>
         <script src="../JS/cargarPreferencias.js"></script>
         <link rel="stylesheet" type="text/css" href="../CSS/style.css">
@@ -196,11 +207,11 @@
             //SI EXISTE COMENTARIOS LOS IMPRIME
             if($comentarios!=null){
             $n;
-            for($n=0;$n<count($result);$n++){
+            for($n=0;$n<=count($result3);$n++){
             echo "<p>".$comentarios[$n]['Comentario']."</p><form method=\"POST\">
                             <input type=\"hidden\" name=\"uid\" value=\"".$comentarios[$n]['idPublicacion']."\"> 
-                          <input class=\"btn\" type=\"submit\" formaction=\"mostrar.php\" value=\"Ver Usuario\">
-                        </form>\";";
+                          <input class=\"btn principal\" type=\"submit\" formaction=\"mostrar.php\" value=\"Ver Usuario\">
+                        </form>";
                 } 
             }else{
                 //SI NO IMPRIME LO SIGUIENTE
@@ -224,12 +235,23 @@
                       <p>".$usuario[$n]['descrip']."
                       <br>Area de Conocimiento: ".$usuario[$n]['Nombre']."
                       <br>Descripción: ".$usuario[$n]['Descripcion']."
-                      </p>
-                    </div>
+                      </p>";
+                         //si es el admin del grupo se imprime la opción de eliminarl el grupo
+                       if($admin[$n]['idUsuario']==$idUsr and $admin[$n]['Estado']==2){
+                      echo "<form method=\"POST\">
+                            <input type=\"hidden\" name=\"idGrupo\" value=\"".$admin[$n]['idGrupo']."\"> 
+                          <input class=\"btn principal\" type=\"submit\" formaction=\"borrarGrupo.php\" value=\"Eliminar Grupo\">
+                        </form>";
+                        }
+                    echo "</div>
                   </div>
                 </div>
               </div>";
+              
             }
+           
+              
+                
                 //imprime los miembros del grupo en una tarjeta blanca
              echo "<div class=\"row\">
             <div>
@@ -238,12 +260,11 @@
                   <span class=\"card-title\">Miembros del Grupo</span>";
             //SI EXISTEN MIEMBROS EN EL GRUPO LOS IMPRIME EN LA TARJETA
             if($miembros!=null){
-            $n;
-            for($n=0;$n<count($result);$n++){
-            echo "<p>".$miembros[$n]['Nickname']."</p><form method=\"POST\">
+            for($n=0;$n<=count($result3);$n++){
+            echo "<p>".$miembros[$n]['Nickname']."<form method=\"POST\">
                             <input type=\"hidden\" name=\"tipo\" value=\"usuario\" />
                             <input type=\"hidden\" name=\"uid\" value=\"".$miembros[$n]['idUsuario']."\"> 
-                          <input class=\"btn\" type=\"submit\" formaction=\"mostrar.php\" value=\"Ver Usuario\">
+                          <input class=\"btn principal\" type=\"submit\" formaction=\"mostrar.php\" value=\"Ver Usuario\">
                         </form></p>";
                 }
             //SI NO, IMPRIME LO SIGUIENTE
@@ -276,8 +297,8 @@
                             <input type=\"hidden\" name=\"tipo\" value=\"grupo\" />
                             <input type=\"hidden\" name=\"idPublicacion\" value=\"".$publicacion[$n]['idPublicacion']."\">
                             <input type=\"hidden\" name=\"uid\" value=\"".$publicacion[$n]['idGrupo']."\"> 
-                          <input class=\"btn\" type=\"submit\" formaction=\"publicacion.php\" value=\"Ver Publicación\">
-                          <input class=\"btn\" type=\"submit\" formaction=\"mostrar.php\" value=\"Ver Grupo\">
+                          <input class=\"btn principal\" type=\"submit\" formaction=\"publicacion.php\" value=\"Ver Publicación\">
+                          <input class=\"btn principal\" type=\"submit\" formaction=\"mostrar.php\" value=\"Ver Grupo\">
                         </form>
                         </div>
                       </div>
