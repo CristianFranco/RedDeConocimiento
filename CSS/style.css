@@ -22,10 +22,15 @@ main {
 }
 
 .swiper-wrapper {
-    padding: 50px;
+    
 }
 
-
+.swiper-slide {
+    padding: 50px;
+    padding-top: 20px;
+    position: relative;
+    box-sizing: border-box;
+}
 /*
 .bcPrincipal {
     background-color: white;

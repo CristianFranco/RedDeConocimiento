@@ -24,11 +24,11 @@
             <li>
                 <i class="material-icons right" id="buscar">search</i>
             </li>
-            <li><a href="badges.html"><i class="material-icons">home</i></a></li>
+            <li><a href="index.php"><i class="material-icons">home</i></a></li>
             <!-- Si no está logeado-->
             <?php if(!isset($_SESSION['idUsuario'])){ ?>
                 <li><a id="loginBoton" href="#login" class="modal-trigger">Iniciar Sesión</a></li>
-                <li><a href="" id="click">Registrarse</a></li>
+                <li><a href="registro.php" id="click">Registrarse</a></li>
 
 
                 <!--- Si está logeado-->
@@ -63,7 +63,7 @@
                     <label for="cajaBuscar2 black"></label>
                 </div>
             </li>
-            <li><a href="badges.html"><i class="material-icons left">home</i>Inicio</a></li>
+            <li><a href="index.php"><i class="material-icons left">home</i>Inicio</a></li>
             <li>
                 <a href="#" id="busquedaA">
                         Busqueda Avanzada
@@ -73,7 +73,7 @@
             <!-- Si no está logeado-->
             <?php if(!isset($_SESSION['idUsuario'])){ ?>
                 <li><a id="loginBoton" href="#login" class="modal-trigger">Iniciar Sesión</a></li>
-                <li><a href="" id="click">Registrarse</a></li>
+                <li><a href="registro.php" id="click">Registrarse</a></li>
 
 
                 <!--- Si está logeado-->
@@ -99,14 +99,14 @@
                         <h5 class="center-align principal">Iniciar Sesión</h5>
 
                         <div class="input-field col s12">
-                            <i class="material-icons prefix">account_circle</i>
-                            <input id="usuario" type="text" class="validate">
-                            <label for="usuario">Usuario</label>
+                            <i class="material-icons prefix icoP">account_circle</i>
+                            <input id="usuario" type="text" class="validate inpP">
+                            <label for="usuario" class="icoP">Usuario</label>
                         </div>
                         <div class="input-field col s12">
-                            <i class="material-icons prefix">vpn_key</i>
-                            <input id="pass" type="password" class="validate">
-                            <label for="pass">Contraseña</label>
+                            <i class="material-icons prefix icoP">vpn_key</i>
+                            <input id="pass" type="password" class="validate inpP">
+                            <label for="pass" class="icoP">Contraseña</label>
                         </div>
 
                     </div>
@@ -118,8 +118,8 @@
         </div>
         <div class="modal-footer principal">
             <div class="principal">
-                <input type="submit" id="iniciar" class="waves-effect btn" value="Iniciar"></input>
-                <a href="#!" class=" modal-action modal-close btn">Cancelar</a>
+                <input type="submit" id="iniciar" class="waves-effect btn secundario" value="Iniciar"></input>
+                <a href="#!" class=" modal-action modal-close btn secundario">Cancelar</a>
             </div>
         </div>
     </form>

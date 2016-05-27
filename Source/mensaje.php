@@ -75,9 +75,6 @@
                     <div class="row" id="para">
                         <h5>Para:</h5>
                     </div>
-                </div>
-                <br>
-                <div class="container secundario">
                     <div class="row">
                         <div class="input-field col s12">
                             <textarea id="mensaje" class="inpP materialize-textarea" name="mensaje"></textarea>

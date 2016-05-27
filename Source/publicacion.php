@@ -27,7 +27,9 @@
     $videos=$connection->query($query);
     $query="select * from Elemento where Tipo=4 and idPublicacion=$idPub ;";
     $audios=$connection->query($query);
-   
+    $query="select * from Usuario u,Comenta c where c.idPublicacion=$idPub and u.idUsuario=c.idUsuario order by c.Fecha";
+    $comentarios=$connection->query($query);
+   $numRows=$comentarios->num_rows;
 ?>
 
 
@@ -69,10 +71,10 @@
         <div class="container">
             <div class="row">
                 <!-- Titulo de la puclicación -->
-                <div class="col s12 m8">
-                    <h4><?=$filaPub['Titulo']?></h4>
+                <div class="col s12 m7">
+                    <h5><?=$filaPub['Titulo']?></h5>
                 </div>
-                <div class="col s12 m4">
+                <div class="col s12 m5">
                     <h5><?=$dt->format('Y-m-d')?>
                     <i class="material-icons yellow-text text-accent-3">star</i>
                     <i class="material-icons yellow-text text-accent-3">star</i>
@@ -144,8 +146,8 @@
             <div class="swiper-container row secundario" id="pubDesc">
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide col s12">
-                        container 1
+                    <div class="swiper-slide">
+                        <p>container 1</p>
                     </div>
                 </div>
                 <!-- If we need pagination -->
@@ -163,8 +165,8 @@
                 <div class="swiper-wrapper">
                     <!-- Slides -->
                     <?php while($fila=$imagenes->fetch_array(MYSQLI_ASSOC)){?>
-                    <div class="swiper-slide col s12">
-                        <?=$fila['Descripcion']?>
+                    <div class="swiper-slide">
+                        <p><?=$fila['Descripcion']?></p>
                     </div>
                     <?php } ?>
                 </div>
@@ -227,6 +229,49 @@
                         <?=$fila['Descripcion']?>
                     </div>
                     <?php } ?>
+                </div>
+                <!-- If we need pagination -->
+                <div class="swiper-pagination"></div>
+
+                <!-- If we need navigation buttons -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+
+                <!-- If we need scrollbar -->
+                <div class="swiper-scrollbar"></div>
+            </div>
+            <div class="swiper-container row secundario" id="pubCom" >
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                   
+                    <!-- Slides -->
+                    <?php 
+                        $contador=0;
+                        $contador2=1;
+                        
+                    ?>
+                    <?php while($fila=$comentarios->fetch_array(MYSQLI_ASSOC)){?>
+                        <?php if($contador==0){?>
+                            <div class="swiper-slide">
+                        <?php }?>
+                          
+                               <div class="principal" style="width:80%;position:relative;float:left;padding-left:25px;">
+                                    <?=$fila['Nickname']?>
+                                </div>
+                                <div class="principal" style="width:20%;position:relative;float:left;">
+                                    <?=$fila['Fecha']?>
+                                </div>
+                                <div class=" secundario">
+                                    <?=$fila['Comentario']?>
+                                </div>
+                          
+                        <?php if($contador2++==$numRows || $contador>1){ ?>
+                            </div>
+                        <?php $contador=-1;}?>
+                    <?php $contador++;} ?>
+                 
+                
+          
                 </div>
                 <!-- If we need pagination -->
                 <div class="swiper-pagination"></div>
