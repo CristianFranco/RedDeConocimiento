@@ -1,15 +1,15 @@
 
 <?php
     session_start();
-    //if(isset($_SESSION["idUsuario"])){
+    if(isset($_SESSION["idUsuario"])){
         require('procesos/connection.php');
         $connection=connect();
-        $idSession=1;
-        //$idSession=$_SESSION["idUsuario"];
+        //$idSession=1;
+        $idSession=$_SESSION["idUsuario"];
         $mensajes=array();
         $query="SELECT MM.ID, U.Nickname, MM.Asunto, MM.Mensaje, MM.Visto, MM.Fecha
                 FROM Usuario U, MandaMsn MM
-                WHERE MM.idUsuario='$idSession' AND MM.mostrar=1 AND MM.idUsuario1=U.idUsuario
+                WHERE MM.idUsuario1='$idSession' AND MM.mostrar=1 AND MM.idUsuario=U.idUsuario
                 ORDER BY MM.Fecha;";
         $result=$connection->query($query);
         while($row=$result->fetch_array(MYSQLI_ASSOC)){
@@ -132,7 +132,7 @@
 
 </html>
 <?php
-    /*}else{
+    }else{
         header('location: index.php');
-    }*/
+    }
 ?>
