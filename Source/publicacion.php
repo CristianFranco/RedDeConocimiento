@@ -38,6 +38,11 @@
     $query="select * from Usuario u,Comenta c where c.idPublicacion=$idPub and u.idUsuario=c.idUsuario order by c.Fecha";
     $comentarios=$connection->query($query);
    $numRows=$comentarios->num_rows;
+
+    $query="select Puntaje from Califica where idUsuario=$idUsr and idPublicacion=$idPub";
+    $calificacion=$connection->query($query);
+    $estrellas=$calificacion->fetch_array(MYSQLI_ASSOC);
+    
 ?>
 
 
@@ -84,11 +89,13 @@
                 </div>
                 <div class="col s12 m5">
                     <h5><?=$dt->format('Y-m-d')?>
-                    <i class="material-icons yellow-text text-accent-3">star</i>
-                    <i class="material-icons yellow-text text-accent-3">star</i>
-                    <i class="material-icons yellow-text text-accent-3">star</i>
-                    <i class="material-icons yellow-text text-accent-3">star</i>
-                    <i class="material-icons yellow-text text-accent-3">star</i>
+                    <?php for($i=0;$i<5;$i++){
+                        if($i<intval($estrellas['Puntaje'])){    
+                    ?>
+                            <i class="material-icons yellow-text text-accent-3">star</i>
+                    <?php }else{ ?>
+                        <i class="material-icons ">star_border</i>
+                    <?php }}?>
                     </h5>
                 </div>
                 <!-- Menú de la publicación-->
