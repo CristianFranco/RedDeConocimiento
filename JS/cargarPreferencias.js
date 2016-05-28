@@ -2,20 +2,20 @@ var strEstilo;
 var estilos = {};
 //#1565C0
 estilos['Default'] = {
-    bcFondo: "white"
+    bcFondo: "#fdfcfc"
     , bcPrincipal: "#1565C0"
     , bcSecundario: "#e3e3e3"
-    , tcPrincipal: "white"
-    , tcSecundario: "#black"
+    , tcPrincipal: "#fdfdfd"
+    , tcSecundario: "#000000"
     , fuente: "arial"
     , tamFuente: "100%"
 };
 estilos['Negro'] = {
-    bcFondo: "gray"
-    , bcPrincipal: "black"
-    , tcPrincipal: "white"
-    , bcSecundario: "white"
-    , tcSecundario: "black"
+    bcFondo: "#818181"
+    , bcPrincipal: "#000000"
+    , tcPrincipal: "#fffefe"
+    , bcSecundario: "#f8f8f8"
+    , tcSecundario: "#000000"
     , fuente: "arial"
     , tamFuente: "100%"
 };
@@ -58,8 +58,8 @@ function cargarDefault(tipo) {
         'color:' + estilos[tipo].tcPrincipal + '!important;' +
         '}' + /******principal hover******/
         'nav.principal ul a:hover,nav.principal ul a.selected{' +
-        'background-color:' + estilos[tipo].tcPrincipal + '!important;' +
-        'color:' + estilos[tipo].bcPrincipal + '!important;' +
+        'background-color:' + estilos[tipo].tcPrincipal + ' !important;' +
+        'color:' + estilos[tipo].bcPrincipal + ' !important;' +
         'opacity:1;' +
         '}' +
         'body{' +

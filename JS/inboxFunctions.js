@@ -10,7 +10,7 @@ $(document).ready(function () {
     var string = decodeURIComponent(json);
     var obj = JSON.parse(string);
     var longitud = obj.length;
-    if (longitud < 9) {
+    if (longitud < 8) {
         $('#next').addClass('disabled');
     } else {
         $('#next').on('click', nextIndex);
@@ -18,7 +18,10 @@ $(document).ready(function () {
     $('#bandeja').on('click', mostrarEnviados)
     $('#marcar').on('click',marcarLeido);
     $('#vaciar').on('click',borrarTodo);
-})
+    $('#hovered').hover(function(){
+        alert("Hover");
+    });
+});
 
 function eliminar(idMensaje) {
     $('#elimina').openModal();
@@ -45,7 +48,7 @@ function eliminar(idMensaje) {
         var string = decodeURIComponent(json);
         var obj = JSON.parse(string);
         var longitud = obj.length;
-        if (longitud < 9) {
+        if (longitud < 8) {
             $('#next').off('click');
             $('#next').addClass('disabled');
         } else {
@@ -81,7 +84,7 @@ function reportar(idMensaje) {
         var string = decodeURIComponent(json);
         var obj = JSON.parse(string);
         var longitud = obj.length;
-        if (longitud < 9) {
+        if (longitud < 8) {
             $('#next').off('click');
             $('#next').addClass('disabled');
         } else {
@@ -104,7 +107,7 @@ function mostrar(idMensaje) {
             button.onclick=function(){
                 var asunto=document.getElementById('asnt').value;
                 var idEnviar=document.getElementById('idEnviar').value;
-                window.location.href='../Source/mensaje.php?asunto='+asunto+'&idDestinatario='+idEnviar;
+                window.location.href='../Source/mensaje.php?asunto='+asunto+'&idDest='+idEnviar;
             }
         }
 
@@ -168,7 +171,7 @@ function marcarLeido() {
     var string = decodeURIComponent(json);
     var obj = JSON.parse(string);
     var longitud = obj.length;
-    if (longitud < 9) {
+    if (longitud < 8) {
         $('#next').off('click');
         $('#next').addClass('disabled');
     } else {
@@ -197,7 +200,7 @@ function borrarTodo() {
     var string = decodeURIComponent(json);
     var obj = JSON.parse(string);
     var longitud = obj.length;
-    if (longitud < 9) {
+    if (longitud < 8) {
         $('#next').off('click');
         $('#next').addClass('disabled');
     } else {
@@ -236,7 +239,7 @@ function mostrarEnviados() {
     var string = decodeURIComponent(json);
     var obj = JSON.parse(string);
     var longitud = obj.length;
-    if (longitud < 9) {
+    if (longitud < 8) {
         $('#next').off('click');
         $('#next').addClass('disabled');
     } else {
@@ -275,7 +278,7 @@ function mostrarRecibidos() {
     var string = decodeURIComponent(json);
     var obj = JSON.parse(string);
     var longitud = obj.length;
-    if (longitud < 9) {
+    if (longitud < 8) {
         $('#next').off('click');
         $('#next').addClass('disabled');
     } else {
@@ -307,7 +310,7 @@ function enter(element, ev) {
         var string = decodeURIComponent(json);
         var obj = JSON.parse(string);
         var longitud = obj.length;
-        if (longitud < 9) {
+        if (longitud < 8) {
             $('#next').off('click');
             $('#next').addClass('disabled');
         } else {
@@ -318,7 +321,7 @@ function enter(element, ev) {
 }
 
 function redactar(){
-    window.location.href='../Source/mensaje.php?asunto=&idDestinatario=0';
+    window.location.href='../Source/mensaje.php?asunto=&idDest=0';
 }
 function responder(){
     

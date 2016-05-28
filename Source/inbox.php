@@ -1,22 +1,23 @@
 
 <?php
     session_start();
-    require('procesos/connection.php');
-    $connection=connect();
-    $idSession=1;
-    //$idSession=$_SESSION["idUsuario"];
-    $mensajes=array();
-    $query="SELECT MM.ID, U.Nickname, MM.Asunto, MM.Mensaje, MM.Visto, MM.Fecha
-            FROM Usuario U, MandaMsn MM
-            WHERE MM.idUsuario='$idSession' AND MM.mostrar=1 AND MM.idUsuario1=U.idUsuario
-            ORDER BY MM.Fecha;";
-    $result=$connection->query($query);
-    while($row=$result->fetch_array(MYSQLI_ASSOC)){
-        $mensaje=array("ID"=>$row["ID"],"Nombre"=>$row["Nickname"],"Asunto"=>$row["Asunto"],"Mensaje"=>$row["Mensaje"],"Fecha"=>$row["Fecha"],"Visto"=>$row["Visto"]);
-        array_push($mensajes,$mensaje);
-    }
-    $JSON=json_encode($mensajes);
-    setcookie("Mensajes",$JSON);
+    //if(isset($_SESSION["idUsuario"])){
+        require('procesos/connection.php');
+        $connection=connect();
+        $idSession=1;
+        //$idSession=$_SESSION["idUsuario"];
+        $mensajes=array();
+        $query="SELECT MM.ID, U.Nickname, MM.Asunto, MM.Mensaje, MM.Visto, MM.Fecha
+                FROM Usuario U, MandaMsn MM
+                WHERE MM.idUsuario='$idSession' AND MM.mostrar=1 AND MM.idUsuario1=U.idUsuario
+                ORDER BY MM.Fecha;";
+        $result=$connection->query($query);
+        while($row=$result->fetch_array(MYSQLI_ASSOC)){
+            $mensaje=array("ID"=>$row["ID"],"Nombre"=>$row["Nickname"],"Asunto"=>$row["Asunto"],"Mensaje"=>$row["Mensaje"],"Fecha"=>$row["Fecha"],"Visto"=>$row["Visto"]);
+            array_push($mensajes,$mensaje);
+        }
+        $JSON=json_encode($mensajes);
+        setcookie("Mensajes",$JSON);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -39,7 +40,7 @@
         <script src="https://code.jquery.com/jquery-2.1.0.min.js" integrity="sha256-8oQ1OnzE2X9v4gpRVRMb1DWHoPHJilbur1LP9ykQ9H0=" crossorigin="anonymous"></script>
         
         <script>
-            var estado = <?php if(isset($_SESSION['idUsuario'])) echo "true";else echo "false"; ?>;
+             var idEstilo = <?php if(isset($_SESSION['idUsuario'])) echo $_SESSION['idUsuario']; else echo 0; ?>;
         </script>
         <script src="../JS/cargarPreferencias.js"></script>
         <link rel="stylesheet" type="text/css" href="../CSS/style.css">
@@ -61,7 +62,7 @@
                 <div style="background-color: #eeeeee;" class="col s12 m12 valign-wrapper">
                     <!--<div class="card-panel grey lighten-4">-->
                     <div class="col s2 m2">
-                        <a class="col s12 m12 btn waves-effect waves-light blue lighten-3" onclick="reloadPage();"><i class="material-icons">replay</i></a>
+                        <a class="col s12 m12 btn waves-effect waves-light principal" onclick="reloadPage();"><i class="material-icons">replay</i></a>
                     </div>
                     <div class="input-field col s6 m6">
                         <i class="material-icons prefix">search</i>
@@ -72,10 +73,10 @@
                     </div>
 
                     <div class="col s2 m2">
-                        <a class="col s12 m12 btn waves-effect waves-light right-align blue lighten-3 disabled" id="prev"><i class="material-icons">skip_previous</i></a>
+                        <a class="col s12 m12 btn waves-effect waves-light right-align principal disabled" id="prev"><i class="material-icons">skip_previous</i></a>
                     </div>
                     <div class="col s2 m2">
-                        <a class="col s12 m12 btn waves-effect waves-light right-align blue lighten-3" id="next"><i class="material-icons">skip_next</i></a>
+                        <a class="col s12 m12 btn waves-effect waves-light right-align principal" id="next"><i class="material-icons">skip_next</i></a>
                     </div>
                     <!--</div>-->
                 </div>
@@ -83,15 +84,15 @@
                     <a class="col s12 m12 waves-effect waves-light btn-large red accent-4" onclick="redactar();">Redactar</a>
                     <br>
                     <br>
-                    <a style="font-size:13px;" id="marcar" class="col s12 m12 waves-effect waves-light btn-large grey">Marcar&nbsp;Todo&nbsp;Como&nbsp;Leido</a>
+                    <a style="font-size:13px;" id="marcar" class="col s12 m12 waves-effect waves-light btn-large principal">Marcar&nbsp;Todo&nbsp;Como&nbsp;Leido</a>
                     <br>
                     <br>
-                    <a id="vaciar" class="col s12 m12 waves-effect waves-light btn-large grey" >Vaciar&nbsp;Bandeja</a>
+                    <a id="vaciar" class="col s12 m12 waves-effect waves-light btn-large principal" >Vaciar&nbsp;Bandeja</a>
                     <br>
                     <br>
-                    <a class="col s12 m12 waves-effect waves-light btn-large grey" id="bandeja">Mensajes&nbsp;Enviados</a>
+                    <a class="col s12 m12 waves-effect waves-light btn-large principal" id="bandeja">Mensajes&nbsp;Enviados</a>
                 </div>
-                <div style="height: 550px;" class="col s9 m9" id="tabla">
+                <div style="height: 453px;" class="col s9 m9" id="tabla">
                 </div>
             </div>
             <div id="elimina" style="height: 25%;" class="modal modal-fixed-footer">
@@ -130,3 +131,8 @@
     </body>
 
 </html>
+<?php
+    /*}else{
+        header('location: index.php');
+    }*/
+?>
