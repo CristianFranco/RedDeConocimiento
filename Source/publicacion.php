@@ -88,14 +88,22 @@
                 <div class="col s12 m5">
                     <h5><?=$filaPub['Titulo']?></h5>
                 </div>
-                <div class="col s12 m4">
+                <div class="col s12 m3">
+                   <?=$filaPub['Puntaje']?>/5.00
+                    <div class="my-rating"></div>
+                    
+                </div>
+                <div class="col s12 m1">
+                    
+                </div>
+                <div class="col s12 m3">
                     <h5><?=$dt->format('Y-m-d')?>
                    
                    
                     </h5>
                     
                 </div>
-                <div class="col s1 m3"><div class="my-rating"></div></div>
+                
                 <!-- Menú de la publicación-->
 
                 <nav class="col s12 principal">
@@ -320,8 +328,35 @@
             <script src="../JS/Estrellas/jquery.star-rating-svg.js"></script>
             <script>
             $(".my-rating").starRating({
-              initialRating: <?=$estrellas['Puntaje']?>,
-              starSize: 25
+                initialRating: <?php if(isset($estrellas['Puntaje']))
+                    echo $estrellas['Puntaje'];
+                    else
+                        echo 0;
+                ?>,
+                starSize: 25,
+                disableAfterRate: false,
+                onHover: function(currentIndex, currentRating, $el){
+                  $('.live-rating').text(currentIndex);
+                },
+                onLeave: function(currentIndex, currentRating, $el){
+                  $('.live-rating').text(currentRating);
+                },
+                callback: function(currentRating, $el){
+                alert('rated ', currentRating);
+                console.log('DOM element ', $el);
+                     $.ajax({
+                        url: "procesos/calificacion.php"
+                        , type: "POST"
+                        , data: {calificacion:currentRating,idPub:"<?=$idPub?>"}
+                        ,dataType:'json'
+                        , success: function (data, textStatus, jqXHR) {
+                            console.log(data);
+                           
+                           // data: return data from server
+                        }
+                    });
+                
+                }
             });
             </script>
             <link rel="stylesheet" type="text/css" href="../CSS/star-rating-svg.css">
