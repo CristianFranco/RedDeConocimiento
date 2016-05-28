@@ -2,8 +2,8 @@
     session_start();
     require('connection.php');
     $connection=connect();
-    //$idSession=$_SESSION["idUsuario"];
-    $idSession=1;
+    $idSession=$_SESSION["idUsuario"];
+    //$idSession=1;
     $index=$_GET["index"];
     $box=$_GET["box"];
     $mensajes=json_decode($_COOKIE['Mensajes'],TRUE);
