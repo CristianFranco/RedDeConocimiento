@@ -64,6 +64,7 @@
 
         <!-- Compiled and minified CSS -->
         <link rel="stylesheet" href="../frameworks/css/materialize.min.css">
+        
 
         <!--Import jQuery before materialize.js-->
         <script src="https://code.jquery.com/jquery-2.1.0.min.js" integrity="sha256-8oQ1OnzE2X9v4gpRVRMb1DWHoPHJilbur1LP9ykQ9H0=" crossorigin="anonymous"></script>
@@ -79,25 +80,22 @@
         <header>
             <?php require("header.php")?>
         </header>
-
+        
         <!--Contenido de la publicación -->
         <div class="container">
             <div class="row">
                 <!-- Titulo de la puclicación -->
-                <div class="col s12 m7">
+                <div class="col s12 m5">
                     <h5><?=$filaPub['Titulo']?></h5>
                 </div>
-                <div class="col s12 m5">
+                <div class="col s12 m4">
                     <h5><?=$dt->format('Y-m-d')?>
-                    <?php for($i=0;$i<5;$i++){
-                        if($i<intval($estrellas['Puntaje'])){    
-                    ?>
-                            <i class="material-icons yellow-text text-accent-3">star</i>
-                    <?php }else{ ?>
-                        <i class="material-icons ">star_border</i>
-                    <?php }}?>
+                   
+                   
                     </h5>
+                    
                 </div>
+                <div class="col s1 m3"><div class="my-rating"></div></div>
                 <!-- Menú de la publicación-->
 
                 <nav class="col s12 principal">
@@ -317,10 +315,17 @@
                 var palabras = textoDesc.split(/(\s+)/);
             </script>
             <script src="../JS/publicacion.js"></script>
-
-
-
             <script src="../JS/swiper.jquery.min.js"></script>
+            <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+            <script src="../JS/Estrellas/jquery.star-rating-svg.js"></script>
+            <script>
+            $(".my-rating").starRating({
+              initialRating: <?=$estrellas['Puntaje']?>,
+              starSize: 25
+            });
+            </script>
+            <link rel="stylesheet" type="text/css" href="../CSS/star-rating-svg.css">
+            
     </body>
 
     </html>
