@@ -124,7 +124,7 @@
                         </div>
 
                         <div align="right">
-                            <button class="waves-effect waves-light btn" name="regresar" onClick="this.form.action='publicacion.php'">Regresar
+                            <button type="button" class="waves-effect waves-light btn" name="regresar" onClick="location.href='index.php'">Regresar
                                 <i class="material-icons left">reply</i>
                             </button>
                             <button id="enviarRegistro" class="waves-effect waves-light btn" type="submit" name="enviar">Registrar
