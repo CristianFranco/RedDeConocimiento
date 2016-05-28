@@ -16,7 +16,7 @@ $('.modal-trigger').leanModal();
 
 $("#formLogin").on("submit", function (e) {
     e.preventDefault();
-    $("#loginMsn").hide();
+    $("#loginMsn").css("visibility","hidden");
     $.ajax({
         url: "procesos/checklogin.php"
         , method: "POST"
@@ -30,7 +30,7 @@ $("#formLogin").on("submit", function (e) {
                 window.location = "index.php";
             } else {
                 $("#loginMsn").text(result.msn);
-                $("#loginMsn").show();
+                $("#loginMsn").css("visibility","visible");
                 //window.location = "index.php";
             }
         }

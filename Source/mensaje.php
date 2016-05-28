@@ -55,8 +55,6 @@
             <?php require("header.php")?>
         </header>
         <main>
-
-
             <form class="col s12" id="formMensaje" method="POST">
                 <div class="container secundario">
                     <div class="row">
@@ -67,13 +65,13 @@
                         </div>
 
                     </div>
-                    <div class="row">
-                        <div class="col s12">
-                            <a class="waves-effect waves-light btn modal-trigger principal" href="#modalAgregar">Agregar</a>
-                        </div>
-                    </div>
                     <div class="row" id="para">
-                        <h5>Para:</h5>
+                       
+                        <h5><a class="btn-floating btn-large waves-effect waves-light modal-trigger principal" href="#modalAgregar"><i class="material-icons"  style="">add</i></a>
+                        Para:
+                        
+                        </h5>
+                        
                     </div>
                     <div class="row">
                         <div class="input-field col s12">

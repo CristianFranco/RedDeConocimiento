@@ -33,18 +33,18 @@
 
                 <!--- Si está logeado-->
                 <?php } else{ ?>
-                    <li><a href="sass.html">Sass</a></li>
-                    <li><a href="badges.html"><i class="material-icons">message</i></a></li>
+                    <li><a href="sass.html"><i class="material-icons">note_add</i></a></li>
+                    <li><a href="inbox.php"><i class="material-icons">message</i></a></li>
                     <li>
                         <ul id="perfilDropDown" class="dropdown-content">
-                            <li><a href="#!">Editar Perfil</a></li>
-                            <li><a href="#!">Personalizar</a></li>
+                            <li><a href="editarPerfil.php">Editar Perfil</a></li>
+                            <li><a href="personalizar.php">Personalizar</a></li>
                             <li class="divider"></li>
                             <li><a href="procesos/salir.php">Salir</a></li>
                         </ul>
                         <ul id="perfilDropDown2" class="dropdown-content">
-                            <li><a href="#!">Editar Perfil</a></li>
-                            <li><a href="#!">Personalizar</a></li>
+                            <li><a href="editarPerfil.php">Editar Perfil</a></li>
+                            <li><a href="personalizar.php">Personalizar</a></li>
                             <li class="divider"></li>
                             <li><a href="procesos/salir.php">Salir</a></li>
                         </ul>
@@ -78,8 +78,8 @@
 
                 <!--- Si está logeado-->
                 <?php } else{ ?>
-                    <li><a href="sass.html">Sass</a></li>
-                    <li><a href="badges.html"><i class="material-icons">message</i></a></li>
+                    <li><a href="sass.html"><i class="material-icons">note_add</i></a></li>
+                    <li><a href="inbox.php"><i class="material-icons">message</i></a></li>
                     <li>
                         <a id="dropdown-button-mobile" class="dropdown-button" href="#!" data-activates="perfilDropDown2">Bienvenido 
                             <?=$_SESSION['nickname']?><i class="material-icons right">arrow_drop_down</i></a>
@@ -92,7 +92,7 @@
 
 <div id="login" class="modal ">
     <form action="" id="formLogin" class="">
-        <div class="">
+        <div class="secundario">
             <div class="container">
                 <div class="row">
                     <div class="col s12">
@@ -110,16 +110,23 @@
                         </div>
 
                     </div>
-                    <div id="loginMsn" class="card-panel red darken-1 col s12 center-align white-text" style="display:none"></div>
+                    <div id="loginMsn" class="card-panel red darken-1 col s12 center-align white-text" style="visibility:hidden;"></div>
 
                 </div>
             </div>
 
         </div>
-        <div class="modal-footer principal">
-            <div class="principal">
-                <input type="submit" id="iniciar" class="waves-effect btn secundario" value="Iniciar"></input>
-                <a href="#!" class=" modal-action modal-close btn secundario">Cancelar</a>
+        <div class="modal-footer secundario">
+            <div class="secundario">
+                
+               <button id="iniciar" class="btn waves-effect principal" type="submit" name="action">Iniciar
+                <i class="material-icons right">send</i>
+              </button>
+               <button  class="btn waves-effect principal modal-action modal-close" type="submit" name="action">Cancelar
+                <i class="material-icons right">close</i>
+              </button>
+                <!-- <input type="submit" id="iniciar" class="waves-effect btn secundario" value="Iniciar"></input>
+                <input type="button" href="" class=" modal-action modal-close waves-effect btn  secundario" value="Cancelar"></input>-->
             </div>
         </div>
     </form>

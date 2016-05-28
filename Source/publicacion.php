@@ -21,12 +21,20 @@
     $query="select * from Elemento where Tipo=1 and idPublicacion=$idPub ;";
 //1 archivo, 2 images, 3 video y 4 audio
     $documentos=$connection->query($query);
+    $nDocumentos=$documentos->num_rows;
+    
     $query="select * from Elemento where Tipo=2 and idPublicacion=$idPub ;";
     $imagenes=$connection->query($query);
+    $nImagenes=$imagenes->num_rows;
+    
     $query="select * from Elemento where Tipo=3 and idPublicacion=$idPub ;";
     $videos=$connection->query($query);
+    $nVideos=$videos->num_rows;
+
     $query="select * from Elemento where Tipo=4 and idPublicacion=$idPub ;";
     $audios=$connection->query($query);
+    $nAudios=$audios->num_rows;
+
     $query="select * from Usuario u,Comenta c where c.idPublicacion=$idPub and u.idUsuario=c.idUsuario order by c.Fecha";
     $comentarios=$connection->query($query);
    $numRows=$comentarios->num_rows;
@@ -94,23 +102,23 @@
 
                             </li>
                             <li><a id="pubImgButton">
-                            (<span class="badge ">4</span>)
+                            (<?=$nImagenes?>)
                             <i class="material-icons left ">photo_camera</i>    
                         </a></li>
                             <li><a id="pubVidButton">
-                            (<span class="badge ">4</span>)
+                            (<?=$nVideos?>)
                             <i class="material-icons left ">videocam<!--movie--></i>    
                         </a></li>
                             <li><a id="pubAudButton">
-                            (<span class="badge ">4</span>)
+                            (<?=$nAudios?>)
                             <i class="material-icons left ">audiotrack</i> 
                         </a></li>
                             <li><a id="pubDocButton">
-                            (<span class="badge ">4</span>)
+                            (<?=$nDocumentos?>)
                             <i class="material-icons left ">description</i> 
                         </a></li>
                             <li><a id="pubComButton">
-                            (<span class="badge ">4</span>)
+                            (<?=$numRows?>)
                             <i class="material-icons left ">sms</i> 
                         </a></li>
                         </ul>
@@ -143,11 +151,12 @@
                 </nav>
 
             </div>
-            <div class="swiper-container row secundario" id="pubDesc">
+            <div class="swiper-container row secundario" id="pubDesc" >
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper">
+                    <!-- Slides -->
                     <div class="swiper-slide">
-                        <p>container 1</p>
+                        <p>hola</p>
                     </div>
                 </div>
                 <!-- If we need pagination -->
@@ -167,6 +176,8 @@
                     <?php while($fila=$imagenes->fetch_array(MYSQLI_ASSOC)){?>
                     <div class="swiper-slide">
                         <p><?=$fila['Descripcion']?></p>
+                        <img src="../publicaciones/<?=$idPub?>/<?=$fila['Directorio']?>" alt="Smiley face" height="60%" width="100%">
+                        
                     </div>
                     <?php } ?>
                 </div>
@@ -185,8 +196,9 @@
                 <div class="swiper-wrapper">
                     <!-- Slides -->
                     <?php while($fila=$videos->fetch_array(MYSQLI_ASSOC)){ ?>
-                    <div class="swiper-slide col s12">
-                        <?=$fila['Descripcion']?>
+                    <div class="swiper-slide">
+                        <p><?=$fila['Descripcion']?></p>
+                        <video  src="../publicaciones/<?=$idPub?>/<?=$fila['Directorio']?>" alt="Smiley face" height="60%" width="100%" controls>
                     </div>
                     <?php } ?>
                 </div>
@@ -205,8 +217,8 @@
                 <div class="swiper-wrapper">
                     <!-- Slides -->
                     <?php while($fila=$audios->fetch_array(MYSQLI_ASSOC)){?>
-                    <div class="swiper-slide col s12">
-                        <?=$fila['Descripcion']?>
+                    <div class="swiper-slide">
+                        <p><?=$fila['Descripcion']?></p>
                     </div>
                     <?php } ?>
                 </div>
@@ -225,8 +237,8 @@
                 <div class="swiper-wrapper">
                     <!-- Slides -->
                     <?php while($fila=$documentos->fetch_array(MYSQLI_ASSOC)){?>
-                    <div class="swiper-slide col s12">
-                        <?=$fila['Descripcion']?>
+                    <div class="swiper-slide">
+                        <p><?=$fila['Descripcion']?></p>
                     </div>
                     <?php } ?>
                 </div>
@@ -283,9 +295,6 @@
                 <!-- If we need scrollbar -->
                 <div class="swiper-scrollbar"></div>
             </div>
-        </div>
-        <div class="container">
-
         </div>
 
 
