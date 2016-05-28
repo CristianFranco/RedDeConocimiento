@@ -57,6 +57,7 @@
         <main>
             <form class="col s12" id="formMensaje" method="POST">
                 <div class="container secundario">
+                   <h4>Enviar Mensaje</h4>
                     <div class="row">
                         <div class="input-field col s6">
                             <i class="icoP material-icons prefix">account_circle</i>
@@ -67,7 +68,7 @@
                     </div>
                     <div class="row" id="para">
                        
-                        <h5><a class="btn-floating btn-large waves-effect waves-light modal-trigger principal" href="#modalAgregar"><i class="material-icons"  style="">add</i></a>
+                        <h5><a class="btn-floating btn waves-effect waves-light modal-trigger principal" href="#modalAgregar"><i class="material-icons"  style="">add</i></a>
                         Para:
                         
                         </h5>
@@ -115,7 +116,7 @@
                             </table>
                         </div>
                         <div class="modal-footer">
-                            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
                         </div>
                     </div>
                     <div class="row">
