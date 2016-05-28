@@ -282,7 +282,7 @@
                       <br>Area de Conocimiento: ".$usuario[$n]['Nombre']."
                       <br>Descripción: ".$usuario[$n]['Descripcion']."
                       </p>";
-                         //si es el admin del grupo se imprime la opción de eliminarl el grupo
+                         //si es el admin del grupo se imprime la opción de eliminarl el grupo******
                         
                        if(isset($_SESSION['idUsuario']) and $admin[$n]['idUsuario']==$idUsr and $admin[$n]['Estado']==2){
                       echo "<form method=\"POST\">
@@ -294,8 +294,31 @@
                   </div>
                 </div>
               </div>";
-              
             }
+            $band3=false;
+            for($n=0;$n<count($result4);$n++){
+            if(!isset($_SESSION['idUsuario']) || $admin[$n]['idGrupo']==$uid ){
+                            $band3=true;
+                           break;
+                       }
+            }
+                    if($band3==false){
+                               echo "<div class=\"row\">
+                                        <div>
+                                        <form method=\"POST\">
+                                        <input type=\"hidden\" name=\"idGrupo\" value=\"$uid\">
+                                        <input type=\"hidden\" name=\"seguidor\" value=\"$idUsr\">
+                                        <input class=\"btn principal\" type=\"submit\" formaction=\"procesos/unirseAlGrupo.php\" value=\"Unirse al Grupo\">
+                                        </form>
+                                        </div>
+                                    </div>";         
+                            }else{
+                                echo "<form method=\"POST\">
+                            <input type=\"hidden\" name=\"idGrupo\" value=\"$uid\">
+                            <input type=\"hidden\" name=\"seguidor\" value=\"$idUsr\">
+                            <input class=\"btn principal\" type=\"submit\" formaction=\"procesos/dejarDeSeguir.php\" value=\"Abandonar Grupo\">
+                            </form>"; 
+                          }
            
               
                 
