@@ -3,12 +3,12 @@
     session_start();
     //Parámetros de sesión
     $idUsuario=1;//$_SESSION['idUsuario'];
-    $idDest=2;
-    if(isset($POST_['idDest']))
-        $idDest=$_POST['idDest'];
+    $idDest=0;
+    if(isset($_GET['idDest']))
+        $idDest=$_GET['idDest'];
     $asunto="";
-    if(isset($_POST['asunto']))
-        $asunto=$_POST['asunto'];
+    if(isset($_GET['asunto']))
+        $asunto=$_GET['asunto'];
    
         
 
@@ -55,10 +55,9 @@
             <?php require("header.php")?>
         </header>
         <main>
-
-
             <form class="col s12" id="formMensaje" method="POST">
                 <div class="container secundario">
+                   <h4>Enviar Mensaje</h4>
                     <div class="row">
                         <div class="input-field col s6">
                             <i class="icoP material-icons prefix">account_circle</i>
@@ -67,17 +66,14 @@
                         </div>
 
                     </div>
-                    <div class="row">
-                        <div class="col s12">
-                            <a class="waves-effect waves-light btn modal-trigger principal" href="#modalAgregar">Agregar</a>
-                        </div>
-                    </div>
                     <div class="row" id="para">
-                        <h5>Para:</h5>
+                       
+                        <h5><a class="btn-floating btn waves-effect waves-light modal-trigger principal" href="#modalAgregar"><i class="material-icons"  style="">add</i></a>
+                        Para:
+                        
+                        </h5>
+                        
                     </div>
-                </div>
-                <br>
-                <div class="container secundario">
                     <div class="row">
                         <div class="input-field col s12">
                             <textarea id="mensaje" class="inpP materialize-textarea" name="mensaje"></textarea>
@@ -120,7 +116,7 @@
                             </table>
                         </div>
                         <div class="modal-footer">
-                            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
                         </div>
                     </div>
                     <div class="row">
