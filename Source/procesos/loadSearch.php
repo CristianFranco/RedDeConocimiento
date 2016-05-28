@@ -2,8 +2,8 @@
     session_start();
     require('connection.php');
     $connection=connect();
-    //$idSession=$_SESSION["idUsuario"];
-    $idSession=1;
+    $idSession=$_SESSION["idUsuario"];
+    //$idSession=1;
     $opt=$_GET["opt"];
     $mensajes=array();
     if($opt==0){

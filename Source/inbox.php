@@ -1,7 +1,7 @@
 
 <?php
     session_start();
-    //if(isset($_SESSION["idUsuario"])){
+    if(isset($_SESSION["idUsuario"])){
         require('procesos/connection.php');
         $connection=connect();
         $idSession=1;
@@ -132,7 +132,7 @@
 
 </html>
 <?php
-    /*}else{
+    }else{
         header('location: index.php');
-    }*/
+    }
 ?>
