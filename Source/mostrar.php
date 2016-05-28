@@ -64,7 +64,7 @@
         //OBTIENE LOS USUARIOS DENTRO DEL GRUPO
         $sql3="SELECT 
     Usuario.idUsuario, Usuario.Nickname FROM Usuario_Grupo, Usuario, Grupo WHERE Usuario_Grupo.idGrupo = Grupo.idGrupo
-     AND Usuario_Grupo.idUsuario = Usuario.idUsuario AND Usuario_Grupo.idGrupo = 1 AND Usuario_Grupo.Estado in (1,2) LIMIT 10;";
+     AND Usuario_Grupo.idUsuario = Usuario.idUsuario AND Usuario_Grupo.idGrupo = $uid AND Usuario_Grupo.Estado in (1,2) LIMIT 10;";
         $result3=$connection->query($sql3);
         $n=0;
         $miembros=null;
