@@ -37,7 +37,7 @@
         <main>
 
             <div class="container secundario">
-                <h4 class="icoP">Registro de Datos</h4>
+                <h4>Registro de Datos</h4>
                 <div class="row">
                     <form id="formRegistro" class="col s12" method="post" name="registro" action="./procesos/procReg.php">
                         <div class="row">
