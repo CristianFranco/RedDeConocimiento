@@ -4,8 +4,8 @@
     if(isset($_SESSION["idUsuario"])){
         require('procesos/connection.php');
         $connection=connect();
-        $idSession=1;
-        //$idSession=$_SESSION["idUsuario"];
+        //$idSession=1;
+        $idSession=$_SESSION["idUsuario"];
         $mensajes=array();
         $query="SELECT MM.ID, U.Nickname, MM.Asunto, MM.Mensaje, MM.Visto, MM.Fecha
                 FROM Usuario U, MandaMsn MM
