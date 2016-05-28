@@ -77,7 +77,7 @@
      datos.append('titulo', document.getElementById('titulo').value);
      datos.append('descripcion', document.getElementById('comment').value);
      datos.append('numero', 777);
-     var url = "subir.php";
+     var url = "procesos/subir.php";
      var solicitud = new XMLHttpRequest();
      solicitud.open("POST", url, true);
      solicitud.send(datos);
@@ -93,7 +93,7 @@
 
              datos.append('numero', i);
              datos.append('tipo', tiposarchivos[i]);
-             var url = "subir.php";
+             var url = "procesos/subir.php";
              var solicitud = new XMLHttpRequest();
              solicitud.open("POST", url, true);
              solicitud.send(datos);
@@ -116,7 +116,7 @@
          datos.append('archivo', archivo);
          datos.append('etiqueta', document.getElementById(etiqueta + i).value);
 
-         var url = "subir.php";
+         var url = "procesos/subir.php";
          var solicitud = new XMLHttpRequest();
          solicitud.open("POST", url, true);
          solicitud.send(datos);

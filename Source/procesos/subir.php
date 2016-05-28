@@ -1,7 +1,6 @@
 <?php 
 session_start();
-require('procesos/connection.php');
-
+require('connection.php');
 
 if (isset ($_POST['etiqueta']) ){
                    //etiquetas

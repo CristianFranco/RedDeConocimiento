@@ -29,7 +29,6 @@ else
 
         <!--Import jQuery before materialize.js-->
         <script src="https://code.jquery.com/jquery-2.1.0.min.js" integrity="sha256-8oQ1OnzE2X9v4gpRVRMb1DWHoPHJilbur1LP9ykQ9H0=" crossorigin="anonymous"></script>
-        <script src="../frameworks/js/jquery.mobile-1.4.5.min.js"></script>
         <script>
             var idEstilo = <?php if(isset($_SESSION['idUsuario'])) echo $_SESSION['idUsuario']; else echo 0; ?>;
         </script>
