@@ -13,12 +13,12 @@
             $query="SELECT MM.ID, U.Nickname, MM.Asunto, MM.Mensaje, MM.Visto, MM.Fecha, MM.mostrar
                     FROM Usuario U, MandaMsn MM
                     WHERE MM.idUsuario1='$idSession' AND MM.mostrar=1 AND MM.idUsuario=U.idUsuario AND (U.Nickname LIKE '%$criteria%' OR MM.Asunto LIKE '%$criteria%' OR MM.Mensaje LIKE '%$criteria%')
-                    ORDER BY MM.Fecha;";
+                    ORDER BY MM.Fecha DESC;";
         }else{
             $query="SELECT MM.ID, U.Nickname, MM.Asunto, MM.Mensaje, MM.Visto, MM.Fecha
                     FROM Usuario U, MandaMsn MM
                     WHERE MM.idUsuario='$idSession' AND MM.idUsuario1=U.idUsuario AND (U.Nickname LIKE '%$criteria%' OR MM.Asunto LIKE '%$criteria%' OR MM.Mensaje LIKE '%$criteria%')
-                    ORDER BY MM.Fecha;";
+                    ORDER BY MM.Fecha DESC;";
         }
         $result=$connection->query($query);
         while($row=$result->fetch_array(MYSQLI_ASSOC)){
@@ -34,7 +34,7 @@
         $query="SELECT MM.ID, U.Nickname, MM.Asunto, MM.Mensaje, MM.Visto, MM.Fecha, MM.mostrar
                 FROM Usuario U, MandaMsn MM
                 WHERE MM.idUsuario1='$idSession' AND MM.mostrar=1 AND MM.idUsuario=U.idUsuario
-                ORDER BY MM.Fecha;";
+                ORDER BY MM.Fecha DESC;";
         $result=$connection->query($query);
         while($row=$result->fetch_array(MYSQLI_ASSOC)){
             $mensaje=array("ID"=>$row["ID"],"Nombre"=>$row["Nickname"],"Asunto"=>$row["Asunto"],"Mensaje"=>$row["Mensaje"],"Fecha"=>$row["Fecha"],"Visto"=>$row["Visto"]);
@@ -49,7 +49,7 @@
         $query="SELECT MM.ID, U.Nickname, MM.Asunto, MM.Mensaje, MM.Visto, MM.Fecha, MM.mostrar
                 FROM Usuario U, MandaMsn MM
                 WHERE MM.idUsuario1='$idSession' AND MM.mostrar=1 AND MM.idUsuario=U.idUsuario
-                ORDER BY MM.Fecha;";
+                ORDER BY MM.Fecha DESC;";
         $result=$connection->query($query);
         while($row=$result->fetch_array(MYSQLI_ASSOC)){
             $mensaje=array("ID"=>$row["ID"],"Nombre"=>$row["Nickname"],"Asunto"=>$row["Asunto"],"Mensaje"=>$row["Mensaje"],"Fecha"=>$row["Fecha"],"Visto"=>$row["Visto"]);
@@ -60,7 +60,7 @@
         $query="SELECT MM.ID, U.Nickname, MM.Asunto, MM.Mensaje, MM.Visto, MM.Fecha
                 FROM Usuario U, MandaMsn MM
                 WHERE MM.idUsuario='$idSession' AND MM.idUsuario1=U.idUsuario
-                ORDER BY MM.Fecha;";
+                ORDER BY MM.Fecha DESC;";
         $result=$connection->query($query);
         while($row=$result->fetch_array(MYSQLI_ASSOC)){
             $mensaje=array("ID"=>$row["ID"],"Nombre"=>$row["Nickname"],"Asunto"=>$row["Asunto"],"Mensaje"=>$row["Mensaje"],"Fecha"=>$row["Fecha"],"Visto"=>$row["Visto"]);
@@ -71,7 +71,7 @@
         $query="SELECT MM.ID, U.Nickname, MM.Asunto, MM.Mensaje, MM.Visto, MM.Fecha, MM.mostrar
                 FROM Usuario U, MandaMsn MM
                 WHERE MM.idUsuario1='$idSession' AND MM.mostrar=1 AND MM.idUsuario=U.idUsuario
-                ORDER BY MM.Fecha;";
+                ORDER BY MM.Fecha DESC;";
         $result=$connection->query($query);
         while($row=$result->fetch_array(MYSQLI_ASSOC)){
             $mensaje=array("ID"=>$row["ID"],"Nombre"=>$row["Nickname"],"Asunto"=>$row["Asunto"],"Mensaje"=>$row["Mensaje"],"Fecha"=>$row["Fecha"],"Visto"=>$row["Visto"]);
@@ -89,7 +89,7 @@
         $query="SELECT MM.ID, U.Nickname, MM.Asunto, MM.Mensaje, MM.Visto, MM.Fecha, MM.mostrar
                 FROM Usuario U, MandaMsn MM
                 WHERE MM.idUsuario1='$idSession' AND MM.mostrar=1 AND MM.idUsuario=U.idUsuario
-                ORDER BY MM.Fecha;";
+                ORDER BY MM.Fecha DESC;";
         $result=$connection->query($query);
         while($row=$result->fetch_array(MYSQLI_ASSOC)){
             $mensaje=array("ID"=>$row["ID"],"Nombre"=>$row["Nickname"],"Asunto"=>$row["Asunto"],"Mensaje"=>$row["Mensaje"],"Fecha"=>$row["Fecha"],"Visto"=>$row["Visto"]);
