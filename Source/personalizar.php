@@ -55,7 +55,7 @@
             <div class="container secundario">
                 <div class="row">
                     <div class="col s12">
-                        <h3>Personalizar</h3>
+                        <h4>Personalizar</h4>
                     </div>
 
                     <div class="col s12">
