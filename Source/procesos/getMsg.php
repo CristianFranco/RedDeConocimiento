@@ -4,6 +4,7 @@
     $mensaje=$mensajes[$idMensaje];
     $box=$_GET["box"];
     $img=strtolower($mensaje["Nombre"][0]);
+    $ID=$mensaje["ID"];
     require('connection.php');
     $connection=connect();
     $query="SELECT U.idUsuario
@@ -36,6 +37,10 @@
         echo "<div class='modal-footer'>";
         echo "<a id='resp' class='modal-action waves-effect waves-blue btn-flat'><i class='material-icons'>reply</i></a>";
         echo "</div>";
+        $query="UPDATE MandaMsn
+                SET Visto=0
+                WHERE ID=$ID;";
+        $connection->query($query);
     }
     echo "<input type='hidden' id='idEnviar' value='$idEnviar'>";
     echo "<input type='hidden' id='asnt' value='$mensaje[Asunto]'>";

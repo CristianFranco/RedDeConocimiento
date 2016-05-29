@@ -20,14 +20,14 @@
                echo "<td class='remove' title='Eliminar Mensaje' style='text-align: center;'><a onclick='eliminar($i);'><img class='deleteIcon' src='../IMG/DeleteRed.png'></a></td>";
                echo "<td class='report' title='Reportar Mensaje' style='text-align: center;'><a onclick='reportar($i);'><i class='material-icons icon-warn'>report_problem</i></a></td>";
            }
-           echo "<td class='imgColumn' style='text-align: center;' onclick='mostrar($i);'><img width='40' height='38' class='circle responsive-img' src='../IMG/Avatar/$img.png'></td>";
-           echo "<td class='userColumn' onclick='mostrar($i);'>$mensaje[Nombre]</td>";
-           echo "<td class='textColumn' onclick='mostrar($i);'>$mensaje[Asunto] - $mensaje[Mensaje]</td>";
-           echo "<td class='date' onclick='mostrar($i);'>$mensaje[Fecha]</td>";
+           echo "<td data-target='mensaje' class='imgColumn modal-trigger' style='text-align: center;' onclick='mostrar($i);'><img width='40' height='38' class='circle responsive-img' src='../IMG/Avatar/$img.png'></td>";
+           echo "<td data-target='mensaje' class='userColumn modal-trigger' onclick='mostrar($i);'>$mensaje[Nombre]</td>";
+           echo "<td data-target='mensaje' class='textColumn modal-trigger' onclick='mostrar($i);'>$mensaje[Asunto] - $mensaje[Mensaje]</td>";
+           echo "<td data-target='mensaje' class='date modal-trigger' onclick='mostrar($i);'>$mensaje[Fecha]</td>";
            if($mensajes[$i]["Visto"]==1){
-               echo "<td class='noColumn' onclick='mostrar($i);'><span style='position:static;' class='new badge secundario'></span></td>";
+               echo "<td data-target='mensaje' class='noColumn modal-trigger' onclick='mostrar($i);'><span style='position:static;' class='new badge secundario'></span></td>";
            }else{
-               echo "<td class='noColumn' onclick='mostrar($i);'></td>";
+               echo "<td data-target='mensaje' class='noColumn modal-trigger' onclick='mostrar($i);'></td>";
            }
            echo "</tr>";
         }
