@@ -62,7 +62,7 @@
                             <div class="input-field col s5">
                                 <i class="icoP material-icons prefix">phone</i>
                                 <input id="icon_prefix" type="text" class="validate inpP" name="tel" pattern="[0-9 ]{10,20}" title="Introduce solo datos númericos (lada + télefono)" require>
-                                <label class="icoP" for="icon_prefix">Telefono</label>
+                                <label class="icoP" for="icon_prefix">Teléfono</label>
                             </div>
                         </div>
                          <div class="row">
@@ -78,7 +78,7 @@
                      }   
                     echo "</select>";
                  ?>
-                              <label class="icoP">Pais:</label>
+                            <label class="icoP">País:</label>
                         </div>
                         <div class="input-field col s6">
                         <i class="icoP  material-icons prefix">location_on</i>
