@@ -81,8 +81,8 @@
             $mail->Port = 587; // or 587 465
             //$mail->IsHTML(true);
             $mail->Subject = "Confirmacion Cuenta Red Conocimiento";
-            $mensaje = "Usted solicito un registro en Red de Conocimiento, \n 
-            Para confirmarlo debe hacer click en el siguiente enlace: \n 
+            $mensaje = "Usted se a registrado a la Red de Conocimiento, \n 
+            Para confirmar su cuenta haga click en el siguiente enlace: \n 
             http://localhost:3030/ROC/Source/confirmacion.php?confirmacion=".$codigoAc."&IdUsr=".$row['IdUsuario']."\n
             Usuario:".$nickname."\n Password=".$pass; //enviamos url con 
             $mail->Body = $mensaje;

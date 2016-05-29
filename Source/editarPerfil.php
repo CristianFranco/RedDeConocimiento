@@ -54,7 +54,7 @@
     ?>
                     <!--CAMPOS A EDITAR-->
                     <div class="row">
-                        <form id="formEPerfil" class="col s12" >
+                        <form id="formEPerfil" class="col s12">
                             <div class="row">
                                 <div class="input-field col m4">
                                     <input type="text" style="display:none;" name="idUsuario" value="<?=$usuario['idUsuario']?>">
@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="input-field col m4">
                                     <i class="icoP material-icons prefix">perm_identity</i>
-                                    <input id="nombre" type="text" class="validate inpP " pattern="[A-Za-z ]{6,15}" title="Introduce tu nombre verdadero" name="nombre" required value="<?php echo $usuario ['Nombre'];?>" disabled>
+                                    <input id="nombre" type="text" class="validate inpP " pattern="[A-Za-z ]{3,15}" title="Introduce tu nombre verdadero" name="nombre" required value="<?php echo $usuario ['Nombre'];?>" disabled>
                                     <label class="icoP" for="nombre">Nombre</label>
                                 </div>
                                 <div class="input-field col m4">
@@ -87,12 +87,12 @@
                                     <input id="telefono" type="text" class="validate inpP " pattern="[0-9]{10,20}" title="Introduce solo datos númericos (lada + télefono)" name="telefono" required value="<?php echo $usuario ['Telefono'];?>" disabled>
                                     <label class="icoP" for="telefono">Télefono</label>
                                 </div>
-                            </div>
-                            <div class="input-field col m4">
+                            </div>                    
+                        <div class="input-field">
                                 <i class="icoP material-icons prefix">assignment</i>
                                 <input id="descripcion" type="text" class="validate inpP " pattern="[A-Za-z0-9 ]{10,30}" title="Introduce una breve descripción de ti " name="descripcion" required value="<?php echo $usuario ['Descripcion'];?>" disabled>
                                 <label class="icoP" for="descripcion">Descripción</label>
-                            </div>
+                            </div>                             
                             <!--BD CATALOGO DE PAIS-CIUDAD-->
                             <div class="input-field col m4">
                                 <i class="icoP material-icons prefix">location_on</i>
@@ -139,7 +139,7 @@
                                 <!--BOTONES-->
                                 <div class="row">
                                     <form class="col m12" method="post" name="registro" action="envreg.php">
-                                        <div class="input-field col m2 offset-m6">
+                                        <div class="input-field col m2">
                                             <button class="waves-effect waves-light btn" id="habilitar" type="button" name="action">Habilitar</button>
                                         </div>
                                         <div class="input-field col m2">
@@ -180,16 +180,8 @@
 
                     })
                     //HABILITAR CAMPOS
-                $("#habilitar").on("click", function (e) {
-                    alert("no");
-                    //  $("#nickname").removeAttr("disabled");
-                    /* $("#password").removeAttr("disabled");
-                     $("#conf_pass").removeAttr("disabled");
-                     $("#nombre").removeAttr("disabled");
-                     $("#apellidos").removeAttr("disabled");
-                     $("#telefono").removeAttr("disabled");
-                     $("#descripcion").removeAttr("disabled");
-                     $("#paises").removeAttr("disabled");*/
+                $("#habilitar").on("click", function (e) { 
+                    $("#descripcion").removeAttr("disabled");
                     $("input").removeAttr("disabled");
                     $('#paises').removeAttr('disabled');
                     $('#ciudades').removeAttr('disabled');
@@ -214,10 +206,10 @@
                         , success: function (data, textStatus, jqXHR) {
                             //console.log(data[0].Est + " que es esto "+ data[0].Mensaje);
                             if(data.estado==true){
-                                
+                              alert('bien');
                             }
                             else{
-                                
+                                alert('mal');
                             }
                         },
                         error: function(res,res2){
