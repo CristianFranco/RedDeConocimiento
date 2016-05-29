@@ -11,7 +11,7 @@
     //Conexión y query's a la BD
     require("procesos/connection.php");
     $connection=connect();
-    $queryPub="SELECT * FROM Publicacion where idPublicacion=$idPub;";
+    $queryPub="SELECT * FROM Publicacion,Publica where Publicacion.idPublicacion=$idPub and Publica.idPublicacion=Publicacion.idPublicacion;";
     $resPub=$connection->query($queryPub);
     $filaPub=$resPub->fetch_array(MYSQLI_ASSOC);
     $fecha = $filaPub['Fecha'];
@@ -89,7 +89,7 @@
                     <h5><?=$filaPub['Titulo']?></h5>
                 </div>
                 <div class="col s6 m3">
-                   <?=$filaPub['Puntaje']?>/5.00
+                   <span id="calificacion"><?=$filaPub['Puntaje']?>/5.00</span>
                     <div class="my-rating"></div>
                     
                 </div>
@@ -128,12 +128,22 @@
                             <i class="material-icons left ">description</i> 
                         </a></li>
                             <li><a id="pubComButton">
-                            (<?=$numRows?>)
-                            <i class="material-icons left ">sms</i> 
+                            <span id="numComentarios1">(<?=$numRows?>)</span>
+                            <i class="material-icons left ">message</i> 
                         </a></li>
-                        <li>
-                            <a href="#comentar" class="modal-trigger waves-effect waves-light btn secundario">Comentar</a>
-                        </li>
+                            
+                        </ul>
+                        <ul class="right hide-on-med-and-down ">
+                            <li>
+                                <a href="#comentar" class="modal-trigger waves-effect waves-light btn-floating btn-large secundario">
+                                <i class="material-icons left icoP">message</i> </a>
+                            </li>
+                            <?php if($filaPub['idUsuario']==$idUsr){?>
+                            <li>
+                                <a href="#comentar" class="modal-trigger waves-effect waves-light btn-floating btn-large secundario">
+                                <i class="material-icons left icoP">delete_forever</i> </a>
+                            </li>
+                            <?php }?>
                         </ul>
                         <ul class="side-nav" id="mobilePub">
                             <li><a href="#"><i class="material-icons left" >info</i>&nbsp;</a>
@@ -279,19 +289,26 @@
                     <?php 
                         $contador=0;
                         $contador2=1;
-                        
+                        $divCont=0;
+                        $nCom=0;
+                        $totalCom=0;
                     ?>
                     <?php while($fila=$comentarios->fetch_array(MYSQLI_ASSOC)){?>
-                        <?php if($contador==0){?>
-                            <div class="swiper-slide">
+                        <?php if($contador==0){
+                            $divCont++;
+                            $nCom=0;
+                    ?>
+                            <div class="swiper-slide" id="com_<?=$divCont?>">
                            
                             <h5>Comentarios</h5>
-                        <?php }?>
-                          
-                               <div class="principal col m6" >
+                        <?php } $nCom++;
+                                $totalCom++;
+                                
+                                ?>
+                               <div class="principal col  s6 m6" >
                                     <?=$fila['Nickname']?>
                                 </div>
-                                <div class="principal col m6 right-align" >
+                                <div class="principal col s6 m6 right-align" >
                                     <?=$fila['Fecha']?>
                                 </div>
                                 <div class=" secundario col s12">
@@ -327,29 +344,25 @@
                         <h5 class="center-align principal">Comentar</h5>
 
                         <div class="input-field col s12">
-                          <textarea id="textarea1" class="materialize-textarea inpP"></textarea>
-                          <label for="textarea1" class="icoP">Comentario</label>
+                          <textarea id="comentarioTxt" class="materialize-textarea inpP" length="120"></textarea>
+                          <label for="comentarioTxt" class="icoP">Comentario</label>
                         </div>
 
                     </div>
-                    <div id="loginMsn" class="card-panel red darken-1 col s12 center-align white-text" style="visibility:hidden;"></div>
+    
 
+                </div>
+                <div class="row">
+                   <button  class="btn waves-effect principal modal-action modal-close col s2 offset-s8" type="button" name="action">
+                    <i class="material-icons ">close</i>
+                  </button>
+                    <button id="enviarComentario" class="btn waves-effect principal col s2" type="submit" name="action">
+                    <i class="material-icons ">send</i>
+                  </button>
+                   
                 </div>
             </div>
 
-        </div>
-        <div class="modal-footer secundario ">
-            <div class="secundario center-align">
-                
-               <button id="iniciar" class="btn waves-effect principal" type="submit" name="action">Comentar
-                <i class="material-icons right">send</i>
-              </button>
-               <button  class="btn waves-effect principal modal-action modal-close" type="submit" name="action">Cancelar
-                <i class="material-icons right">close</i>
-              </button>
-                <!-- <input type="submit" id="iniciar" class="waves-effect btn secundario" value="Iniciar"></input>
-                <input type="button" href="" class=" modal-action modal-close waves-effect btn  secundario" value="Cancelar"></input>-->
-            </div>
         </div>
     </form>
 </div>
@@ -369,6 +382,7 @@
             <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
             <script src="../JS/Estrellas/jquery.star-rating-svg.js"></script>
             <script>
+            var idPub = <?=$idPub?>;
             $(".my-rating").starRating({
                 initialRating: <?php if(isset($estrellas['Puntaje']))
                     echo $estrellas['Puntaje'];
@@ -384,7 +398,7 @@
                   $('.live-rating').text(currentRating);
                 },
                 callback: function(currentRating, $el){
-                alert('rated ', currentRating);
+                //alert('rated ', currentRating);
                 console.log('DOM element ', $el);
                      $.ajax({
                         url: "procesos/calificacion.php"
@@ -393,6 +407,9 @@
                         ,dataType:'json'
                         , success: function (data, textStatus, jqXHR) {
                             console.log(data);
+                            var num=Number(data.resultado);
+                            
+                            $("#calificacion").text(num.toFixed(2)+"/5.00");
                            
                            // data: return data from server
                         }
@@ -400,6 +417,73 @@
                 
                 }
             });
+            <?php if(isset($_SESSION['idUsuario'])){?>
+            $("#comentar").submit(function (e){
+               e.preventDefault();
+               
+               var comentario=$("#comentarioTxt").val();
+                console.log(idPub+" "+comentario);
+                $.ajax({
+                    type:"POST"
+                    ,url:"procesos/comentar.php"
+                    ,data:{idPub:idPub,comentario:comentario}
+                    , success: function (data, textStatus, jqXHR) {
+                            console.log(data);
+                           Materialize.toast('Comentario hecho!', 3000);
+                           // data: return data from server
+                        }
+                });
+            });
+            <?php }?>
+            var contenedor = <?=$divCont?>;
+            var nCom=<?=$nCom?>;
+            var totalCom= <?=$totalCom?>;
+             setInterval(function(e){ 
+                 console.log("llamando comentarios");
+                $.ajax({
+                    type:"POST"
+                    ,url:"procesos/verComentarios.php"
+                    ,data:{offset:totalCom,idPub:idPub}
+                    , success: function (data, textStatus, jqXHR) {
+                            console.log(data);
+                            if(data.comentarios.length>0){
+                                totalCom+=data.comentarios.length;
+                                for(var x=0;x<data.comentarios.length;x++){
+                                    if(nCom>=3|| contenedor==0){
+                                        nCom=0;
+                                        contenedor++;
+                                        $("#pubCom .swiper-wrapper").append(
+                                            '<div class="swiper-slide" id="com_'+contenedor+'">'+
+                                            '<h5>Comentarios</h5>'+
+                                            '</div>'
+                                        );
+                                        //crear nuevo contenedor
+                                        
+                                    }
+                                    $("#com_"+contenedor).append(
+                                        '<div class="principal col  s6 m6" >'+data.comentarios[x].nickname+
+                                        '</div>'+
+                                        '<div class="principal col s6 m6 right-align" >'+data.comentarios[x].fecha+
+                                        '</div>'+
+                                        '<div class=" secundario col s12">'+data.comentarios[x].comentario+
+                                        '</div>'
+                                    );
+                                    
+                                    nCom++;
+                                    
+                                }
+                                console.log(data);
+                               Materialize.toast('Comentarios nuevos!', 1000);
+                               
+                                $("#numComentarios1").text('('+totalCom+')');
+                                $("#numComentarios2").text('('+totalCom+')');
+                            }
+                           // data: return data from server
+                        }
+                });
+                                       
+                                       
+            }, 3000);
             </script>
             <link rel="stylesheet" type="text/css" href="../CSS/star-rating-svg.css">
             
