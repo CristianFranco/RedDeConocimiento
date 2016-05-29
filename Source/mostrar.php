@@ -3,7 +3,7 @@
     session_start();
     require("procesos/connection.php");    
     //Parámetros de sesión
-    $idUsr=3;//$_SESSION["idUsuario"];
+    $idUsr=$_SESSION["idUsuario"];
     $acceso=1;//$_SESSION['tipo'];
     $bandera=false; //la publicación fue echa en un grupo
     //Parámetros externos
@@ -21,7 +21,7 @@
         $check="SELECT idUsuario, idGrupo, Estado, Notificar FROM RCO.Usuario_Grupo where idUsuario=$idUsr;";
         $result4=$connection->query($check);
         $n=0;
-        $admin=0;
+        $admin=array();
          while($fila=$result4->fetch_assoc()){
                             $admin[$n]=$fila;
                             $n++;
@@ -297,7 +297,7 @@
             }
             $band3=false;
             for($n=0;$n<count($result4);$n++){
-            if(!isset($_SESSION['idUsuario']) || $admin[$n]['idGrupo']==$uid ){
+            if(!isset($_SESSION['idUsuario']) || $admin[$n]['idGrupo']==$uid || $admin[$n]['Estado']==2){
                             $band3=true;
                            break;
                        }
@@ -316,7 +316,7 @@
                                 echo "<form method=\"POST\">
                             <input type=\"hidden\" name=\"idGrupo\" value=\"$uid\">
                             <input type=\"hidden\" name=\"seguidor\" value=\"$idUsr\">
-                            <input class=\"btn principal\" type=\"submit\" formaction=\"procesos/dejarDeSeguir.php\" value=\"Abandonar Grupo\">
+                            <input class=\"btn principal\" type=\"submit\" formaction=\"procesos/abandonarGrupo.php\" value=\"Abandonar Grupo\">
                             </form>"; 
                           }
            
@@ -418,13 +418,9 @@
                 //SI NO SE TIENEN PUBLICACIONES ENTONCES SE MUESTRA LO SIGUIENTE
                 echo "<div class=\"row\">
                 <div>
-                  <div class=\"card blue \">
+                  <div class=\"card principal \">
                     <div class=\"card-content secundario \">
-                      <span class=\"card-title\">".$publicacion[0]['Nickname']." no cuenta con publicaciones.</span>
-                    </div>
-                    <div class=\"card-action\">
-                      <a href=\"#\">Ver Publicación</a>
-                      <a href=\"#\">Ver Grupo</a>
+                      <span class=\"card-title\">".$publicacion[0]['Nickname']." No cuenta con publicaciones.</span>
                     </div>
                   </div>
                 </div>
