@@ -12,7 +12,6 @@
                         var contGrupo = 0;
                         var contPersona = 0;
                         for (var x = 0; x < result.length; x++) {
-                            var contGrupo = 0;
                             if(result[x].Tipo == 1){
                                 contGrupo++;
                                 var seg = "Miembros";
