@@ -13,7 +13,8 @@
      		$result = $conexion ->query($queryTags);
      		$extraido = mysqli_fetch_array($result);
 		     while($extraido != NULL){
-		        $query2 = "insert into Usuario_Grupo (idUsuario, idGrupo, Estado, Notificar) values (".$idUser.",".$extraido["idGrupo"].",2,0);";
+		        $query2 = "insert into Usuario_Grupo
+		         (idUsuario, idGrupo, Estado, Notificar) values (".$idUser.",".$extraido["idGrupo"].",2,0);";
 		         if($conexion -> query($query2)){
 		         	$registro=array("Id"=>$extraido["idGrupo"],"success" => true);
         			array_push($grupo,$registro);

@@ -18,7 +18,7 @@
                                     seg = "Miembro";
                                 }
                                 $("#tabla").append("<tr onClick='sendGrPe("+result[x].Id+",\"grupo\")'><td style='width:20%;'><img src=../IMG/avatar/"+result[x].Nombre[0].toLowerCase()+".png></img></td><td style='width:80%;'>" + result[x].Nombre+"<br><font size='1'>Red de"
-                                +" conocimiento: programación | "+result[x].seguidores+" "+seg+" </font></td></tr>");
+                                +" conocimiento: " + result[x].area + " | "+result[x].seguidores+" "+seg+" </font></td></tr>");
                             }else{
                                 var seg = "Seguidores";
                                 if(result[x].seguidores === '1'){

@@ -103,8 +103,7 @@
 	</main>
         <?php require("footer.php");?>
     <script src="../frameworks/js/materialize.min.js"></script>
-            <script src="../JS/header.js"></script>
-
+    <script type="text/javascript" src="../JS/header.js"></script>
             <script type="text/javascript">
             	$(document).ready(function(){
             		$(".modal-trigger").leanModal();
