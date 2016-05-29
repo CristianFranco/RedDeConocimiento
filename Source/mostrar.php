@@ -420,11 +420,7 @@
                 <div>
                   <div class=\"card principal \">
                     <div class=\"card-content secundario \">
-                      <span class=\"card-title\">".$publicacion[0]['Nickname']." no cuenta con publicaciones.</span>
-                    </div>
-                    <div class=\"card-action\">
-                      <a href=\"#\">Ver Publicación</a>
-                      <a href=\"#\">Ver Grupo</a>
+                      <span class=\"card-title\">".$publicacion[0]['Nickname']." No cuenta con publicaciones.</span>
                     </div>
                   </div>
                 </div>
