@@ -137,8 +137,11 @@
                             <br>
                             <p>
                                 <!--BOTONES-->
-                                <div class="row">
-                                    <form class="col m12" method="post" name="registro" action="envreg.php">
+                                <!--<div class="row">-->
+                                   
+                                <!--</div>-->
+                        </form>
+                         <form class="col m12" method="post" name="registro" action="envreg.php">
                                         <div class="input-field col m2">
                                             <button class="waves-effect waves-light btn" id="habilitar" type="button" name="action">Habilitar</button>
                                         </div>
@@ -149,8 +152,6 @@
                                             <button class="waves-effect waves-light btn" id="cancelar" type="button" name="action" disabled>Cancelar</button>
                                         </div>
                                     </form>
-                                </div>
-                        </form>
                     </div>
             </div>
         </main>
@@ -194,7 +195,7 @@
                     window.location = "editarPerfil.php";
                 });
                 //PROCESO METER DATOS A BD  
-                $("#formEPerfil").submit(function (e) {
+                $("#formEPerfil").validate(function (e) {
                     //alert('FORM');
                     e.preventDefault();
                     var postData = $(this).serializeArray();
