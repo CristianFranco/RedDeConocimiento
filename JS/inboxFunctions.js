@@ -1,5 +1,6 @@
 var indice = 0;
 var box=0;
+var opt=4;
 $(document).ready(function () {
     indice = 0;
     $('.tooltipped').tooltip({delay: 50});
@@ -18,15 +19,13 @@ $(document).ready(function () {
     $('#bandeja').on('click', mostrarEnviados)
     $('#marcar').on('click',marcarLeido);
     $('#vaciar').on('click',borrarTodo);
-    $('#hovered').hover(function(){
-        alert("Hover");
-    });
 });
 
 function eliminar(idMensaje) {
     $('#elimina').openModal();
     var button=document.getElementById('elimAc');
     var idMsj=idMensaje;
+    opt=5;
     button.onclick=function(){
         indice = 0;
         $('#prev').addClass("disabled");
@@ -63,6 +62,7 @@ function reportar(idMensaje) {
     $('#reporta').openModal();
     var button=document.getElementById('reporAc');
     var idMsj=idMensaje;
+    opt=5;
     button.onclick=function(){
         indice = 0;
         $('#prev').addClass("disabled");
@@ -102,7 +102,25 @@ function mostrar(idMensaje) {
         async: false,
         success: function (data) {
             $('#mensaje').html(data);
-            $('#mensaje').openModal();
+            $('#mensaje').openModal({
+                complete: function(){
+                    
+                   $.ajax({
+                        url: '../Source/procesos/loadSearch.php?opt='+opt,
+                        dataType: 'json',
+                        async: false,
+                        success: function (data) {
+                            json = JSON.stringify(data);
+                            document.cookie = "Mensajes=" + json;
+                            $('#tabla').load('../Source/procesos/loadInbox.php?index=' + indice+"&box="+box);
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            alert(opt);
+                          }
+
+                    });
+               } 
+            });
             var button=document.getElementById('resp');
             button.onclick=function(){
                 var asunto=document.getElementById('asnt').value;
@@ -152,6 +170,7 @@ function reloadPage() {
 
 function marcarLeido() {
     indice = 0;
+    opt=1;
     $('#prev').addClass("disabled");
     $('#prev').off('click');
     $.ajax({
@@ -182,6 +201,7 @@ function marcarLeido() {
 
 function borrarTodo() {
     indice = 0;
+    opt=2;
     $('#prev').addClass("disabled");
     $('#prev').off('click');
     $.ajax({
@@ -212,6 +232,7 @@ function borrarTodo() {
 function mostrarEnviados() {
     indice = 0;
     box=1;
+    opt=3;
     $('#prev').addClass("disabled");
     $('#prev').off('click');
     var but = document.getElementById('bandeja');
@@ -251,6 +272,7 @@ function mostrarEnviados() {
 function mostrarRecibidos() {
     indice = 0;
     box=0;
+    opt=4;
     $('#prev').addClass("disabled");
     $('#prev').off('click');
     var but = document.getElementById('bandeja');
@@ -289,6 +311,7 @@ function mostrarRecibidos() {
 
 function enter(element, ev) {
     indice = 0;
+    opt=0;
     $('#prev').addClass("disabled");
     $('#prev').off('click');
     if (ev.keyCode == 13) {
