@@ -137,20 +137,21 @@
                             <br>
                             <p>
                                 <!--BOTONES-->
-                                <!--<div class="row">-->
-                                   
-                                <!--</div>-->
-                                <form class="col m12" method="post" name="registro" action="index.php">
-                                        <div class="input-field col m2">
+                                
+                                <div class="row">    
+                                        <div class="input-field col m6">
                                             <button class="waves-effect waves-light btn" id="habilitar" type="button" name="action">Habilitar</button>
+                                            <button class="waves-effect waves-light btn" id="aceptar" type="submit" name="action" disabled>Aceptar</button>
+                                            <button class="waves-effect waves-light btn" id="cancelar" type="button" name="action" disabled>Cancelar</button>
                                         </div>
-                                        <div class="input-field col m2">
+                                        <!--<div class="input-field col m2">
                                             <button class="waves-effect waves-light btn" id="aceptar" type="submit" name="action" disabled>Aceptar</button>
                                         </div>
                                         <div class="input-field col m2">
-                                            <button class="waves-effect waves-light btn" id="cancelar" type="button" name="action" disabled>Cancelar</button>
-                                        </div>
-                                    </form>
+                                            <button class="waves-effect waves-light btn" id="cancelar" type="button" name="action" disabled>Cancelar</button>-->
+                                    </div> 
+                            
+                        
                         </form>
                          
                     </div>
@@ -196,23 +197,28 @@
                     window.location = "editarPerfil.php";
                 });
                 //PROCESO METER DATOS A BD  
-                $("#formEPerfil").submit(function (e) {
+                
+            </script>
+        <script>
+            $("#formEPerfil").submit(function (e) {
                     //alert('FORM');
                     e.preventDefault();
                     var postData = $(this).serializeArray();
                     $.ajax({
-                        url: "procesos/editPerfil.php"
-                         , type: "POST"
-                        , data: postData
+                        url: "procesos/editPerfil.php", type: "POST"
+                        
+                        ,data: postData
                         ,dataType:'json'
-                        , success: function (data, textStatus, jqXHR) {
+                        ,success: function (data, textStatus, jqXHR) {
                             //console.log(data[0].Est + " que es esto "+ data[0].Mensaje);
                             if(data.estado==true){
-                              alert('bien');
+                              Materialize.toast("Edición Éxitosa", 4000);
                               window.location.href="index.php";
                             }
                             else{
-                                //alert('mal');
+                                
+                                Materialize.toast("Nickname existente, favor de seleccionar otro", 4000);//alert('mal');
+                                //console.log(data);
                             }
                         },
                         error: function(res,res2){
@@ -222,7 +228,7 @@
                     //return false;
                     //e.preventDefault();
                 });
-            </script>
+        </script>
 
             <script>
                 $(document).ready(function () {

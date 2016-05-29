@@ -9,20 +9,41 @@ function cargarPublicaciones(last_index) {
             + '   <div class="principal z-depth-2 col s12 m6 offset-m3"><span class="flow-text">Últimas publicaciones</span></div>'
             + ' </div>');
     $("#contenido").append('<div id="cargando"><h3>Cargando...</h3><br><div class="progress principal"><div class="indeterminate secundario"></div></div></div>');
-
     $.getJSON("procesos/get_publicaciones.php",
             {
                 idP: last_index
             },
             function (data) {
                 $("#cargando").remove();
-                $.each(data.publicaciones, function (index, publicacion) {
-                    if (publicacion.idGrupo === null) {
-                        $('#contenido').append(index+': No hay grupo<br>');
-                    } else {
-                        $('#contenido').append(index+': '+publicacion.NombreGrupo+'<br>');
-                    }
-                });
+                $.each(data.publicaciones,
+                        function (index, $publicacion) {
+                            var nombreGrupo = '';
+                            var botonGrupo = '';
+                            if ($publicacion.idGrupo !== null) {
+                                nombreGrupo = '<br>Nombre Grupo: ' + $publicacion.NombreGrupo;
+                                botonGrupo = '<a class="btn principal right" href="javascript:irGrupo(' + $publicacion.idGrupo + ')">Ver Grupo</a>'
+                            }
+                            $("#contenido").append(
+                                    '<div class="row">'
+                                    + '     <div>'
+                                    + '       <div class="card ">'
+                                    + '         <div class="card-content secundario">'
+                                    + '           <span class="card-title">' + $publicacion.Autor + ' publicó:<strong> ' + $publicacion.Titulo + '</strong></span> '
+                                    + '           <p>El ' + $publicacion.Fecha.split(' ')[0] + ' a las ' + $publicacion.Fecha.split(' ')[1] + ' hrs.'
+                                    //+'           <br>Descripcion: '+$publicacion.['descrip']."                                                        '
+                                    + nombreGrupo
+                                    + '           <br>Descripcion: ' + $publicacion.Descripcion
+                                    + '           </p>'
+                                    + '         </div>'
+                                    + '         <div class="card-action">  '
+                                    + '           <a class="btn principal" href="javascript:irPublicacion(' + $publicacion.idPublicacion + ')">Ver Publicación</a>'
+                                    + botonGrupo
+                                    + '         </div>                                                                                                    '
+                                    + '       </div>                                                                                                      '
+                                    + '     </div>                                                                                                        '
+                                    + '   </div>                                                                                                          '
+                                    );
+                        });
                 $('.tooltipped').tooltip({delay: 50});
                 $('.modal-trigger').leanModal();
             });
@@ -42,7 +63,6 @@ function cargarGrupos(opciones) {
                 '<div class="row center">'
                 + '   <div class="principal z-depth-2 col s12 m6 offset-m3"><span class="flow-text">Últimos grupos</span></div>'
                 + ' </div>');
-
     }
     $("#contenido").append('<div id="cargando"><h3>Cargando...</h3><br><div class="progress principal"><div class="indeterminate secundario"></div></div></div>');
     $.getJSON("procesos/getGrupos.php",
@@ -69,13 +89,14 @@ function cargarGrupos(opciones) {
                                         + '   <div class="card principal z-depth-2" >'//"blue-grey darken-1">'
                                         + '     <div class="card-content" >'//white-text">'
                                         + '       <span class="card-title">' + val.NombreGrupo + '</span>'
-                                        + '       <p>' + val.Descripcion + '</p>'
+                                        + '       <p>' + val.Descripcion.substr(0, 100) + '...</p>'
                                         + '     </div>'
                                         + '<div class="card-action">'
                                         + 'Área de conocimiento<br>'
                                         + '<a class="tooltipped waves-effect waves-light modal-trigger left" data-position="bottom" data-delay="50" data-tooltip="Click para más info." href="#modal' + i + '">' + val.AreaConocimiento + '</a>'
                                         + '<a class="right tooltipped" data-tooltip="Click para ir al grupo" href=javascript:irGrupo("' + val.idGrupo + '") > Ir al grupo</a>'
                                         + '</div></div></div>'
+
 
                                         + '<div id="modal' + i + '" class="modal bottom-sheet">'
                                         + '   <div class="modal-content">'
@@ -104,5 +125,11 @@ function irGrupo(idGrupo) {
     $('<form action="mostrar.php" method=post>'
             + '<input type=hidden name=tipo value=grupo>'
             + '<input type=hidden name=uid value=' + idGrupo + '>'
+            + '</form>').submit();
+}
+
+function irPublicacion(idP) {
+    $('<form action="publicacion.php" method=post>'
+            + '<input type=hidden name=idPub value=' + idP + '>'
             + '</form>').submit();
 }

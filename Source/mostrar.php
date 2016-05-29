@@ -297,7 +297,7 @@
             }
             $band3=false;
             for($n=0;$n<count($result4);$n++){
-            if(!isset($_SESSION['idUsuario']) || $admin[$n]['idGrupo']==$uid ){
+            if(!isset($_SESSION['idUsuario']) || $admin[$n]['idGrupo']==$uid || $admin[$n]['Estado']==2){
                             $band3=true;
                            break;
                        }
@@ -316,7 +316,7 @@
                                 echo "<form method=\"POST\">
                             <input type=\"hidden\" name=\"idGrupo\" value=\"$uid\">
                             <input type=\"hidden\" name=\"seguidor\" value=\"$idUsr\">
-                            <input class=\"btn principal\" type=\"submit\" formaction=\"procesos/dejarDeSeguir.php\" value=\"Abandonar Grupo\">
+                            <input class=\"btn principal\" type=\"submit\" formaction=\"procesos/abandonarGrupo.php\" value=\"Abandonar Grupo\">
                             </form>"; 
                           }
            
@@ -418,7 +418,7 @@
                 //SI NO SE TIENEN PUBLICACIONES ENTONCES SE MUESTRA LO SIGUIENTE
                 echo "<div class=\"row\">
                 <div>
-                  <div class=\"card blue \">
+                  <div class=\"card principal \">
                     <div class=\"card-content secundario \">
                       <span class=\"card-title\">".$publicacion[0]['Nickname']." no cuenta con publicaciones.</span>
                     </div>
