@@ -297,7 +297,7 @@
             }
             $band3=false;
             for($n=0;$n<count($result4);$n++){
-            if(!isset($_SESSION['idUsuario']) || $admin[$n]['idGrupo']==$uid and $admin[$n]['Estado']==2){
+            if(!isset($_SESSION['idUsuario']) || $admin[$n]['idGrupo']==$uid || $admin[$n]['Estado']==2){
                             $band3=true;
                            break;
                        }
@@ -316,7 +316,7 @@
                                 echo "<form method=\"POST\">
                             <input type=\"hidden\" name=\"idGrupo\" value=\"$uid\">
                             <input type=\"hidden\" name=\"seguidor\" value=\"$idUsr\">
-                            <input class=\"btn principal\" type=\"submit\" formaction=\"procesos/dejarDeSeguir.php\" value=\"Abandonar Grupo\">
+                            <input class=\"btn principal\" type=\"submit\" formaction=\"procesos/abandonarGrupo.php\" value=\"Abandonar Grupo\">
                             </form>"; 
                           }
            
