@@ -1,6 +1,6 @@
 <nav class="principal">
     <div class="nav-wrapper">
-        <a href="#" class="brand-logo">RedConocimiento</a>
+        <a href="#" class="brand-logo">Cognitus</a>
         <a id="mobileButton" href="#" data-activates="mobile-navbar" class="button-collapse"><i class="material-icons">menu</i></a>
 
         <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -34,6 +34,7 @@
                 <!--- Si está logeado-->
                 <?php } else{ ?>
                     <li><a href="sass.html"><i class="material-icons">note_add</i></a></li>
+                    <li><a href="creaGrupo.php"><i class="material-icons">group_add</i></a></li>
                     <li><a href="inbox.php"><i class="material-icons">message</i></a></li>
                     <li>
                         <ul id="perfilDropDown" class="dropdown-content">

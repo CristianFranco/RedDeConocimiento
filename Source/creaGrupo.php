@@ -24,6 +24,8 @@
             var idEstilo = <?php if(isset($_SESSION['idUsuario'])) echo $_SESSION['idUsuario']; else echo 0; ?>;
         </script>
         <link rel="stylesheet" type="text/css" href="../CSS/style.css">
+        
+        <script src="../JS/cargarPreferencias.js"></script>
 
 </head>
 <body>
@@ -33,9 +35,10 @@
         </header>
         <main>
 
-	<div class="container">
+	<div class="container secundario">
 		<div class="row">
 			<div class="col m12">
+			<h4>Crear Grupo</h4>
 				<form id="formId">
 					<div class="input-field" >
 						<label class="icoP" for="nombre">Nombre de Grupo:</label>
@@ -59,10 +62,10 @@
 						     }
 						?>
 					</select>
-					<label>Area de conocimiento:</label>
+					<label class="icoP">Area de conocimiento:</label>
 					</div>
 
-					<input type="submit" name="sendRequest" class="btn"></input>
+					<input type="submit" name="sendRequest" class="btn principal"></input>
 					<?php echo "<input type='text' id='idUsr' name='idUsr' value='".$_SESSION['idUsuario']."' hidden></input>"; ?>
 
 				</form>
@@ -73,6 +76,7 @@
 	</main>
 	<?php require("footer.php");?>
     <script src="../frameworks/js/materialize.min.js"></script>
+    <script src="../JS/header.js"></script>
         <script src="../JS/crearGrupos.js"></script>
 
     <script type="text/javascript">
