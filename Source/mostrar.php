@@ -297,7 +297,7 @@
             }
             $band3=false;
             for($n=0;$n<count($result4);$n++){
-            if(!isset($_SESSION['idUsuario']) || $admin[$n]['idGrupo']==$uid ){
+            if(!isset($_SESSION['idUsuario']) || $admin[$n]['idGrupo']==$uid and $admin[$n]['Estado']==2){
                             $band3=true;
                            break;
                        }
