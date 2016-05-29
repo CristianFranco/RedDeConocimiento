@@ -3,7 +3,7 @@
 <?php 
     session_start();
     require("procesos/connection.php"); 
-    $Uid= 1;
+    $Uid= $_SESSION['idUsuario'];
     $connection = connect();
     $sql = "SELECT u.idUsuario,u.Nickname, u.Password, u.Telefono, u.Nombre, u.Apellidos, u.Descripcion, c.CodigoPais,u.idCiudad from Usuario u,Ciudad c WHERE u.idUsuario = $Uid and u.idCiudad=c.ID;";
     $result = $connection -> query($sql);
@@ -140,8 +140,7 @@
                                 <!--<div class="row">-->
                                    
                                 <!--</div>-->
-                        </form>
-                         <form class="col m12" method="post" name="registro" action="envreg.php">
+                                <form class="col m12" method="post" name="registro" action="index.php">
                                         <div class="input-field col m2">
                                             <button class="waves-effect waves-light btn" id="habilitar" type="button" name="action">Habilitar</button>
                                         </div>
@@ -152,6 +151,8 @@
                                             <button class="waves-effect waves-light btn" id="cancelar" type="button" name="action" disabled>Cancelar</button>
                                         </div>
                                     </form>
+                        </form>
+                         
                     </div>
             </div>
         </main>
@@ -195,7 +196,7 @@
                     window.location = "editarPerfil.php";
                 });
                 //PROCESO METER DATOS A BD  
-                $("#formEPerfil").validate(function (e) {
+                $("#formEPerfil").submit(function (e) {
                     //alert('FORM');
                     e.preventDefault();
                     var postData = $(this).serializeArray();
@@ -208,9 +209,10 @@
                             //console.log(data[0].Est + " que es esto "+ data[0].Mensaje);
                             if(data.estado==true){
                               alert('bien');
+                              window.location.href="index.php";
                             }
                             else{
-                                alert('mal');
+                                //alert('mal');
                             }
                         },
                         error: function(res,res2){
