@@ -176,8 +176,8 @@
                             if(data.estado==false){
                                  Materialize.toast(String(data.msg), 4000);
                             }else{
-                                Materialize.toast("Se envio un correo de confirmacion a tu direccion de email",4000);
-                                Materialize.toast("Se redireccionara a la pagina principal.",4000);
+                                Materialize.toast("Se envío un correo de confirmación a tu dirección de email",4000);
+                                Materialize.toast("Se redireccionará a la página principal.",4000);
                                 Materialize.toast("Gracias por su registro!!!",4000);
                                 setTimeout(function(e){
                                     window.location="index.php";
