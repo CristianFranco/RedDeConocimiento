@@ -38,9 +38,9 @@
         $tags[$cont2]=$extraido["Nombre"];
         $ids[$cont2++] = $extraido["idAreaConocimiento"];
         $hashMap[$extraido["idAreaConocimiento"]] = $extraido["Nombre"];
-
         $extraido = mysqli_fetch_array($result);
      }
+
      $idsAceptedArea = getArray($cont2, $area, $tags, $ids);
      $str = "(";
 
@@ -129,10 +129,17 @@
       if($area === ""){
         return $idsAcepted;
       }
-     $tag2= explode(" ",$area);
+     $tag2= array();
+     $tag2 = explode(" ",$area);
      for($x=0;$x<sizeof($tag2) ; $x++){
          for( $i = 0 ; $i < $cont2 ; $i++){
-            for($j = 0 ; $j<sizeof($tags[$i]) || $j<sizeof($tag2[$x]); $j++){
+            $myContAux = 0;
+            if(sizeof($tags[$i]) >= sizeof($tag2[$x])){
+                $myContAux = sizeof($tag2[$x]);
+            }else{
+                $myContAux = sizeof($tags[$i]);
+            }
+            for($j = 0 ; $j<$myContAux; $j++){
                 $aux = sizeof($tag2[$x]);
                 if(strtoupper ($tags[$i][$j]) == strtoupper ($tag2[$x][$j]) ){
                     $acum++;
@@ -144,6 +151,10 @@
             $acum = 0;
          }
      }
+ 
+  
     return $idsAcepted;
 }
+
+
     ?>

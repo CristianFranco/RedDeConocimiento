@@ -46,20 +46,20 @@
         <div class="modal" id ="modal">
         	<div class="container">
         	<br>
-        	<h4> Esta informacion para que compreda mejor el uso de la busqueda avanzada</h4>
+        	<h4> Esta información es con el fin para que cómpreda mejor el uso de la búsqueda avanzada.</h4>
         	<br><br>
 <ul style="list-style-type:square">
-        	<li>&#8226; En el campo de Busqueda o persona busca las personas que contengan las palabras especificadas.</li>
+        	<li>&#8226; En el campo de búsqueda o persona busca las personas que contengan las palabras especificadas.</li>
         	<br><br>
 
-        	<li>&#8226; La busqueda por area de conocimiento es para traer los grupos los cuales se encuentran en esa area de conociemiento.</li>
+        	<li>&#8226; La búsqueda por área de conocimiento es para traer los grupos los cuales se encuentran en esa área de conocimiento.</li>
 
         	<br><br>
-        	<li>&#8226; La busqueda por contendio de publicaciones trae los grupos que contienen publicaciones de ese contenido y los usuarios que han publicado ese tipo de publicaciones.</li>
+        	<li>&#8226; La búsqueda por contenido de publicaciones trae los grupos que contienen publicaciones de ese contenido y los usuarios que han publicado ese tipo de publicaciones.</li>
 <br><br>
-        	<li>&#8226; Al tener activada la opcion de Grupos que contengan el tipo de publicación trae los grupos que se encuentren en un area de conocimiento y que contengan los contenidos de publicaciones que se especifica.</li>
+        	<li>&#8226; Al tener activada la opción de Grupos que contengan el tipo de publicación trae los grupos que se encuentren en un área de conocimiento y que contengan los contenidos de publicaciones que se especifica.</li>
 <br><br>
-        	<li>&#8226; Al tener activada la opcion Grupos o publicaciones trae los grupos que se encuentren en esa area de conocimiento y tambien los grupos que contengan publicaciones por busqueda de contenido.</li>
+        	<li>&#8226; Al tener activada la opción Grupos o publicaciones trae los grupos que se encuentren en esa área de conocimiento y también los grupos que contengan publicaciones por búsqueda de contenido.</li>
 <br>
 </ul>
 <div class="row">
@@ -103,8 +103,7 @@
 	</main>
         <?php require("footer.php");?>
     <script src="../frameworks/js/materialize.min.js"></script>
-            <script src="../JS/header.js"></script>
-
+    <script type="text/javascript" src="../JS/header.js"></script>
             <script type="text/javascript">
             	$(document).ready(function(){
             		$(".modal-trigger").leanModal();
