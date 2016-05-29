@@ -70,8 +70,8 @@ session_start();
         <?php require("footer.php");?>
         <script type="text/javascript" src = "../JS/Redirect/jquery.redirect.js"></script>
     <script src="../frameworks/js/materialize.min.js"></script>
-            <script src="../JS/header.js"></script>
 		<script type="text/javascript" src="../JS/listaUsuarioScript.js"></script>
+    <script type="text/javascript" src="../JS/header.js"></script>
 		 
 
 	</body>
