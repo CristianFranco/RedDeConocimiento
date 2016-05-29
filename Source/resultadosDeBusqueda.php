@@ -46,9 +46,9 @@ session_start();
 		<div class="container secundario">
 		<div class="row">
 		<div class="col s12">
-			<ul class="tabs inpP">
-				<li class=" tab col s6"><a href="#grupo">Grupos</a></li>
-				<li class="tab col s6"><a href="#persona">Personas</a></li>
+			<ul class="tabs ">
+				<li class=" tab col s6 "><a href="#grupo" class="icoP">Grupos</a></li>
+				<li class="tab col s6"><a href="#persona" class="icoP">Personas</a></li>
 
 			</ul>
 				<div class="col s12" id="grupo">

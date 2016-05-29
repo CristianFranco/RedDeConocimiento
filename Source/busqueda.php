@@ -1,3 +1,6 @@
+<?php 
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang = "es">
 <head>
@@ -25,9 +28,7 @@
         <link rel="stylesheet" type="text/css" href="../CSS/style.css">
     </head>
 <body >
-<?php 
-    session_start();
-?>
+
 
  		<header>
             <?php require("header.php") ?>
@@ -95,7 +96,7 @@
 				<input class="inpP" type="text" id="tags"  name="tags"></input>
 			</div>
 
-			<button class="btn waves-effect waves-light blue darken-3 col s6 " type="submit" name="action">Buscar
+			<button class="btn waves-effect waves-light col s6 principal" type="submit" name="action">Buscar
                 <i class="material-icons right">search</i>
             </button>
 		</form>

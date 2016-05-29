@@ -100,6 +100,9 @@ function cargarDefault(tipo) {
         'border-bottom: 1px solid #F44336' + "!important;" +
         'box-shadow: 0 1px 0 0 #F44336' + "!important;" +
         '}' +
+        '.tabs .indicator{'+
+        'background-color:'+ estilos[tipo].bcPrincipal + '!important;' +
+        '}'+
         '</style>';
     $(document.head).prepend($(strEstilo));
 }

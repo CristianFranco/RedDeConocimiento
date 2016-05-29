@@ -1,6 +1,6 @@
 <nav class="principal">
     <div class="nav-wrapper">
-        <a href="#" class="brand-logo">Cognitus</a>
+        <a href="index.php" class="brand-logo">Cognitus</a>
         <a id="mobileButton" href="#" data-activates="mobile-navbar" class="button-collapse"><i class="material-icons">menu</i></a>
 
         <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -24,7 +24,7 @@
             <li>
                 <i class="material-icons right" id="buscar">search</i>
             </li>
-            <li><a href="index.php"><i class="material-icons">home</i></a></li>
+            <li><a href="index.php" class="tooltipped" data-tooltip="Ir a inicio"><i class="material-icons">home</i></a></li>
             <!-- Si no está logeado-->
             <?php if(!isset($_SESSION['idUsuario'])){ ?>
                 <li><a id="loginBoton" href="#login" class="modal-trigger">Iniciar Sesión</a></li>
@@ -33,9 +33,9 @@
 
                 <!--- Si está logeado-->
                 <?php } else{ ?>
-                    <li><a href="sass.html"><i class="material-icons">note_add</i></a></li>
-                    <li><a href="creaGrupo.php"><i class="material-icons">group_add</i></a></li>
-                    <li><a href="inbox.php"><i class="material-icons">message</i></a></li>
+                    <li><a href="sass.html" class="tooltipped" data-tooltip="Publicar"><i class="material-icons " >note_add</i></a></li>
+                    <li><a href="creaGrupo.php" class="tooltipped" data-tooltip="Crear grupo"><i class="material-icons">group_add</i></a></li>
+                    <li><a href="inbox.php" class="tooltipped" data-tooltip="Bandeja de entrada"><i class="material-icons">message</i></a></li>
                     <li>
                         <ul id="perfilDropDown" class="dropdown-content">
                             <li><a href="editarPerfil.php">Editar Perfil</a></li>
