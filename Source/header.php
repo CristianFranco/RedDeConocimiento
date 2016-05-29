@@ -131,5 +131,3 @@
         </div>
     </form>
 </div>
-
-<script type="text/javascript" src="../JS/Redirect/jquery.redirect.js"></script>

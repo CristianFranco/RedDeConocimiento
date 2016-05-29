@@ -40,3 +40,7 @@ $("#loginBoton").on("click", function (e) {
     $("#loginMsn").hide();
 });
 $("#mobileButton").sideNav();
+
+ $("#buscar").click(function(){
+        $.redirect('./resultadosDeBusqueda.php', {'nombre': $("#cajaBuscar").val(),'area': $("#cajaBuscar").val(),'tags': $("#cajaBuscar").val() });
+    });
