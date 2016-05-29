@@ -10,21 +10,13 @@ $("#cajaBuscar").focusout(function (e) {
 });
 $('.modal-trigger').leanModal();
 
-    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-    
-    $('#dropdown-button-normal').dropdown({
-      inDuration: 300,
-      outDuration: 225,
-      constrain_width: false, // Does not change width of dropdown to that of the activator
-      hover: true, // Activate on hover
-      gutter: 0, // Spacing from edge
-      belowOrigin: false, // Displays dropdown below the button
-      alignment: 'left' // Displays dropdown with edge aligned to the left of button
-    });
+// the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+
+
 
 $("#formLogin").on("submit", function (e) {
     e.preventDefault();
-    $("#loginMsn").hide();
+    $("#loginMsn").css("visibility","hidden");
     $.ajax({
         url: "procesos/checklogin.php"
         , method: "POST"
@@ -38,7 +30,7 @@ $("#formLogin").on("submit", function (e) {
                 window.location = "index.php";
             } else {
                 $("#loginMsn").text(result.msn);
-                $("#loginMsn").show();
+                $("#loginMsn").css("visibility","visible");
                 //window.location = "index.php";
             }
         }
@@ -48,3 +40,7 @@ $("#loginBoton").on("click", function (e) {
     $("#loginMsn").hide();
 });
 $("#mobileButton").sideNav();
+
+ $("#buscar").click(function(){
+        $.redirect('./resultadosDeBusqueda.php', {'nombre': $("#cajaBuscar").val(),'area': $("#cajaBuscar").val(),'tags': $("#cajaBuscar").val() });
+    });

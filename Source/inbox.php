@@ -1,16 +1,16 @@
 
 <?php
     session_start();
-    //if(isset($_SESSION["idUsuario"])){
+    if(isset($_SESSION["idUsuario"])){
         require('procesos/connection.php');
         $connection=connect();
-        $idSession=1;
-        //$idSession=$_SESSION["idUsuario"];
+        //$idSession=1;
+        $idSession=$_SESSION["idUsuario"];
         $mensajes=array();
         $query="SELECT MM.ID, U.Nickname, MM.Asunto, MM.Mensaje, MM.Visto, MM.Fecha
                 FROM Usuario U, MandaMsn MM
-                WHERE MM.idUsuario='$idSession' AND MM.mostrar=1 AND MM.idUsuario1=U.idUsuario
-                ORDER BY MM.Fecha;";
+                WHERE MM.idUsuario1='$idSession' AND MM.mostrar=1 AND MM.idUsuario=U.idUsuario
+                ORDER BY MM.Fecha DESC;";
         $result=$connection->query($query);
         while($row=$result->fetch_array(MYSQLI_ASSOC)){
             $mensaje=array("ID"=>$row["ID"],"Nombre"=>$row["Nickname"],"Asunto"=>$row["Asunto"],"Mensaje"=>$row["Mensaje"],"Fecha"=>$row["Fecha"],"Visto"=>$row["Visto"]);
@@ -40,7 +40,7 @@
         <script src="https://code.jquery.com/jquery-2.1.0.min.js" integrity="sha256-8oQ1OnzE2X9v4gpRVRMb1DWHoPHJilbur1LP9ykQ9H0=" crossorigin="anonymous"></script>
         
         <script>
-            var estado = <?php if(isset($_SESSION['idUsuario'])) echo "true";else echo "false"; ?>;
+             var idEstilo = <?php if(isset($_SESSION['idUsuario'])) echo $_SESSION['idUsuario']; else echo 0; ?>;
         </script>
         <script src="../JS/cargarPreferencias.js"></script>
         <link rel="stylesheet" type="text/css" href="../CSS/style.css">
@@ -84,13 +84,13 @@
                     <a class="col s12 m12 waves-effect waves-light btn-large red accent-4" onclick="redactar();">Redactar</a>
                     <br>
                     <br>
-                    <a style="font-size:13px;" id="marcar" class="col s12 m12 waves-effect waves-light btn-large secundario">Marcar&nbsp;Todo&nbsp;Como&nbsp;Leido</a>
+                    <a style="font-size:13px;" id="marcar" class="col s12 m12 waves-effect waves-light btn-large principal">Marcar&nbsp;Todo&nbsp;Como&nbsp;Leido</a>
                     <br>
                     <br>
-                    <a id="vaciar" class="col s12 m12 waves-effect waves-light btn-large secundario" >Vaciar&nbsp;Bandeja</a>
+                    <a id="vaciar" class="col s12 m12 waves-effect waves-light btn-large principal" >Vaciar&nbsp;Bandeja</a>
                     <br>
                     <br>
-                    <a class="col s12 m12 waves-effect waves-light btn-large secundario" id="bandeja">Mensajes&nbsp;Enviados</a>
+                    <a class="col s12 m12 waves-effect waves-light btn-large principal" id="bandeja">Mensajes&nbsp;Enviados</a>
                 </div>
                 <div style="height: 453px;" class="col s9 m9" id="tabla">
                 </div>
@@ -132,7 +132,7 @@
 
 </html>
 <?php
-    /*}else{
+    }else{
         header('location: index.php');
-    }*/
+    }
 ?>
