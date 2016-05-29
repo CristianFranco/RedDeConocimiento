@@ -44,7 +44,7 @@
         }
     }
     if(empty($ciudad) or empty($pais)){
-        $errores=array("estado"=>false,"msg"=>"No se selcciono Pais");
+        $errores=array("estado"=>false,"msg"=>"No se selccionó País");
     }
     //if(count($errores)==0){
         //echo "Registro correcto";
@@ -80,7 +80,7 @@
             $mail->CharSet    = 'UTF-8';
             $mail->Port = 587; // or 587 465
             //$mail->IsHTML(true);
-            $mail->Subject = "Confirmacion Cuenta Red Conocimiento";
+            $mail->Subject = "Confirmación Cuenta Red Conocimiento";
             $mensaje = "Usted se a registrado a la Red de Conocimiento, \n 
             Para confirmar su cuenta haga click en el siguiente enlace: \n 
             http://localhost:3030/ROC/Source/confirmacion.php?confirmacion=".$codigoAc."&IdUsr=".$row['IdUsuario']."\n
@@ -92,7 +92,7 @@
                {
                 //echo "Problemas enviando correo electrónico a ".$email." actualize la pagina";
                 //echo "<br/>".$mail->ErrorInfo;	
-                $errores=array("estado"=>false,"msg"=>"La direccion de correo ".$email." no es valida ");
+                $errores=array("estado"=>false,"msg"=>"La dirección de correo ".$email." no es válida ");
                }
                else
                {
@@ -103,7 +103,7 @@
 
         }else{
             //echo "error";
-            $errores=array("estado"=>false,"msg"=>"Fallo al registrar el usuario, intentelo de nuevo");
+            $errores=array("estado"=>false,"msg"=>"Fallo al registrar el usuario, inténtelo de nuevo");
         }
     }
      echo json_encode($errores);   
