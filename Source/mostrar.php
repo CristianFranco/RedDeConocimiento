@@ -418,7 +418,7 @@
                 //SI NO SE TIENEN PUBLICACIONES ENTONCES SE MUESTRA LO SIGUIENTE
                 echo "<div class=\"row\">
                 <div>
-                  <div class=\"card blue \">
+                  <div class=\"card principal \">
                     <div class=\"card-content secundario \">
                       <span class=\"card-title\">".$publicacion[0]['Nickname']." no cuenta con publicaciones.</span>
                     </div>
