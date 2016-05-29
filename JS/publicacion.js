@@ -121,6 +121,7 @@ $(window).on("ready", function (e) {
     
     
 */
+    
     $(".swiper-container").each(function (index, element) {
         var $this = $(this);
         $this.addClass("instance-" + index);
@@ -129,10 +130,12 @@ $(window).on("ready", function (e) {
         $this.find(".swiper-pagination").addClass("pagination-" + index);
         var swiper = new Swiper(".instance-" + index, {
             // your settings ...
-            pagination: '.pagination-' + index
+            observer:true
+            ,pagination: '.pagination-' + index
             , paginationClickable: true
             , nextButton: ".btn-next-" + index
             , prevButton: ".btn-prev-" + index
+        
         });
     });
     /*Ocultar swipers*/

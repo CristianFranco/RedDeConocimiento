@@ -37,10 +37,14 @@ $loggueado = isset($_SESSION["idUsuario"]);
             <div class="container">
 
 
-                <div class="row secundario">
-                    <a href="javascript:window.location.href='index.php'">#HailSDTM</a>
+                <div class="row secundario">  
+                    
+                    <p class="flow-text">I am Flow Text <button onclick="window.location.href='inbox.php'" class="btn right" >asd</button></p>
+                    <p class="flow-text">I am Flow Text <button class="btn right" >asd</button></p>
+                    <p class="flow-text">I am Flow Text <button class="btn right" >asd</button></p>
+                    <p class="flow-text">I am Flow Text <button class="btn right" >asd</button></p>
                 </div>
-                
+                    
                 <div class="row center">
                     <div class="col s12 m12 l12">
                         <div class="btn-block">
@@ -55,9 +59,9 @@ $loggueado = isset($_SESSION["idUsuario"]);
                 <div class="row ">
 
                     <div  id="contenido">
-                        
+
                     </div>
-        
+
                 </div>
             </div>
         </main>
@@ -66,10 +70,10 @@ $loggueado = isset($_SESSION["idUsuario"]);
         <script src="../frameworks/js/materialize.min.js"></script>
         <script src="../JS/header.js"></script>
         <script>
-            <?php if ($loggueado) { ?>
-            cargarGrupos('mios');
-            <?php } else { ?>
-            cargarGrupos('todos'); 
-            <?php } ?>
+<?php if ($loggueado) { ?>
+                                    cargarGrupos('mios');
+<?php } else { ?>
+                                    cargarGrupos('todos');
+<?php } ?>
         </script>
     </body>

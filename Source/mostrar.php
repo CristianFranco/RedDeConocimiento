@@ -3,7 +3,7 @@
     session_start();
     require("procesos/connection.php");    
     //Parámetros de sesión
-    $idUsr=3;//$_SESSION["idUsuario"];
+    $idUsr=$_SESSION["idUsuario"];
     $acceso=1;//$_SESSION['tipo'];
     $bandera=false; //la publicación fue echa en un grupo
     //Parámetros externos
@@ -21,7 +21,7 @@
         $check="SELECT idUsuario, idGrupo, Estado, Notificar FROM RCO.Usuario_Grupo where idUsuario=$idUsr;";
         $result4=$connection->query($check);
         $n=0;
-        $admin=0;
+        $admin=array();
          while($fila=$result4->fetch_assoc()){
                             $admin[$n]=$fila;
                             $n++;
@@ -418,7 +418,7 @@
                 //SI NO SE TIENEN PUBLICACIONES ENTONCES SE MUESTRA LO SIGUIENTE
                 echo "<div class=\"row\">
                 <div>
-                  <div class=\"card blue \">
+                  <div class=\"card principal \">
                     <div class=\"card-content secundario \">
                       <span class=\"card-title\">".$publicacion[0]['Nickname']." no cuenta con publicaciones.</span>
                     </div>
