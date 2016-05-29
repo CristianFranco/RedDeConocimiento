@@ -15,6 +15,9 @@ main {
 .label {
     margin: 5px;
 }
+*{
+    box-sizing:border-box;
+}
 
 .swiper-container {
     margin-top: -20px;
@@ -26,8 +29,7 @@ main {
 }
 
 .swiper-slide {
-    padding: 50px;
-    padding-top: 20px;
+    padding: 0 50px 0 50px;
     position: relative;
     box-sizing: border-box;
 }

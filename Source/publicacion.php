@@ -85,17 +85,22 @@
         <div class="container">
             <div class="row">
                 <!-- Titulo de la puclicación -->
-                <div class="col s12 m5">
+                <div class="col s12 m6">
                     <h5><?=$filaPub['Titulo']?></h5>
                 </div>
-                <div class="col s12 m4">
+                <div class="col s6 m3">
+                   <?=$filaPub['Puntaje']?>/5.00
+                    <div class="my-rating"></div>
+                    
+                </div>
+                <div class="col s6 m3 right-align">
                     <h5><?=$dt->format('Y-m-d')?>
                    
                    
                     </h5>
                     
                 </div>
-                <div class="col s1 m3"><div class="my-rating"></div></div>
+                
                 <!-- Menú de la publicación-->
 
                 <nav class="col s12 principal">
@@ -126,6 +131,9 @@
                             (<?=$numRows?>)
                             <i class="material-icons left ">sms</i> 
                         </a></li>
+                        <li>
+                            <a href="#comentar" class="modal-trigger waves-effect waves-light btn secundario">Comentar</a>
+                        </li>
                         </ul>
                         <ul class="side-nav" id="mobilePub">
                             <li><a href="#"><i class="material-icons left" >info</i>&nbsp;</a>
@@ -161,6 +169,7 @@
                 <div class="swiper-wrapper">
                     <!-- Slides -->
                     <div class="swiper-slide">
+                       <h5>Abstract</h5>
                         <p>hola</p>
                     </div>
                 </div>
@@ -180,6 +189,7 @@
                     <!-- Slides -->
                     <?php while($fila=$imagenes->fetch_array(MYSQLI_ASSOC)){?>
                     <div class="swiper-slide">
+                       <h5>Imagenes</h5>
                         <p><?=$fila['Descripcion']?></p>
                         <img src="../publicaciones/<?=$idPub?>/<?=$fila['Directorio']?>" alt="Smiley face" height="60%" width="100%">
                         
@@ -200,8 +210,10 @@
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper">
                     <!-- Slides -->
+                    
                     <?php while($fila=$videos->fetch_array(MYSQLI_ASSOC)){ ?>
                     <div class="swiper-slide">
+                       <h5>Videos</h5>
                         <p><?=$fila['Descripcion']?></p>
                         <video  src="../publicaciones/<?=$idPub?>/<?=$fila['Directorio']?>" alt="Smiley face" height="60%" width="100%" controls>
                     </div>
@@ -223,6 +235,7 @@
                     <!-- Slides -->
                     <?php while($fila=$audios->fetch_array(MYSQLI_ASSOC)){?>
                     <div class="swiper-slide">
+                       <h5>Audios</h5>
                         <p><?=$fila['Descripcion']?></p>
                     </div>
                     <?php } ?>
@@ -243,6 +256,7 @@
                     <!-- Slides -->
                     <?php while($fila=$documentos->fetch_array(MYSQLI_ASSOC)){?>
                     <div class="swiper-slide">
+                       <h5>Documentos</h5>
                         <p><?=$fila['Descripcion']?></p>
                     </div>
                     <?php } ?>
@@ -257,7 +271,7 @@
                 <!-- If we need scrollbar -->
                 <div class="swiper-scrollbar"></div>
             </div>
-            <div class="swiper-container row secundario" id="pubCom" >
+            <div class="swiper-container secundario row" id="pubCom" >
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper">
                    
@@ -270,15 +284,17 @@
                     <?php while($fila=$comentarios->fetch_array(MYSQLI_ASSOC)){?>
                         <?php if($contador==0){?>
                             <div class="swiper-slide">
+                           
+                            <h5>Comentarios</h5>
                         <?php }?>
                           
-                               <div class="principal" style="width:80%;position:relative;float:left;padding-left:25px;">
+                               <div class="principal col m6" >
                                     <?=$fila['Nickname']?>
                                 </div>
-                                <div class="principal" style="width:20%;position:relative;float:left;">
+                                <div class="principal col m6 right-align" >
                                     <?=$fila['Fecha']?>
                                 </div>
-                                <div class=" secundario">
+                                <div class=" secundario col s12">
                                     <?=$fila['Comentario']?>
                                 </div>
                           
@@ -302,7 +318,41 @@
             </div>
         </div>
 
+<div id="comentar" class="modal ">
+    <form action="" id="formLogin" class="">
+        <div class="secundario">
+            <div class="container">
+                <div class="row">
+                    <div class="col s12">
+                        <h5 class="center-align principal">Comentar</h5>
 
+                        <div class="input-field col s12">
+                          <textarea id="textarea1" class="materialize-textarea inpP"></textarea>
+                          <label for="textarea1" class="icoP">Comentario</label>
+                        </div>
+
+                    </div>
+                    <div id="loginMsn" class="card-panel red darken-1 col s12 center-align white-text" style="visibility:hidden;"></div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer secundario ">
+            <div class="secundario center-align">
+                
+               <button id="iniciar" class="btn waves-effect principal" type="submit" name="action">Comentar
+                <i class="material-icons right">send</i>
+              </button>
+               <button  class="btn waves-effect principal modal-action modal-close" type="submit" name="action">Cancelar
+                <i class="material-icons right">close</i>
+              </button>
+                <!-- <input type="submit" id="iniciar" class="waves-effect btn secundario" value="Iniciar"></input>
+                <input type="button" href="" class=" modal-action modal-close waves-effect btn  secundario" value="Cancelar"></input>-->
+            </div>
+        </div>
+    </form>
+</div>
 
         <?php require("footer.php ");?>
 
@@ -320,8 +370,35 @@
             <script src="../JS/Estrellas/jquery.star-rating-svg.js"></script>
             <script>
             $(".my-rating").starRating({
-              initialRating: <?=$estrellas['Puntaje']?>,
-              starSize: 25
+                initialRating: <?php if(isset($estrellas['Puntaje']))
+                    echo $estrellas['Puntaje'];
+                    else
+                        echo 0;
+                ?>,
+                starSize: 25,
+                disableAfterRate: false,
+                onHover: function(currentIndex, currentRating, $el){
+                  $('.live-rating').text(currentIndex);
+                },
+                onLeave: function(currentIndex, currentRating, $el){
+                  $('.live-rating').text(currentRating);
+                },
+                callback: function(currentRating, $el){
+                alert('rated ', currentRating);
+                console.log('DOM element ', $el);
+                     $.ajax({
+                        url: "procesos/calificacion.php"
+                        , type: "POST"
+                        , data: {calificacion:currentRating,idPub:"<?=$idPub?>"}
+                        ,dataType:'json'
+                        , success: function (data, textStatus, jqXHR) {
+                            console.log(data);
+                           
+                           // data: return data from server
+                        }
+                    });
+                
+                }
             });
             </script>
             <link rel="stylesheet" type="text/css" href="../CSS/star-rating-svg.css">
