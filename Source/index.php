@@ -72,7 +72,7 @@ $loggueado = isset($_SESSION["idUsuario"]);
                               <p>" . $_SESSION['nombre'] . " " . $_SESSION['apellidos'] . "
                               <br>Correo: " . $_SESSION['email'] . " 
                               <br>No. Telefónico: " . $_SESSION['telefono'] . "
-                              <a href=javascript:irUsuario(" . $_SESSION['idUsuario'] . ") class=right>Mostrar resumen</a>
+                              <a href=javascript:irUsuario(" . $_SESSION['idUsuario'] . ") class=right>Ver mi perfil</a>
                                 </p>
                                 </div>
                           </div>
@@ -95,6 +95,7 @@ $loggueado = isset($_SESSION["idUsuario"]);
                         </div>
                     </div>
                 </div>
+
                 <div class="row ">
 
                     <div  id="contenido">
@@ -106,7 +107,7 @@ $loggueado = isset($_SESSION["idUsuario"]);
 
         <!--a href="#" id="back-to-top" title="Back to top">&uarr;</a-->
         <a href="#" id="back-to-top" title="Ir hacia arriba" class="btn-floating btn-large waves-effect waves-light principal"><i class="material-icons">navigation</i></a>
-  
+
         <?php require("footer.php"); ?>
         <script src="../frameworks/js/materialize.min.js"></script>
         <script src="../JS/header.js"></script>

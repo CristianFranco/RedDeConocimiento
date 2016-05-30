@@ -27,15 +27,15 @@ function cargarSeguidores() {
                  function (index, s) {
                  llenarUsuarios('seguidores', data.seguidores);
                  });*/
-                
+
                 $("#cargando1").remove();
                 $("#cargando2").remove();
-                if (data.seguidores.length  <= 0) {
+                if (data.seguidores.length <= 0) {
                     $("#seguidores").html("Aún no tienes seguidores");
                 } else {
                     llenarUsuarios('seguidores', data.seguidores);
                 }
-                if (data.seguidos.length  <= 0) {
+                if (data.seguidos.length <= 0) {
                     $("#seguidos").html("Aún no sigues a nadie");
                 } else {
                     llenarUsuarios('siguiendo', data.seguidos);
@@ -93,7 +93,8 @@ function cargarPublicaciones(last_index) {
 }
 
 
-function cargarGrupos(opciones) {
+function cargarGrupos(opciones, area) {
+    area = typeof area !== 'undefined' ? area : 'todos';
     if (opciones === 'mios') {
         $("#contenido").html(
                 '<div class="row center  ">'
@@ -107,14 +108,41 @@ function cargarGrupos(opciones) {
                 + '   <div class="principal z-depth-2 col s12 m6 offset-m3"><span class="flow-text">Últimos grupos</span></div>'
                 + ' </div>');
     }
+    $("#contenido").append('<div class="row " id="areas"></div>');
     $("#contenido").append('<div id="cargando"><h3>Cargando...</h3><br><div class="progress principal"><div class="indeterminate secundario"></div></div></div>');
     $.getJSON("procesos/getGrupos.php",
             {
-                tipo: opciones
+                tipo: opciones,
+                area: area
             },
             function (data) {
                 var i = 0;
+                var areaActual = data.area_elegida === 'todos' ? 'Todas las áreas del conocimiento' : data.area_elegida;
+                var categorias ="<ul id='dropdown1' class='dropdown-content'>"
+                        + "<li><a class='secundario' href=javascript:cargarGrupos('mios')>Todas las áreas</a></li>"
+                            + '<li class="divider"></li>';
+                $.each(data.areas, function (idArea, nombre) {
+                    categorias+=("<li class='secundario'><a href=javascript:cargarGrupos('"+opciones+"',"+idArea+")>"+nombre+"</a></li>");                
+                });
+
+                $("#areas").append(categorias
+                        +"</ul><a class='dropdown-button btn left principal' href='#' data-activates='dropdown1'>Filtro: "+areaActual+"</a>"
+                        );
+                $('.dropdown-button').dropdown({
+                    inDuration: 300,
+                    outDuration: 225,
+                    constrain_width: false, // Does not change width of dropdown to that of the activator
+                    hover: true, // Activate on hover
+                    gutter: 0, // Spacing from edge
+                    belowOrigin: false, // Displays dropdown below the button
+                    alignment: 'left' // Displays dropdown with edge aligned to the left of button
+                }
+                );
                 $("#cargando").remove();
+                $("#contenido").append('<div class="row principal">'
+                        + '<ul>'
+
+                        + '</ul><div>');
                 if (data.grupos.length > 0) {
                     $.each(data.grupos,
                             function (key, val) {
@@ -161,6 +189,8 @@ function cargarGrupos(opciones) {
                 $('.tooltipped').tooltip({delay: 50});
                 $('.modal-trigger').leanModal();
             });
+
+
 }
 
 
@@ -196,7 +226,7 @@ function llenarUsuarios(div, usuarios) {
                 '         <p>' + user.Nombre + ' ' + user.Apellidos +
                 '         <br>Correo: ' + user.Email +
                 '         <br>No. Telefónico:  ' + user.Telefono +
-                '         <a href=javascript:irUsuario(' + user.idUsuario + ') class=right>Mostrar resumen</a>' +
+                '         <a href=javascript:irUsuario(' + user.idUsuario + ') class=right>Ver perfil</a>' +
                 '           </p>                                                                                      ' +
                 '           </div>                                                                                    ' +
                 '     </div>                                                                                          ' +
@@ -204,4 +234,5 @@ function llenarUsuarios(div, usuarios) {
                 ' </div>																							  '
                 );
     });
+
 }
