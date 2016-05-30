@@ -3,7 +3,11 @@
     session_start();
     require("procesos/connection.php");    
     //Parámetros de sesión
+    if(isset($_SESSION)){
     $idUsr=$_SESSION["idUsuario"];
+    }else{ 
+    $idUsr=0;
+    }
     $acceso=1;//$_SESSION['tipo'];
     $bandera=false; //la publicación fue echa en un grupo
     //Parámetros externos
