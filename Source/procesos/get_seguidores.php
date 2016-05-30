@@ -2,14 +2,15 @@
 
 session_start();
 /* Traer lista de seguidores */
-$querySeguidores = "select * from Sigue s join Usuario u on u.idUsuario=s.idUsuarioSeguidor  where s.idUsuario=38";// . $_SESSION['idUsuario'];
+$querySeguidores = "select * from Sigue s join Usuario u on u.idUsuario=s.idUsuarioSeguidor  where s.idUsuario=".$_SESSION['idUsuario'];
 
 /* Traer lista de personas a las que sigue */
-$querySiguiendo = "select * from Sigue s join Usuario u on u.idUsuario=s.idUsuario  where s.idUsuarioSeguidor=38";// . $_SESSION['idUsuario'];
+$querySiguiendo = "select * from Sigue s join Usuario u on u.idUsuario=s.idUsuario  where s.idUsuarioSeguidor=". $_SESSION['idUsuario'];
 include_once 'connection.php';
 $conn = connect();
 $response = [ "seguidores" => [], "seguidos" => []];
 $result = $conn->query($querySeguidores);
+
 while ($row = mysqli_fetch_assoc($result)) {
     $response["seguidores"][] = $row;
 }
