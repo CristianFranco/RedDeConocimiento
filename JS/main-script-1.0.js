@@ -3,6 +3,38 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+function cargarSeguidores() {
+
+    $('#contenido').html(
+            '<div class="row secundario">                                                              '
+            + '<div class="col s12">                                                            '
+            + '    <ul class="tabs">                                                          '
+            + '        <li class="tab col s6"><a href="#siguiendo" class="icoP">Siguiendo</a></li>  '
+            + '        <li class="tab col s6"><a href="#seguidores" class="icoP">Seguidores</a></li>'
+            + '    </ul>                                                                       '
+            + '    <div class="col s12" id="siguiendo">                                            '
+            + '   a </div>                                                                      '
+            + '    <div class="col s12" id="seguidores">                                          '
+            + '   b </div>                                                                      '
+            + '</div>                                                                        '
+            );
+    $.getJSON("procesos/get_publicaciones.php",
+            function (data) {
+                $.each(data.seguidores,
+                        function (index, s) {
+
+                        });
+                $.each(data.siguiendo,
+                        function (index, s) {
+
+                        });
+                $('.tooltipped').tooltip({delay: 50});
+                $('.modal-trigger').leanModal();
+            });
+    $('ul.tabs').tabs();
+}
+
 function cargarPublicaciones(last_index) {
     $("#contenido").html(
             '<div class="row center">'

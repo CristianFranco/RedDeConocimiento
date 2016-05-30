@@ -16,6 +16,9 @@
                 $_SESSION['idUsuario']=$fila['idUsuario'];
                 $_SESSION['nickname']=$fila['Nickname'];
                 $_SESSION['nombre']=$fila['Nombre'];
+                $_SESSION['email']=$fila['Email'];
+                $_SESSION['apellidos']=$fila['Apellidos'];
+                $_SESSION['descripcion']=$fila['Descripcion'];
             }
             else
                 $respuesta=array("estado"=>false,"msn"=>("Usuario y/o contraseña erronea"));
