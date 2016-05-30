@@ -2,7 +2,7 @@
     //Inicio de sesión
     session_start();
     //Parámetros de sesión
-    $idUsuario=1;//$_SESSION['idUsuario'];
+    $idUsuario=$_SESSION['idUsuario'];
     $idDest=0;
     if(isset($_GET['idDest']))
         $idDest=$_GET['idDest'];
