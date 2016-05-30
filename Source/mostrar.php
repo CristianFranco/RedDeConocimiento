@@ -3,10 +3,9 @@
     session_start();
     require("procesos/connection.php");    
     //Parámetros de sesión
-    if(isset($_SESSION)){
-    $idUsr=$_SESSION["idUsuario"];
-    }else{ 
     $idUsr=0;
+    if(isset($_SESSION['idUsuario'])){
+    $idUsr=$_SESSION["idUsuario"];
     }
     $acceso=1;//$_SESSION['tipo'];
     $bandera=false; //la publicación fue echa en un grupo
@@ -218,6 +217,7 @@
                 </div>
               </div>";
             }
+                
                 $band2=false;
                 for($x=0;$x<count($siguiendo);$x++){
                                 if(!isset($_SESSION['idUsuario']) || $siguiendo[$x]['idUsuario']==$uid || $uid==$idUsr){
@@ -228,6 +228,7 @@
                                 }
                                 
                             }
+                
                 if($band2==false){
                                echo "<div class=\"row\">
                                         <div>
@@ -247,6 +248,7 @@
                             <input class=\"btn principal\" type=\"submit\" formaction=\"procesos/dejarDeSeguir.php\" value=\"Dejar de Seguir\">
                             </form>"; 
                           }
+                
                 
             //SE IMIPRIMEN LOS COMENTARIOS DEL USUARIO DENTRO DE UNA SOLA TARJETA
             echo "<div class=\"row\">
