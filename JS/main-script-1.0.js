@@ -98,11 +98,11 @@ function cargarGrupos(opciones, area) {
     var grupos = opciones === 'mios' ? 'Mis grupos' : 'Últimos grupos';
     $("#contenido").html(
             '<div class="row center principal" id="titulosg">'
-            + '   <div class="principal z-depth-2 col s12 m6 "><span class="flow-text">' + grupos + '</span></div>'
+            + '   <div class="principal z-depth-2 col s12 m4 "><span class="flow-text">' + grupos + '</span></div>'
             + ' </div>'
 
             );
-    $("#titulosg").append('<div class="principal z-depth-2 col s12 m6" id="areas" ></div>');
+    $("#titulosg").append('<div class="principal z-depth-2 col s12 m8" id="areas" ></div>');
     $("#contenido").append('<div id="cargando"><h3>Cargando...</h3><br><div class="progress principal"><div class="indeterminate secundario"></div></div></div>');
     $.getJSON("procesos/getGrupos.php",
             {
@@ -120,7 +120,7 @@ function cargarGrupos(opciones, area) {
                 });
 
                 $("#areas").append(categorias
-                        + "</ul><a class='dropdown-button btn left principal' href='#' data-activates='dropdown1'>Filtro: " + areaActual + "</a>"
+                        + "</ul><a class='dropdown-button btn left principal'  href='#' data-activates='dropdown1'>Filtro: " + areaActual + '<i class="material-icons right">arrow_drop_down</i></a>'
                         );
                 $('.dropdown-button').dropdown({
                     inDuration: 300,
