@@ -24,7 +24,7 @@
             <li>
                 <i class="material-icons right" id="buscar">search</i>
             </li>
-            <li><a href="index.php" class="tooltipped" data-tooltip="Ir a inicio"><i class="material-icons principal">home</i></a></li>
+            <li><a href="index.php" class="tooltipped" data-tooltip="Ir a inicio"><i class="material-icons ">home</i></a></li>
             <!-- Si no está logeado-->
             <?php if(!isset($_SESSION['idUsuario'])){ ?>
                 <li><a id="loginBoton" href="#login" class="modal-trigger">Iniciar Sesión</a></li>
@@ -33,9 +33,9 @@
 
                 <!--- Si está logeado-->
                 <?php } else{ ?>
-                    <li><a href="sass.html" class="tooltipped" data-tooltip="Publicar"><i class="material-icons principal" >note_add</i></a></li>
-                    <li><a href="creaGrupo.php" class="tooltipped" data-tooltip="Crear grupo"><i class="material-icons principal">group_add</i></a></li>
-                    <li><a href="inbox.php" class="tooltipped" data-tooltip="Bandeja de entrada"><i class="material-icons principal">message</i></a></li>
+                    <li><a href="sass.html" class="tooltipped" data-tooltip="Publicar"><i class="material-icons " >note_add</i></a></li>
+                    <li><a href="creaGrupo.php" class="tooltipped" data-tooltip="Crear grupo"><i class="material-icons">group_add</i></a></li>
+                    <li><a href="inbox.php" class="tooltipped" data-tooltip="Bandeja de entrada"><i class="material-icons">message</i></a></li>
                     <li>
                         <ul id="perfilDropDown" class="dropdown-content">
                             <li><a href="editarPerfil.php">Editar Perfil</a></li>
@@ -50,21 +50,21 @@
                             <li><a href="procesos/salir.php">Salir</a></li>
                         </ul>
                         <a id="dropdown-button-normal" class="dropdown-button" href="#!" data-activates="perfilDropDown">Bienvenido 
-                            <?=$_SESSION['nickname']?><i class="material-icons right ">arrow_drop_down</i></a>
+                            <?=$_SESSION['nickname']?><i class="material-icons right">arrow_drop_down</i></a>
 
                     </li>
                     <?php } ?>
         </ul>
-        <ul class="side-nav" id="mobile-navbar">
+        <ul class="side-nav principal" id="mobile-navbar">
 
             <li>
                 <div class="input-field">
-                    <i class="material-icons prefix principal">search</i>
-                    <input id="cajaBuscar2" type="text" class="validate white black-text" placeholder="Buscar">
+                    <i class="material-icons prefix black-text">search</i>
+                    <input id="cajaBuscar2" type="text" class="validate white black-text" placeholder="Buscar" width="25px">
                     <label for="cajaBuscar2 black"></label>
                 </div>
             </li>
-            <li><a href="index.php"><i class="material-icons left principal">home</i>Inicio</a></li>
+            <li><a href="index.php"><i class="material-icons left">home</i>Inicio</a></li>
             <li>
                 <a href="#" id="busquedaA">
                         Busqueda Avanzada
@@ -79,8 +79,9 @@
 
                 <!--- Si está logeado-->
                 <?php } else{ ?>
-                    <li><a href="sass.html"><i class="material-icons ">note_add</i></a></li>
-                    <li><a href="inbox.php"><i class="material-icons principal">message</i></a></li>
+                    <li><a href="sass.html"><i class="material-icons left">note_add</i>Publicar</a></li>
+                    <li><a href="creaGrupo.php"><i class="material-icons left">group_add</i>Crear Grupo</a></li>
+                    <li><a href="inbox.php"><i class="material-icons left">message</i>Inbox</a></li>
                     <li>
                         <a id="dropdown-button-mobile" class="dropdown-button" href="#!" data-activates="perfilDropDown2">Bienvenido 
                             <?=$_SESSION['nickname']?><i class="material-icons right">arrow_drop_down</i></a>

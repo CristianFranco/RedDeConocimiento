@@ -50,7 +50,7 @@
 						<input class="inpP" type="text" id="desc" name="desc">
 					</div>
 <div class="input-field col s12">
-<i class="material-icons prefix">language</i>
+<i class="material-icons prefix icoP">language</i>
 					<select  name='conocimiento' id='conocimiento'>
 						<?php 
 							$queryTags="select * from AreaConocimiento;";
@@ -64,9 +64,10 @@
 					</select>
 					<label class="icoP">Area de conocimiento:</label>
 					</div>
-
-					<input type="submit" name="sendRequest" class="btn principal"></input>
+                    <div align="right">
+					<input type="submit" name="sendRequest" class="btn principal" value="CREAR">
 					<?php echo "<input type='text' id='idUsr' name='idUsr' value='".$_SESSION['idUsuario']."' hidden></input>"; ?>
+                    </div>
 
 				</form>
 			</div>
@@ -85,5 +86,6 @@
     $('select').material_select();
   });
     </script>
+    <script src="../JS/Redirect/jquery.redirect.js"></script>
 </body>
 </html>

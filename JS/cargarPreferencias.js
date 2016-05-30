@@ -103,6 +103,9 @@ function cargarDefault(tipo) {
         '.tabs .indicator{'+
         'background-color:'+ estilos[tipo].bcPrincipal + '!important;' +
         '}'+
+        '.ico2{'+
+        'color:'+ estilos[tipo].tcPrincipal + '!important;' +
+        '}'+
         '</style>';
     $(document.head).prepend($(strEstilo));
 }
