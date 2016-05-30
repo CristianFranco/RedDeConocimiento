@@ -48,7 +48,6 @@
         <header>
             <?php require("header.php")?>
         </header>
-
         <!--Contenido de la publicación -->
         <br>
         <main>
@@ -66,7 +65,7 @@
                                 <option value="Personalizado">Personalizado</option>
 
                             </select>
-                            <label>Tema Actual</label>
+                            <label class="icoP">Tema Actual</label>
                         </div>
                         <a id="guardarEstilo" class="principal waves-effect waves-light btn "><i class="material-icons">save</i></a>
                         <a class="principal waves-effect waves-light btn"><i class="material-icons">close</i></a>

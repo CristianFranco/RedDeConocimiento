@@ -5,7 +5,10 @@ $("#cajaBuscar").focus(function (e) {
 });
 $("#cajaBuscar").focusout(function (e) {
     console.log("hola");
-    $("#busquedaA").attr('style', 'display:none');
+    setTimeout(function(e){
+        $("#busquedaA").attr('style', 'display:none');
+    }, 500);
+    
 
 });
 $('.modal-trigger').leanModal();

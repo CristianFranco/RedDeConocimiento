@@ -1,8 +1,17 @@
 <nav class="principal">
     <div class="nav-wrapper">
-        <a href="index.php" class="brand-logo">Cognitus</a>
-        <a id="mobileButton" href="#" data-activates="mobile-navbar" class="button-collapse"><i class="material-icons">menu</i></a>
+        <a href="index.php" class="brand-logo">
+            
+              <img src="../IMG/logo6.png" width="65px;">
+              <a href="index.php" style="margin-left:65px;display:inline;" class="brand-logo">Cognitus</a>
+            
+        
+        
+        </a>
+       
 
+        <a id="mobileButton" href="#" data-activates="mobile-navbar" class="button-collapse"><i class="material-icons">menu</i></a>
+        
         <ul id="nav-mobile" class="right hide-on-med-and-down">
 
             <li class="col s2">
@@ -13,7 +22,7 @@
                     <input id="cajaBuscar" type="text" class="validate white black-text" style="margin-left:25px;width:200px;height:30px;" placeholder="Buscar">
 
                 </div>
-                <a href="#" id="busquedaA" class="" style="display:none;">
+                <a href="busqueda.php" id="busquedaA" class="" style="display:none;">
                     <div style="width:250px;" class=" center-align">
                         Busqueda Avanzada
                     </div>
@@ -66,7 +75,7 @@
             </li>
             <li><a href="index.php"><i class="material-icons left">home</i>Inicio</a></li>
             <li>
-                <a href="#" id="busquedaA">
+                <a href="busqueda.php" id="busquedaA">
                         Busqueda Avanzada
                 </a>
             </li>
