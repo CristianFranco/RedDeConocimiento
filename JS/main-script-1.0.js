@@ -19,16 +19,27 @@ function cargarSeguidores() {
             + '   b </div>                                                                      '
             + '</div>                                                                        '
             );
-    $.getJSON("procesos/get_publicaciones.php",
+    $("#siguiendo").html('<div id="cargando1"><h3>Cargando...</h3><br><div class="progress principal"><div class="indeterminate secundario"></div></div></div>');
+    $("#seguidor").html('<div id="cargando2"><h3>Cargando...</h3><br><div class="progress principal"><div class="indeterminate secundario"></div></div></div>');
+    $.getJSON("procesos/get_seguidores.php",
             function (data) {
-                $.each(data.seguidores,
-                        function (index, s) {
-
-                        });
-                $.each(data.siguiendo,
-                        function (index, s) {
-
-                        });
+                /*$.each(data.seguidores,
+                 function (index, s) {
+                 llenarUsuarios('seguidores', data.seguidores);
+                 });*/
+                
+                $("#cargando1").remove();
+                $("#cargando2").remove();
+                if (data.seguidores.length  <= 0) {
+                    $("#seguidores").html("Aún no tienes seguidores");
+                } else {
+                    llenarUsuarios('seguidores', data.seguidores);
+                }
+                if (data.seguidos.length  <= 0) {
+                    $("#seguidos").html("Aún no sigues a nadie");
+                } else {
+                    llenarUsuarios('siguiendo', data.seguidos);
+                }
                 $('.tooltipped').tooltip({delay: 50});
                 $('.modal-trigger').leanModal();
             });
@@ -164,4 +175,33 @@ function irPublicacion(idP) {
     $('<form action="publicacion.php" method=post>'
             + '<input type=hidden name=idPub value=' + idP + '>'
             + '</form>').submit();
+}
+
+function irUsuario(idU) {
+    $('<form action="mostrar.php" method=post>'
+            + '<input type=hidden name=uid value=' + idU + '>'
+            + '<input type=hidden name=tipo value="usuario">'
+            + '</form>').submit();
+}
+
+function llenarUsuarios(div, usuarios) {
+    $('#' + div).html('');
+    $.each(usuarios, function (key, user) {
+        $('#' + div).append(
+                '<div class="row">                                                                                   ' +
+                '   <div>                                                                                             ' +
+                '     <div class="card">                                                                              ' +
+                '       <div class="card-content principal">                                                          ' +
+                '         <span class="card-title">' + user.Nickname + '</span>                    ' +
+                '         <p>' + user.Nombre + ' ' + user.Apellidos +
+                '         <br>Correo: ' + user.Email +
+                '         <br>No. Telefónico:  ' + user.Telefono +
+                '         <a href=javascript:irUsuario(' + user.idUsuario + ') class=right>Mostrar resumen</a>' +
+                '           </p>                                                                                      ' +
+                '           </div>                                                                                    ' +
+                '     </div>                                                                                          ' +
+                '   </div>                                                                                            ' +
+                ' </div>																							  '
+                );
+    });
 }

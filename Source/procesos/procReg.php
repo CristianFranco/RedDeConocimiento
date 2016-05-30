@@ -83,7 +83,7 @@
             $mail->Subject = "Confirmación Cuenta Red Conocimiento";
             $mensaje = "Usted se a registrado a la Red de Conocimiento, \n 
             Para confirmar su cuenta haga click en el siguiente enlace: \n 
-            http://localhost:3030/ROC/Source/confirmacion.php?confirmacion=".$codigoAc."&IdUsr=".$row['IdUsuario']."\n
+            http://localhost/RedDeConocimiento/Source/confirmacion.php?confirmacion=".$codigoAc."&IdUsr=".$row['IdUsuario']."\n
             Usuario:".$nickname."\n Password=".$pass; //enviamos url con 
             $mail->Body = $mensaje;
             //$mail->AltBody = "Mensaje de prueba mandado con pbhpmailer en formato solo texto";
