@@ -35,7 +35,7 @@
                 <?php } else{ ?>
                     <li><a href="sass.html" class="tooltipped" data-tooltip="Publicar"><i class="material-icons " >note_add</i></a></li>
                     <li><a href="creaGrupo.php" class="tooltipped" data-tooltip="Crear grupo"><i class="material-icons">group_add</i></a></li>
-                    <li><a href="inbox.php" class="tooltipped" data-tooltip="Bandeja de entrada"><i class="material-icons">message</i></a></li>
+                    <li><a href="inbox.php" class="tooltipped" data-tooltip="Bandeja de entrada"><i class="material-icons left">message</i><span id="inb"></span></a></li>
                     <li>
                         <ul id="perfilDropDown" class="dropdown-content">
                             <li><a href="editarPerfil.php">Editar Perfil</a></li>
@@ -133,3 +133,25 @@
         </div>
     </form>
 </div>
+<?php
+    if(isset($_SESSION["idUsuario"])){
+?>
+<script type="text/javascript">
+    $(document).ready(function(){
+        setInterval(function(e){ 
+            $.ajax({
+                url:"procesos/noMensajes.php"
+                , success: function (data) {
+                    if(data!=0){
+                        $('#inb').html("<span class='new badge secundario'>"+data+"</span>");
+                    }else{
+                        $('#inb').html("<span></span>");
+                    }
+                }
+            });
+        },1000);
+      });
+</script>
+<?php
+                                     }
+?>
