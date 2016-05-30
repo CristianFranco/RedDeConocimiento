@@ -8,10 +8,14 @@
  indicestag = [];
  etiquetas = [];
  iddesc = [];
+ contdes = 0;
+
+ descripciones = [];
 
  function iniciar() {
 
      var archivosaux;
+
      var nombre = '';
      indices = [];
      tiposarchivos = [];
@@ -75,7 +79,7 @@
 
          // alert('entre a enviar');
 
-         var desc = 'descripcion';
+
          var datos = new FormData();
          //datos.append('titulo',' hola');
          var archivo = new File([""], "filename.txt");
@@ -93,36 +97,30 @@
 
          documentos = ' ';
          console.log('archivos: ' + archivos1.length);
-
+         var descripcionesaux = document.getElementsByName('descripcion');
+         for (i = 0; i < descripcionesaux.length; i++)
+             descripciones.push(descripcionesaux[i]);
+         //alert(descripciones.length);
          //alert(iddesc.length);
          for (i = 0; i < archivos1.length; i++) {
              // alert('archivos.length: ' + archivos1.length);
              if (encontrareliminados()) {
+                 var desc = 'descripcion';
                  console.log(archivos1.length);
                  //console.log(archivos1[0].name);
                  //alert('entre a form data');
                  // alert('archivos[i]: ' + archivos1[i].name);
                  var archivo = archivos1[i];
-
                  var datos = new FormData();
-
                  datos.append('archivo', archivo);
                  // alert('archivo: ' + archivo.name);
 
-                 if (document.getElementById(des + i).value != '' || document.getElementById(des + i) != undefined) {
-                     datos.append('descripcion', document.getElementById(des + i).value);
-                 } else {
-                     var etiquetasn = document.getElementsByName(desc + archivo.name);
-
-                     for (var k = 0; k < etiquetasn.length; k++) {
-                         alert(etiquetasn[k].value);
-                         datos.append('descripcion', etiquetasn[k].value);
-                         break;
-                     }
-                 }
-
-
+                 /*
+                  if (document.getElementById(desc + i) != null || document.getElementById(desc + i) != undefined)
+                      datos.append('descripcion', document.getElementById(desc + i).value);*/
                  // datos.append('descripcion', document.getElementById(desc + i).value);
+                 console.log(descripciones[i].value);
+                 datos.append('descripcion', descripciones[i].value);
 
                  documentos += archivo.name + '<br>';
                  datos.append('numero', i);
@@ -194,6 +192,10 @@
      document.getElementById(boton1).className = "waves-effect waves-light btn";
      document.getElementById(boton2).className = "waves-effect waves-light btn";
      document.getElementById(boton3).className = "waves-effect waves-light btn";
+     var descripcionesaux = document.getElementsByName('descripcion');
+     for (i = 0; i < descripcionesaux.length; i++)
+         descripciones.push(descripcionesaux[i]);
+     // alert(descripciones.length);
  }
 
  function cambiararchivo() {
@@ -202,6 +204,7 @@
      archivosvalidos = 'solo se admiten archivos con extension de office, txt, pdf, rar, sql, zip';
      // document.getElementById('barchivos').className = "waves-effect waves-light btn blue accent-3";
      cambiarcolorbotones('barchivos', 'bimagenes', 'bvideo', 'baudio');
+
      mostrararchivos1();
  }
 
@@ -394,10 +397,10 @@
                  '</button>' + '</span>' + '</div>' +
                  '</div>';
              marchivos.innerHTML += '<div class="row">' + '<div class="input-field col s12">' +
-                 '<textarea class="materialize-textarea" id="' + des + i + '" name="' + des + archivos1[i].name + '">' + '</textarea>' +
+                 '<textarea class="materialize-textarea" id="' + des + i + '" name="descripcion">' + '</textarea>' +
                  '<label for="textarea1">' + 'Descripcion del archivo' + '</label>' +
                  '</div>' + '</div>';
-             iddesc.push(des + archivos1[i].name);
+             // iddesc.push(des + archivos1[i].name);
 
          }
      }
@@ -426,23 +429,11 @@
                  '</button>' + '</span>' + '</div>' +
                  '</div>';
 
-             var etiq = document.getElementById(des + i);
-             // alert(des + archivos1[i].name);
-             // console.log(des + archivos1[i].name);
-             alert(etiq.length);
 
-
-             if (etiq.value != '' || etiq.value != undefined) {
-                 marchivos.innerHTML += '<div class="row">' + '<div class="input-field col s12">' +
-                     '<textarea class="materialize-textarea" name="' + des + archivos1[i].name + '">' + etiq.value + '</textarea>' +
-                     '<label for="textarea1">' + 'Descripcion del archivo' + '</label>' +
-                     '</div>' + '</div>';
-             } else {
-                 marchivos.innerHTML += '<div class="row">' + '<div class="input-field col s12">' +
-                     '<textarea class="materialize-textarea" name="' + des + archivos1[i].name + '">' + '</textarea>' +
-                     '<label for="textarea1">' + 'Descripcion del archivo' + '</label>' +
-                     '</div>' + '</div>';
-             }
+             marchivos.innerHTML += '<div class="row">' + '<div class="input-field col s12">' +
+                 '<textarea class="materialize-textarea" name="descripcion1">' + descripciones[i] + '</textarea>' +
+                 '<label for="textarea1">' + 'Descripcion del archivo' + '</label>' +
+                 '</div>' + '</div>';
          }
 
      }
