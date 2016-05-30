@@ -2,11 +2,11 @@
     //Inicio de sesión
     session_start();
     //Parámetros de sesión
-    $idUsr=1;//$_SESSION["idUsuario"];
+    $idUsr=$_SESSION["idUsuario"];
     $acceso=1;//$_SESSION['tipo'];
     
     //Parámetros externos
-    $idPub=1;//$_POST['idPub']
+    $idPub=2;//$_POST['idPub']
 
     //Conexión y query's a la BD
     require("procesos/connection.php");
@@ -80,7 +80,7 @@
         <header>
             <?php require("header.php")?>
         </header>
-        
+        <main>
         <!--Contenido de la publicación -->
         <div class="container">
             <div class="row">
@@ -140,7 +140,7 @@
                             </li>
                             <?php if($filaPub['idUsuario']==$idUsr){?>
                             <li>
-                                <a href="#comentar" class="modal-trigger waves-effect waves-light btn-floating btn-large secundario">
+                                <a id="comentar" class="waves-effect waves-light btn-floating btn-large secundario">
                                 <i class="material-icons left icoP">delete_forever</i> </a>
                             </li>
                             <?php }?>
@@ -180,7 +180,7 @@
                     <!-- Slides -->
                     <div class="swiper-slide">
                        <h5>Abstract</h5>
-                        <p>hola</p>
+                        <p><?=$filaPub['Descripcion']?></p>
                     </div>
                 </div>
                 <!-- If we need pagination -->
@@ -199,8 +199,9 @@
                     <!-- Slides -->
                     <?php while($fila=$imagenes->fetch_array(MYSQLI_ASSOC)){?>
                     <div class="swiper-slide">
-                       <h5>Imagenes</h5>
+                       <h5>Imagenes <a href="../publicaciones/<?=$idPub?>/<?=$fila['Directorio']?>" download><i class="small material-icons icoP">file_download</i></a></h5>
                         <p><?=$fila['Descripcion']?></p>
+                        
                         <img src="../publicaciones/<?=$idPub?>/<?=$fila['Directorio']?>" alt="Smiley face" height="60%" width="100%">
                         
                     </div>
@@ -223,7 +224,7 @@
                     
                     <?php while($fila=$videos->fetch_array(MYSQLI_ASSOC)){ ?>
                     <div class="swiper-slide">
-                       <h5>Videos</h5>
+                       <h5>Videos <a href="../publicaciones/<?=$idPub?>/<?=$fila['Directorio']?>" download><i class="small material-icons icoP">file_download</i></a></h5>
                         <p><?=$fila['Descripcion']?></p>
                         <video  src="../publicaciones/<?=$idPub?>/<?=$fila['Directorio']?>" alt="Smiley face" height="60%" width="100%" controls>
                     </div>
@@ -245,8 +246,12 @@
                     <!-- Slides -->
                     <?php while($fila=$audios->fetch_array(MYSQLI_ASSOC)){?>
                     <div class="swiper-slide">
-                       <h5>Audios</h5>
+                       <h5>Audios <a href="../publicaciones/<?=$idPub?>/<?=$fila['Directorio']?>" download><i class="small material-icons icoP">file_download</i></a></h5>
                         <p><?=$fila['Descripcion']?></p>
+                        <audio controls style="width:100%;">
+                          <source src="../publicaciones/<?=$idPub?>/<?=$fila['Directorio']?>" type="audio/mpeg">
+                        
+                        </audio>
                     </div>
                     <?php } ?>
                 </div>
@@ -266,8 +271,11 @@
                     <!-- Slides -->
                     <?php while($fila=$documentos->fetch_array(MYSQLI_ASSOC)){?>
                     <div class="swiper-slide">
-                       <h5>Documentos</h5>
+                       <h5>Documentos </h5>
                         <p><?=$fila['Descripcion']?></p>
+                        <div style="width:100%;">
+                        <a href="../publicaciones/<?=$idPub?>/<?=$fila['Directorio']?>" download class="center-align"><i class="large material-icons icoP">file_download</i></a>
+                        </div>
                     </div>
                     <?php } ?>
                 </div>
@@ -366,7 +374,7 @@
         </div>
     </form>
 </div>
-
+</main>
         <?php require("footer.php ");?>
 
 
@@ -379,7 +387,6 @@
             </script>
             <script src="../JS/publicacion.js"></script>
             <script src="../JS/swiper.jquery.min.js"></script>
-            <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
             <script src="../JS/Estrellas/jquery.star-rating-svg.js"></script>
             <script>
             var idPub = <?=$idPub?>;
@@ -399,7 +406,7 @@
                 },
                 callback: function(currentRating, $el){
                 //alert('rated ', currentRating);
-                console.log('DOM element ', $el);
+                //console.log('DOM element ', $el);
                      $.ajax({
                         url: "procesos/calificacion.php"
                         , type: "POST"
@@ -430,6 +437,7 @@
                     , success: function (data, textStatus, jqXHR) {
                             console.log(data);
                            Materialize.toast('Comentario hecho!', 3000);
+                            $("#comentarioTxt").val("");
                            // data: return data from server
                         }
                 });
@@ -473,7 +481,7 @@
                                     
                                 }
                                 console.log(data);
-                               Materialize.toast('Comentarios nuevos!', 1000);
+                               Materialize.toast('Comentarios nuevos!', 3000);
                                
                                 $("#numComentarios1").text('('+totalCom+')');
                                 $("#numComentarios2").text('('+totalCom+')');
@@ -484,6 +492,14 @@
                                        
                                        
             }, 3000);
+            <?php if($filaPub['idUsuario']==$idUsr){?>
+                $("#comentar").click(function(e){
+                    window.location="procesos/eliminarPub.php?idPub=<?=$idPub?>";
+                });
+                 $("#comentar2").click(function(e){
+                    window.location="procesos/eliminarPub.php?idPub=<?=$idPub?>";
+                });
+            <?php }?>
             </script>
             <link rel="stylesheet" type="text/css" href="../CSS/star-rating-svg.css">
             
