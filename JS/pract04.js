@@ -11,6 +11,7 @@
  contdes = 0;
 
  descripciones = [];
+ descripciones1 = [];
 
  function iniciar() {
 
@@ -142,10 +143,10 @@
          $('#modal2').openModal();
      } else {
          //alert('entre a validar formulario enviar');
-         var texto1 = 'Para realizar una publicacion al menos debe tener: Titulo y Descripcion';
+         texto1 = 'Para realizar una publicacion al menos debe tener: Titulo y Descripcion';
          console.log(texto1);
-         document.getElementById('textomodal').innerHTML = texto1;
-         $('#modal1').openModal();
+         document.getElementById('textoformulario').innerHTML = texto1;
+         $('#modal3').openModal();
          alert(texto1);
      }
 
@@ -195,7 +196,7 @@
      var descripcionesaux = document.getElementsByName('descripcion');
      for (i = 0; i < descripcionesaux.length; i++)
          descripciones.push(descripcionesaux[i]);
-     // alert(descripciones.length);
+
  }
 
  function cambiararchivo() {
@@ -431,7 +432,7 @@
 
 
              marchivos.innerHTML += '<div class="row">' + '<div class="input-field col s12">' +
-                 '<textarea class="materialize-textarea" name="descripcion1">' + descripciones[i] + '</textarea>' +
+                 '<textarea class="materialize-textarea" name="descripcion1">' + descripciones[i].value + '</textarea>' +
                  '<label for="textarea1">' + 'Descripcion del archivo' + '</label>' +
                  '</div>' + '</div>';
          }
