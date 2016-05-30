@@ -3,7 +3,7 @@
 <?php 
     session_start();
     require("procesos/connection.php"); 
-    $Uid= 1;
+    $Uid= $_SESSION['idUsuario'];
     $connection = connect();
     $sql = "SELECT u.idUsuario,u.Nickname, u.Password, u.Telefono, u.Nombre, u.Apellidos, u.Descripcion, c.CodigoPais,u.idCiudad from Usuario u,Ciudad c WHERE u.idUsuario = $Uid and u.idCiudad=c.ID;";
     $result = $connection -> query($sql);
@@ -54,7 +54,7 @@
     ?>
                     <!--CAMPOS A EDITAR-->
                     <div class="row">
-                        <form id="formEPerfil" class="col s12" >
+                        <form id="formEPerfil" class="col s12">
                             <div class="row">
                                 <div class="input-field col m4">
                                     <input type="text" style="display:none;" name="idUsuario" value="<?=$usuario['idUsuario']?>">
@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="input-field col m4">
                                     <i class="icoP material-icons prefix">perm_identity</i>
-                                    <input id="nombre" type="text" class="validate inpP " pattern="[A-Za-z ]{6,15}" title="Introduce tu nombre verdadero" name="nombre" required value="<?php echo $usuario ['Nombre'];?>" disabled>
+                                    <input id="nombre" type="text" class="validate inpP " pattern="[A-Za-z ]{3,15}" title="Introduce tu nombre verdadero" name="nombre" required value="<?php echo $usuario ['Nombre'];?>" disabled>
                                     <label class="icoP" for="nombre">Nombre</label>
                                 </div>
                                 <div class="input-field col m4">
@@ -87,12 +87,12 @@
                                     <input id="telefono" type="text" class="validate inpP " pattern="[0-9]{10,20}" title="Introduce solo datos númericos (lada + télefono)" name="telefono" required value="<?php echo $usuario ['Telefono'];?>" disabled>
                                     <label class="icoP" for="telefono">Télefono</label>
                                 </div>
-                            </div>
-                            <div class="input-field col m4">
+                            </div>                    
+                        <div class="input-field">
                                 <i class="icoP material-icons prefix">assignment</i>
                                 <input id="descripcion" type="text" class="validate inpP " pattern="[A-Za-z0-9 ]{10,30}" title="Introduce una breve descripción de ti " name="descripcion" required value="<?php echo $usuario ['Descripcion'];?>" disabled>
                                 <label class="icoP" for="descripcion">Descripción</label>
-                            </div>
+                            </div>                             
                             <!--BD CATALOGO DE PAIS-CIUDAD-->
                             <div class="input-field col m4">
                                 <i class="icoP material-icons prefix">location_on</i>
@@ -137,20 +137,23 @@
                             <br>
                             <p>
                                 <!--BOTONES-->
-                                <div class="row">
-                                    <form class="col m12" method="post" name="registro" action="envreg.php">
-                                        <div class="input-field col m2 offset-m6">
+                                
+                                <div class="row">    
+                                        <div class="input-field col m6">
                                             <button class="waves-effect waves-light btn" id="habilitar" type="button" name="action">Habilitar</button>
+                                            <button class="waves-effect waves-light btn" id="aceptar" type="submit" name="action" disabled>Aceptar</button>
+                                            <button class="waves-effect waves-light btn" id="cancelar" type="button" name="action" disabled>Cancelar</button>
                                         </div>
-                                        <div class="input-field col m2">
+                                        <!--<div class="input-field col m2">
                                             <button class="waves-effect waves-light btn" id="aceptar" type="submit" name="action" disabled>Aceptar</button>
                                         </div>
                                         <div class="input-field col m2">
-                                            <button class="waves-effect waves-light btn" id="cancelar" type="button" name="action" disabled>Cancelar</button>
-                                        </div>
-                                    </form>
-                                </div>
+                                            <button class="waves-effect waves-light btn" id="cancelar" type="button" name="action" disabled>Cancelar</button>-->
+                                    </div> 
+                            
+                        
                         </form>
+                         
                     </div>
             </div>
         </main>
@@ -180,16 +183,8 @@
 
                     })
                     //HABILITAR CAMPOS
-                $("#habilitar").on("click", function (e) {
-                    alert("no");
-                    //  $("#nickname").removeAttr("disabled");
-                    /* $("#password").removeAttr("disabled");
-                     $("#conf_pass").removeAttr("disabled");
-                     $("#nombre").removeAttr("disabled");
-                     $("#apellidos").removeAttr("disabled");
-                     $("#telefono").removeAttr("disabled");
-                     $("#descripcion").removeAttr("disabled");
-                     $("#paises").removeAttr("disabled");*/
+                $("#habilitar").on("click", function (e) { 
+                    $("#descripcion").removeAttr("disabled");
                     $("input").removeAttr("disabled");
                     $('#paises').removeAttr('disabled');
                     $('#ciudades').removeAttr('disabled');
@@ -202,22 +197,28 @@
                     window.location = "editarPerfil.php";
                 });
                 //PROCESO METER DATOS A BD  
-                $("#formEPerfil").submit(function (e) {
+                
+            </script>
+        <script>
+            $("#formEPerfil").submit(function (e) {
                     //alert('FORM');
                     e.preventDefault();
                     var postData = $(this).serializeArray();
                     $.ajax({
-                        url: "procesos/editPerfil.php"
-                         , type: "POST"
-                        , data: postData
+                        url: "procesos/editPerfil.php", type: "POST"
+                        
+                        ,data: postData
                         ,dataType:'json'
-                        , success: function (data, textStatus, jqXHR) {
+                        ,success: function (data, textStatus, jqXHR) {
                             //console.log(data[0].Est + " que es esto "+ data[0].Mensaje);
                             if(data.estado==true){
-                                
+                              Materialize.toast("Edición Éxitosa", 4000);
+                              window.location.href="index.php";
                             }
                             else{
                                 
+                                Materialize.toast("Nickname existente, favor de seleccionar otro", 4000);//alert('mal');
+                                //console.log(data);
                             }
                         },
                         error: function(res,res2){
@@ -227,7 +228,7 @@
                     //return false;
                     //e.preventDefault();
                 });
-            </script>
+        </script>
 
             <script>
                 $(document).ready(function () {

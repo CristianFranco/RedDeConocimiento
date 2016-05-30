@@ -3,10 +3,8 @@
     session_start();
     require("procesos/connection.php");    
     //Parámetros de sesión
-    $idUsr=3;//$_SESSION["idUsuario"];
+    $idUsr=$_SESSION["idUsuario"];
     $acceso=1;//$_SESSION['tipo'];
-    $uid=null;
-    $tipo=null;
     $bandera=false; //la publicación fue echa en un grupo
     //Parámetros externos
     $idPub=1;//$_POST['idPub']
@@ -23,7 +21,7 @@
         $check="SELECT idUsuario, idGrupo, Estado, Notificar FROM RCO.Usuario_Grupo where idUsuario=$idUsr;";
         $result4=$connection->query($check);
         $n=0;
-        $admin=0;
+        $admin=array();
          while($fila=$result4->fetch_assoc()){
                             $admin[$n]=$fila;
                             $n++;
@@ -66,7 +64,7 @@
         //OBTIENE LOS USUARIOS DENTRO DEL GRUPO
         $sql3="SELECT 
     Usuario.idUsuario, Usuario.Nickname FROM Usuario_Grupo, Usuario, Grupo WHERE Usuario_Grupo.idGrupo = Grupo.idGrupo
-     AND Usuario_Grupo.idUsuario = Usuario.idUsuario AND Usuario_Grupo.idGrupo = 1 AND Usuario_Grupo.Estado in (1,2) LIMIT 10;";
+     AND Usuario_Grupo.idUsuario = Usuario.idUsuario AND Usuario_Grupo.idGrupo = $uid AND Usuario_Grupo.Estado in (1,2) LIMIT 10;";
         $result3=$connection->query($sql3);
         $n=0;
         $miembros=null;
@@ -147,6 +145,13 @@
                 $comentarios[$n]=$fila;
                 $n++;
             }
+        $sql5="SELECT idUsuario,idUsuarioSeguidor,Notificar FROM RCO.Sigue where idUsuarioSeguidor=$idUsr;";
+            $result5=$connection->query($sql5);
+            $n=0;
+            while($fila=$result5->fetch_assoc()){
+                $siguiendo[$n]=$fila;
+                $n++;
+            }
             
     }
 ?>
@@ -211,24 +216,34 @@
             }
                 $band2=false;
                 for($x=0;$x<count($siguiendo);$x++){
-                    
                                 if(!isset($_SESSION['idUsuario']) || $siguiendo[$x]['idUsuario']==$uid || $uid==$idUsr){
                                                     $band2=true;
                                                     //echo $siguiendo[$x]['idUsuario']." ".$miembros[$n]['idUsuario'];
                                                     //echo $miembros[$n]['idUsuario']." $idUsr";
                                                     break;
                                 }
-                                if($band2==false){
-                               echo " <form method=\"POST\">
+                                
+                            }
+                if($band2==false){
+                               echo "<div class=\"row\">
+                                        <div>
+                                        <form method=\"POST\">
+                                        <input type=\"hidden\" name=\"tipo\" value=\"usuario\" />
+                                        <input type=\"hidden\" name=\"uid\" value=\"$uid\">
+                                        <input type=\"hidden\" name=\"seguidor\" value=\"$idUsr\">
+                                        <input class=\"btn principal\" type=\"submit\" formaction=\"procesos/seguir.php\" value=\"Seguir Usuario\">
+                                        </form>
+                                        </div>
+                                    </div>";         
+                            }else{
+                                echo "<form method=\"POST\">
                             <input type=\"hidden\" name=\"tipo\" value=\"usuario\" />
                             <input type=\"hidden\" name=\"uid\" value=\"$uid\">
                             <input type=\"hidden\" name=\"seguidor\" value=\"$idUsr\">
-                            <input class=\"btn principal\" type=\"submit\" formaction=\"procesos/seguir.php\" value=\"Seguir Usuario\">
-                            </form></p>";         
-                            }
+                            <input class=\"btn principal\" type=\"submit\" formaction=\"procesos/dejarDeSeguir.php\" value=\"Dejar de Seguir\">
+                            </form>"; 
                           }
-                            
-                        
+                
             //SE IMIPRIMEN LOS COMENTARIOS DEL USUARIO DENTRO DE UNA SOLA TARJETA
             echo "<div class=\"row\">
                 <div>
@@ -240,8 +255,8 @@
             $n;
             for($n=0;$n<=count($result3);$n++){
             echo "<p>".$comentarios[$n]['Comentario']."</p><form method=\"POST\">
-                            <input type=\"hidden\" name=\"uid\" value=\"".$comentarios[$n]['idPublicacion']."\"> 
-                          <input class=\"btn principal\" type=\"submit\" formaction=\"mostrar.php\" value=\"Ver Usuario\">
+                            <input type=\"hidden\" name=\"idPub\" value=\"".$comentarios[$n]['idPublicacion']."\"> 
+                          <input class=\"btn principal\" type=\"submit\" formaction=\"publicacion.php\" value=\"Ver Publicación\">
                         </form>";
                 } 
             }else{
@@ -267,21 +282,46 @@
                       <br>Area de Conocimiento: ".$usuario[$n]['Nombre']."
                       <br>Descripción: ".$usuario[$n]['Descripcion']."
                       </p>";
-                         //si es el admin del grupo se imprime la opción de eliminarl el grupo
-                        
+                         //si es el admin del grupo se imprime la opción de eliminarl el grupo******
+                        if($admin!=0 and $admin!= null){
                        if(isset($_SESSION['idUsuario']) and $admin[$n]['idUsuario']==$idUsr and $admin[$n]['Estado']==2){
                       echo "<form method=\"POST\">
                             <input type=\"hidden\" name=\"idGrupo\" value=\"".$admin[$n]['idGrupo']."\"> 
                           <input class=\"btn principal\" type=\"submit\" formaction=\"borrarGrupo.php\" value=\"Eliminar Grupo\">
                         </form>";
                        }
+                        }
                     echo "</div>
                   </div>
                 </div>
               </div>";
-              
             }
-           
+            //if(isset($_SESSION['idUsuario']) and $admin[$n]['idUsuario']==$idUsr and $admin[$n]['Estado']==2){}else{
+            $band3=false;
+            for($n=0;$n<count($admin);$n++){
+            if(!isset($_SESSION['idUsuario']) || $admin[$n]['idGrupo']==$uid || $admin[$n]['Estado']==2){
+                            $band3=true;
+                           break;
+                       }
+            }
+                    if($band3==false){
+                               echo "<div class=\"row\">
+                                        <div>
+                                        <form method=\"POST\">
+                                        <input type=\"hidden\" name=\"idGrupo\" value=\"$uid\">
+                                        <input type=\"hidden\" name=\"seguidor\" value=\"$idUsr\">
+                                        <input class=\"btn principal\" type=\"submit\" formaction=\"procesos/unirseAlGrupo.php\" value=\"Unirse al Grupo\">
+                                        </form>
+                                        </div>
+                                    </div>";         
+                            }else{
+                                echo "<form method=\"POST\">
+                            <input type=\"hidden\" name=\"idGrupo\" value=\"$uid\">
+                            <input type=\"hidden\" name=\"seguidor\" value=\"$idUsr\">
+                            <input class=\"btn principal\" type=\"submit\" formaction=\"procesos/abandonarGrupo.php\" value=\"Abandonar Grupo\">
+                            </form>"; 
+                          }
+            //}
               
                 
                 //imprime los miembros del grupo en una tarjeta blanca
@@ -312,6 +352,8 @@
                             if($band==false){
                                     
                                echo " <input class=\"btn principal\" type=\"submit\" formaction=\"procesos/seguir.php\" value=\"Seguir Usuario\">";         
+                            }else{
+                                echo " <input class=\"btn principal\" type=\"submit\" formaction=\"procesos/dejarDeSeguir.php\" value=\"Dejar de Seguir\">"; 
                             }
                         
                         echo "</form></p>";
@@ -378,13 +420,9 @@
                 //SI NO SE TIENEN PUBLICACIONES ENTONCES SE MUESTRA LO SIGUIENTE
                 echo "<div class=\"row\">
                 <div>
-                  <div class=\"card blue \">
+                  <div class=\"card principal \">
                     <div class=\"card-content secundario \">
-                      <span class=\"card-title\">".$publicacion[0]['Nickname']." no cuenta con publicaciones.</span>
-                    </div>
-                    <div class=\"card-action\">
-                      <a href=\"#\">Ver Publicación</a>
-                      <a href=\"#\">Ver Grupo</a>
+                      <span class=\"card-title\">".$publicacion[0]['Nickname']." No cuenta con publicaciones.</span>
                     </div>
                   </div>
                 </div>

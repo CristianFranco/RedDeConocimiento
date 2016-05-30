@@ -1,4 +1,6 @@
-
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
     <html lang="es">
 <head>
@@ -58,11 +60,10 @@
                 $codig=$_GET['confirmacion'];
                 //echo $codig;
                 require("procesos/connection.php");
-                $connection=connect();
                 $query="UPDATE Usuario SET Estado=1 WHERE IdUsuario='".$usr."' AND CodigoAc=".$codig.";";
                 if($connection -> query($query)){
-                    echo "<h4 class='icoP'>Su cuenta de la red de conocimiento ha sido activada con exito.....</h4>";
-                    echo"</br><h4 class='icoP'>Espere mientras se redirecciona a la pagina principal</h4>";
+                    echo "<h4 class='icoP'>Su cuenta de la red de conocimiento ha sido activada con éxito.....</h4>";
+                    echo"</br><h4 class='icoP'>Espere mientras se redirecciona a la página principal</h4>";
                 }
                 $connection=disconnect($connection);
             ?>

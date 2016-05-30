@@ -60,7 +60,7 @@
                    <h4>Enviar Mensaje</h4>
                     <div class="row">
                         <div class="input-field col s6">
-                            <i class="icoP material-icons prefix">account_circle</i>
+                            <i class="icoP material-icons prefix">subject</i>
                             <input id="asunto" type="text" class="inpP validate" name="asunto" value="<?=$asunto?>">
                             <label class="icoP" for="icon_prefix">Asunto</label>
                         </div>
@@ -120,6 +120,9 @@
                         </div>
                     </div>
                     <div class="row">
+                       <a id="regresarInbox" class="btn waves-effect waves-light principal" type="button" name="action" href="inbox.php">Cancelar
+                            <i class="material-icons right">close</i>
+                        </a>
                         <button id="enviarMensaje" class="btn waves-effect waves-light" type="submit" name="action">Enviar
                             <i class="material-icons right">send</i>
                         </button>
@@ -174,7 +177,7 @@
                     var solicitud = new XMLHttpRequest();
                     solicitud.onreadystatechange = function () {
                         if (solicitud.readyState == 4 && solicitud.status == 200) {
-                            Materialize.toast('Mensaje Enviado!', 4000)
+                            Materialize.toast('Mensaje Enviado!', 3000)
                         }
                     };
                     solicitud.open("POST", "procesos/enviarMensaje.php", true);
