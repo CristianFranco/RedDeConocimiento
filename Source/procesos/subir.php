@@ -77,8 +77,8 @@ $tamano_archivo = $_FILES['archivo']['size'];
      if ($result->num_rows > 0) { 
             $row = $result->fetch_assoc();
             $idpublicacion=$row['id']; 
-            $dir= "../publicaciones/".$row['id'];
-            $dirmake = mkdir("$dir", 0777); 
+            $dir= "../../publicaciones/".$row['id'];
+            $dirmake = mkdir("$dir", 0777);             
             $connection = connect();
               if (isset ($_SESSION['idGrupo']) ){
                   $idGrupo=$_SESSION['idGrupo'];                  
@@ -95,7 +95,7 @@ $tamano_archivo = $_FILES['archivo']['size'];
     disconnect($connection);
 
  }
-else{
+else if($_POST['numero']<777 && !isset ($_POST['etiqueta'])){
     
      $descripcion=$_POST['descripcion'];
     
@@ -130,7 +130,7 @@ else{
     $result = $connection -> query($query);
     disconnect($connection);
     
-     $destino="../publicaciones/".$row['id']."/".$nombre_archivo;   //Directorio  destino  del  archivo  en  el servidor
+     $destino="../../publicaciones/".$row['id']."/".$nombre_archivo;   //Directorio  destino  del  archivo  en  el servidor
 if (move_uploaded_file($_FILES['archivo']['tmp_name'], $destino)){ 
 echo "El archivo ha sido cargado correctamente."; 
 

@@ -1,7 +1,9 @@
+<!DOCTYPE html>
+
 <html lang="en">
 <?php
  session_start();
- echo $_SESSION["idUsuario"];
+ //echo $_SESSION["idUsuario"];
  
  if (isset ($_POST['idGrupo']) )
 {
@@ -43,6 +45,9 @@ else
     </head>
 
     <body>
+        <header>
+            <?php require("header.php")?>
+        </header>
         <div class="container">
 
             <form class="">
@@ -82,7 +87,7 @@ else
 
 
                 <div class="row">
-                    <div class="col s6 offset-s3">
+                    <div class="col s6 m6 l6 offset-s3 offset-l3 offset-m3">
                         <div class="btn-group col s12">
                             <button type="button" class="waves-effect waves-light btn" onclick="cambiararchivo()" id="barchivos">
                                 <span class="glyphicon glyphicon-paperclip " aria-hidden="true"></span></button>
@@ -120,19 +125,40 @@ else
                         <button type="submit" class="btn btn-success" id="publicar">Cancelar</button>
                     </div>
                 </div>
+
+
+                <!-- Modal Structure -->
+                <div id="modal1" class="modal modal-fixed-footer">
+                    <div class="modal-content red ">
+                        <h4>Error</h4>
+                        <p id="textomodal">A bunch of text</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Ok</a>
+                    </div>
+                </div>
+
+                <!-- Modal Structure -->
+                <div id="modal2" class="modal modal-fixed-footer">
+                    <div class="modal-content green accent-2">
+                        <h4>Publicacion realizada correctamente</h4>
+                        <p id="textopublicacion">A bunch of text</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat " onclick="recargar()">Ok</a>
+                    </div>
+                </div>
+
+
             </form>
         </div>
+        <?php require("footer.php");?>
     </body>
     <script src="../frameworks/js/materialize.min.js"></script>
-    <script>
-        var textoDesc = "<?=$filaPub['Descripcion']?>";
-        var palabras = textoDesc.split(/(\s+)/);
-    </script>
-    <script src="../JS/publicacion.js"></script>
     <script src="../JS/header.js"></script>
     <script src="../frameworks/bootstrap/js/bootstrap.min.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../JS/pract04.js"></script>
 

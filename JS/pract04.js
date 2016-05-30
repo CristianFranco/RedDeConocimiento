@@ -2,7 +2,12 @@
  longitud = 0;
  imagenes = [];
  archivoserroneos = '';
+ documentos = '';
+ tags = '';
  conetiquetas = 1;
+ indicestag = [];
+ etiquetas = [];
+ iddesc = [];
 
  function iniciar() {
 
@@ -47,7 +52,7 @@
 
  function agregartag() {
      var etiqueta = 'etiqueta';
-     var etiquetas = []
+     etiquetas = []
      for (i = 0; i < conetiquetas; i++) {
          //alert(etiqueta + conetiquetas);
          etiquetas.push(document.getElementById(etiqueta + i).value);
@@ -56,9 +61,6 @@
          '<div class="input-field col s4 offset-s3">' +
          '<input id=' + etiqueta + conetiquetas + ' type="text">' +
          '<label for="icon-prefix">' + 'Tag' + '</label>' + '</div>' +
-         '<div class="col s4">' +
-         '<button type="button" class="waves-effect waves-light btn red darken-4" id=' + conetiquetas + '  onclick="eliminartags(this)">' + '<span class="glyphicon glyphicon-remove">' + '</span>' +
-         '</button>' + '</span>' +
          '</div>';
      conetiquetas++;
      for (i = 0; i < etiquetas.length; i++)
@@ -66,60 +68,122 @@
 
  }
 
+
  function enviar() {
 
-     var desc = 'descripcion';
+     if (validarformulario()) {
 
-     var datos = new FormData();
-     //datos.append('titulo',' hola');
-     var archivo = new File([""], "filename.txt");
-     datos.append('archivo', archivo);
-     datos.append('titulo', document.getElementById('titulo').value);
-     datos.append('descripcion', document.getElementById('comment').value);
-     datos.append('numero', 777);
-     var url = "procesos/subir.php";
-     var solicitud = new XMLHttpRequest();
-     solicitud.open("POST", url, true);
-     solicitud.send(datos);
-     console.log('elementos enviados');
+         // alert('entre a enviar');
 
-     for (i = 0; i < archivos1.length; i++) {
-         if (encontrareliminados()) {
-             console.log(archivos1.length);
-             var archivo = archivos1[i];
-             var datos = new FormData();
-             datos.append('archivo', archivo);
-             datos.append('descripcion', document.getElementById(desc + i).value);
+         var desc = 'descripcion';
+         var datos = new FormData();
+         //datos.append('titulo',' hola');
+         var archivo = new File([""], "filename.txt");
+         datos.append('archivo', archivo);
+         datos.append('titulo', document.getElementById('titulo').value);
+         datos.append('descripcion', document.getElementById('comment').value);
+         datos.append('numero', 777);
+         var url = "procesos/subir.php";
+         var solicitud = new XMLHttpRequest();
+         solicitud.open("POST", url, true);
+         solicitud.send(datos);
+         console.log('elementos enviados');
+         console.log('archivos: ' + archivos1.length);
+         //alert(archivos1.length);
 
-             datos.append('numero', i);
-             datos.append('tipo', tiposarchivos[i]);
-             var url = "procesos/subir.php";
-             var solicitud = new XMLHttpRequest();
-             solicitud.open("POST", url, true);
-             solicitud.send(datos);
+         documentos = ' ';
+         console.log('archivos: ' + archivos1.length);
+
+         //alert(iddesc.length);
+         for (i = 0; i < archivos1.length; i++) {
+             // alert('archivos.length: ' + archivos1.length);
+             if (encontrareliminados()) {
+                 console.log(archivos1.length);
+                 //console.log(archivos1[0].name);
+                 //alert('entre a form data');
+                 // alert('archivos[i]: ' + archivos1[i].name);
+                 var archivo = archivos1[i];
+
+                 var datos = new FormData();
+
+                 datos.append('archivo', archivo);
+                 // alert('archivo: ' + archivo.name);
+
+                 if (document.getElementById(des + i).value != '' || document.getElementById(des + i) != undefined) {
+                     datos.append('descripcion', document.getElementById(des + i).value);
+                 } else {
+                     var etiquetasn = document.getElementsByName(desc + archivo.name);
+
+                     for (var k = 0; k < etiquetasn.length; k++) {
+                         alert(etiquetasn[k].value);
+                         datos.append('descripcion', etiquetasn[k].value);
+                         break;
+                     }
+                 }
+
+
+                 // datos.append('descripcion', document.getElementById(desc + i).value);
+
+                 documentos += archivo.name + '<br>';
+                 datos.append('numero', i);
+                 datos.append('tipo', tiposarchivos[i]);
+                 var url = "procesos/subir.php";
+                 var solicitud = new XMLHttpRequest();
+                 solicitud.open("POST", url, true);
+                 solicitud.send(datos);
+                 // alert('archivos.length1: ' + archivos1.length);
+
+             }
              // alert(archivo.name);
          }
+         enviaretiquetas();
+         var texto = 'Titulo: ' + document.getElementById('titulo').value + '<br>' +
+             'Descripcion: ' + document.getElementById('comment').value + '<br>' + 'Archivos: <br>' + documentos + '<br>' + 'Tags: ' + tags;
+
+         document.getElementById('textopublicacion').innerHTML = texto;
+         $('#modal2').openModal();
+     } else {
+         //alert('entre a validar formulario enviar');
+         var texto1 = 'Para realizar una publicacion al menos debe tener: Titulo y Descripcion';
+         console.log(texto1);
+         document.getElementById('textomodal').innerHTML = texto1;
+         $('#modal1').openModal();
+         alert(texto1);
      }
-     enviaretiquetas();
 
      //alert(publicacion.titulo);
  }
 
- function enviaretiquetas() {
-     for (i = 0; i < conetiquetas; i++) {
+ function recargar() {
+     location.reload();
 
+ }
+
+ function validarformulario() {
+     if (document.getElementById('titulo').value == '' || document.getElementById('comment').value == '' || document.getElementById('titulo').value == null || document.getElementById('comment').value == null) {
+
+         return false;
+     }
+     return true;
+ }
+
+ function enviaretiquetas() {
+     tags = '';
+     for (i = 0; i < conetiquetas; i++) {
          var etiqueta = 'etiqueta';
-         alert(document.getElementById(etiqueta + i).value);
+         //alert(document.getElementById(etiqueta + i).value);
          console.log(archivos1.length);
          var archivo = new File([""], "filename.txt");
          var datos = new FormData();
          datos.append('archivo', archivo);
          datos.append('etiqueta', document.getElementById(etiqueta + i).value);
+         tags += document.getElementById(etiqueta + i).value + '<br>';
 
          var url = "procesos/subir.php";
          var solicitud = new XMLHttpRequest();
          solicitud.open("POST", url, true);
-         solicitud.send(datos);
+         if (document.getElementById(etiqueta + i).value != '' || document.getElementById(etiqueta + i).value != null)
+             solicitud.send(datos);
          // alert(archivo.name);
      }
 
@@ -210,29 +274,41 @@
 
 
  function imagenarchivo(archivo) {
+     console.log(archivo.name);
+     console.log(archivo.type);
 
-     if (archivo.type.search('powerpoint') != -1) {
+     if (archivo.name.search('ppt') != -1) {
          imagenes.push('ppt');
+         return;
 
      }
-     if (archivo.type.search('word') != -1) {
+     if (archivo.name.search('docx') != -1) {
          imagenes.push('word');
+         return;
 
      }
      if (archivo.type.search('plain') != -1) {
          imagenes.push('plain');
+         return;
      }
-     if (archivo.type.search('pdf') != -1) {
+     if (archivo.name.search('pdf') != -1) {
          imagenes.push('pdf');
+         return;
      }
      if (archivo.name.search('.rar') != -1) {
          imagenes.push('rar');
+         return;
      }
      if (archivo.name.search('.sql') != -1) {
          imagenes.push('sql');
+         return;
      }
      if (archivo.type.search('.zip') != -1) {
          imagenes.push('zip');
+         return;
+     } else {
+         imagenes.push('expediente');
+         return;
      }
  }
 
@@ -250,14 +326,20 @@
                  archivoserroneos += archivosaux[i].name + '\n';
              }
 
-         if (archivoserroneos != '')
-             alert(archivoserroneos + archivosvalidos)
+         if (archivoserroneos != '') {
+             // alert(archivoserroneos + archivosvalidos)
+
+             document.getElementById('textomodal').innerHTML = 'Los siguientes archivos no concuerdan con el tipo seleccionado' + '<br>' + archivoserroneos + '<br>' + archivosvalidos;
+             $('#modal1').openModal();
+         }
          console.log('longitud archivos: ' + archivos1.length + " longitud: " + longitud);
          administrararchivos();
          longitud = archivos1.length;
          mostrararchivos();
      } else {
-         alert('debe selecionar el tipo de archivo a subir');
+         document.getElementById('textomodal').innerHTML = 'debe selecionar el tipo de archivos a subir' + '<br>' + 'Archivos' + '<br>' + 'Imagenes' + '<br>' + 'Videos' + '<br>' + 'Audio';
+         $('#modal1').openModal();
+         //alert('debe selecionar el tipo de archivo a subir');
      }
 
 
@@ -312,10 +394,10 @@
                  '</button>' + '</span>' + '</div>' +
                  '</div>';
              marchivos.innerHTML += '<div class="row">' + '<div class="input-field col s12">' +
-                 '<textarea id="' +
-                 des + i + '"  class="materialize-textarea">' + '</textarea>' +
+                 '<textarea class="materialize-textarea" id="' + des + i + '" name="' + des + archivos1[i].name + '">' + '</textarea>' +
                  '<label for="textarea1">' + 'Descripcion del archivo' + '</label>' +
                  '</div>' + '</div>';
+             iddesc.push(des + archivos1[i].name);
 
          }
      }
@@ -337,17 +419,30 @@
          var des = 'descripcion';
          if (encontrareliminados() && tiposarchivos[i] == tipoarchivo) {
              marchivos.innerHTML += '<div class="row">' +
-                 '<div class="col s2">' + '<img src=iconos/iconojpg.svg width=80 heigth=100>' + '</div>' + '<div class= "col s8">' +
+                 '<div class="col s2">' + '<img src=../IMG/iconos/' + imagenes[i] + '.png width=80 heigth=100>' + '</div>' + '<div class= "col s8">' +
                  archivos1[i].name + '</div>' +
                  '<div class ="col s2">' +
                  '<button type="button" class="waves-effect waves-light btn red darken-4" name=' + archivos1[i].name + ' id=' + i + '  onclick="eliminararchivos(this)">' + '<span class="glyphicon glyphicon-remove">' + '</span>' +
                  '</button>' + '</span>' + '</div>' +
                  '</div>';
-             marchivos.innerHTML += '<div class="row">' + '<div class="input-field col s12">' +
-                 '<textarea id=' +
-                 des + i + '  class="materialize-textarea">' + '</textarea>' +
-                 '<label for="textarea1">' + 'Descripcion del archivo' + '</label>' +
-                 '</div>' + '</div>';
+
+             var etiq = document.getElementById(des + i);
+             // alert(des + archivos1[i].name);
+             // console.log(des + archivos1[i].name);
+             alert(etiq.length);
+
+
+             if (etiq.value != '' || etiq.value != undefined) {
+                 marchivos.innerHTML += '<div class="row">' + '<div class="input-field col s12">' +
+                     '<textarea class="materialize-textarea" name="' + des + archivos1[i].name + '">' + etiq.value + '</textarea>' +
+                     '<label for="textarea1">' + 'Descripcion del archivo' + '</label>' +
+                     '</div>' + '</div>';
+             } else {
+                 marchivos.innerHTML += '<div class="row">' + '<div class="input-field col s12">' +
+                     '<textarea class="materialize-textarea" name="' + des + archivos1[i].name + '">' + '</textarea>' +
+                     '<label for="textarea1">' + 'Descripcion del archivo' + '</label>' +
+                     '</div>' + '</div>';
+             }
          }
 
      }
@@ -369,6 +464,8 @@
 
  }
 
+
+
  function subirtarget(e) {
      //archivos1 = e.target.files;
      if (tipoarchivo != '') {
@@ -384,7 +481,8 @@
          longitud = archivos1.length;
          mostrararchivos();
      } else {
-         alert('debe selecionar el tipo de archivo a subir');
+         document.getElementById('textomodal').innerHTML = 'debe selecionar el tipo de archivos a subir' + '<br>' + 'Archivos' + '<br>' + 'Imagenes' + '<br>' + 'Videos' + '<br>' + 'Audio';
+         $('#modal1').openModal();
 
      }
 
