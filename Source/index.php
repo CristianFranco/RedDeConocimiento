@@ -33,16 +33,14 @@ $loggueado = isset($_SESSION["idUsuario"]);
                 bottom: 40px;
                 right: 40px;
                 z-index: 9999;
-                width: 32px;
-                height: 32px;
                 text-align: center;
                 line-height: 30px;
-                background: #f5f5f5;
+                /*background: #f5f5f5;
                 color: #444;
                 cursor: pointer;
-                border: 0;
-                border-radius: 2px;
-                text-decoration: none;
+                /*border: 0;
+                /*border-radius: 2px;*/
+                /*text-decoration: none;*/
                 transition: opacity 0.2s ease-out;
                 opacity: 0;
             }
@@ -66,8 +64,6 @@ $loggueado = isset($_SESSION["idUsuario"]);
             <div class="container">
                 <?php
                 if ($loggueado) {
-
-
                     echo "<div class=\"row \">
                         <div>
                           <div class=\"card\">
@@ -76,8 +72,9 @@ $loggueado = isset($_SESSION["idUsuario"]);
                               <p>" . $_SESSION['nombre'] . " " . $_SESSION['apellidos'] . "
                               <br>Correo: " . $_SESSION['email'] . " 
                               <br>No. Telefónico: " . $_SESSION['telefono'] . "
-                              </p>
-                            </div>
+                              <a href=javascript:irUsuario(" . $_SESSION['idUsuario'] . ") class=right>Mostrar resumen</a>
+                                </p>
+                                </div>
                           </div>
                         </div>
                       </div>";
@@ -88,12 +85,12 @@ $loggueado = isset($_SESSION["idUsuario"]);
                         <div class="btn-block">
                             <?php if ($loggueado) { ?>
                                 <button onclick="cargarGrupos('mios')" class="btn btn-large waves-effect z-depth-2">Mis Grupos</button>
-<?php } ?>
+                            <?php } ?>
                             <button onclick="cargarGrupos('todos')" class="btn btn-large waves-effect z-depth-2">Últimos Grupos </button>
                             <button onclick="cargarPublicaciones()" class="btn  btn-large waves-effect z-depth-2">Publicaciones</button>
                             <?php if ($loggueado) { ?>
                                 <button onclick="cargarSeguidores()" class="btn btn-large waves-effect z-depth-2">Seguidores</button>
-<?php } ?>
+                            <?php } ?>
 
                         </div>
                     </div>
@@ -107,8 +104,10 @@ $loggueado = isset($_SESSION["idUsuario"]);
             </div>
         </main>
 
-        <a href="#" id="back-to-top" title="Back to top">&uarr;</a>
-<?php require("footer.php"); ?>
+        <!--a href="#" id="back-to-top" title="Back to top">&uarr;</a-->
+        <a href="#" id="back-to-top" title="Ir hacia arriba" class="btn-floating btn-large waves-effect waves-light principal"><i class="material-icons">navigation</i></a>
+  
+        <?php require("footer.php"); ?>
         <script src="../frameworks/js/materialize.min.js"></script>
         <script src="../JS/header.js"></script>
         <script>

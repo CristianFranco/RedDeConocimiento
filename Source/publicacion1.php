@@ -68,7 +68,7 @@ else
 
                     <div class="input-field col s4 offset-s3">
                         <input id="etiqueta0" type="text">
-                        <label for="icon-prefix">Tag(s)</label>
+                        <label for="icon-prefix">Etiqueta(s)</label>
                     </div>
 
                     <div class="input-field col s3">
@@ -143,6 +143,17 @@ else
                     <div class="modal-content green accent-2">
                         <h4>Publicacion realizada correctamente</h4>
                         <p id="textopublicacion">A bunch of text</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat " onclick="recargar()">Ok</a>
+                    </div>
+                </div>
+
+                <!-- Modal Structure -->
+                <div id="modal3" class="modal modal-fixed-footer">
+                    <div class="modal-content red">
+                        <h4>Error</h4>
+                        <p id="textoformulario">A bunch of text</p>
                     </div>
                     <div class="modal-footer">
                         <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat " onclick="recargar()">Ok</a>

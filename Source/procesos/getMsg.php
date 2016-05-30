@@ -1,4 +1,6 @@
 <?php
+    session_start();
+    $idUsuario=$_SESSION["idUsuario"];
     $mensajes=json_decode($_COOKIE["Mensajes"],true);
     $idMensaje=$_GET["idMensaje"];
     $mensaje=$mensajes[$idMensaje];
@@ -13,6 +15,9 @@
     $result=$connection->query($query);
     $row=$result->fetch_array(MYSQLI_ASSOC);
     $idEnviar=$row["idUsuario"];
+    $query="SELECT count(*) as Cuenta
+            FROM Sigue
+            WHERE idUsuarioSeguidor=$idUsuario AND idUsuario=$idEnviar;";
     echo "<div class='modal-content'>";
     echo "<div class='row'>";
     echo "<div class='col s2 m2'>";
@@ -33,7 +38,9 @@
     echo "</p>";
     echo "</div>";
     echo "</div>";
-    if($box!=1){
+    $result=$connection->query($query);
+    $row=$result->fetch_array(MYSQLI_ASSOC);
+    if($box!=1 && $row["Cuenta"]){
         echo "<div class='modal-footer'>";
         echo "<a id='resp' class='modal-action waves-effect waves-blue btn-flat'><i class='material-icons'>reply</i></a>";
         echo "</div>";
