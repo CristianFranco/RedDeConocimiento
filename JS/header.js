@@ -36,6 +36,7 @@ $("#formLogin").on("submit", function (e) {
         }
     });
 });
+
 $("#loginBoton").on("click", function (e) {
     $("#loginMsn").hide();
 });

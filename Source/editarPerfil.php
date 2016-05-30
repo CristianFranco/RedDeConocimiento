@@ -84,13 +84,13 @@
                                 </div>
                                 <div class="input-field col m4">
                                     <i class="icoP material-icons prefix">phone</i>
-                                    <input id="telefono" type="text" class="validate inpP " pattern="[0-9]{10,20}" title="Introduce solo datos númericos (lada + télefono)" name="telefono" required value="<?php echo $usuario ['Telefono'];?>" disabled>
+                                    <input id="telefono" type="text" class="validate inpP " pattern="[0-9]{9,10}" title="Introduce solo datos númericos (lada + télefono)" name="telefono" required value="<?php echo $usuario ['Telefono'];?>" disabled>
                                     <label class="icoP" for="telefono">Télefono</label>
                                 </div>
                             </div>                    
                         <div class="input-field">
                                 <i class="icoP material-icons prefix">assignment</i>
-                                <input id="descripcion" type="text" class="validate inpP " pattern="[A-Za-z0-9 ]{10,30}" title="Introduce una breve descripción de ti " name="descripcion" required value="<?php echo $usuario ['Descripcion'];?>" disabled>
+                                <input id="descripcion" type="text" class="validate inpP " pattern="[A-Za-z0-9 ]{10,200}" title="Introduce una breve descripción de ti " name="descripcion" required value="<?php echo $usuario ['Descripcion'];?>" disabled>
                                 <label class="icoP" for="descripcion">Descripción</label>
                             </div>                             
                             <!--BD CATALOGO DE PAIS-CIUDAD-->
