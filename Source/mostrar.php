@@ -283,20 +283,22 @@
                       <br>Descripción: ".$usuario[$n]['Descripcion']."
                       </p>";
                          //si es el admin del grupo se imprime la opción de eliminarl el grupo******
-                        
+                        if($admin!=0 and $admin!= null){
                        if(isset($_SESSION['idUsuario']) and $admin[$n]['idUsuario']==$idUsr and $admin[$n]['Estado']==2){
                       echo "<form method=\"POST\">
                             <input type=\"hidden\" name=\"idGrupo\" value=\"".$admin[$n]['idGrupo']."\"> 
                           <input class=\"btn principal\" type=\"submit\" formaction=\"borrarGrupo.php\" value=\"Eliminar Grupo\">
                         </form>";
                        }
+                        }
                     echo "</div>
                   </div>
                 </div>
               </div>";
             }
+            //if(isset($_SESSION['idUsuario']) and $admin[$n]['idUsuario']==$idUsr and $admin[$n]['Estado']==2){}else{
             $band3=false;
-            for($n=0;$n<count($result4);$n++){
+            for($n=0;$n<count($admin);$n++){
             if(!isset($_SESSION['idUsuario']) || $admin[$n]['idGrupo']==$uid || $admin[$n]['Estado']==2){
                             $band3=true;
                            break;
@@ -319,7 +321,7 @@
                             <input class=\"btn principal\" type=\"submit\" formaction=\"procesos/abandonarGrupo.php\" value=\"Abandonar Grupo\">
                             </form>"; 
                           }
-           
+            //}
               
                 
                 //imprime los miembros del grupo en una tarjeta blanca
