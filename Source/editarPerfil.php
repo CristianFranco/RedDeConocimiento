@@ -142,7 +142,7 @@
                                         <div class="input-field col m6">
                                             <button class="waves-effect waves-light btn" id="habilitar" type="button" name="action">Habilitar</button>
                                             <button class="waves-effect waves-light btn" id="aceptar" type="submit" name="action" disabled>Aceptar</button>
-                                            <button class="waves-effect waves-light btn" id="cancelar" type="button" name="action" disabled>Cancelar</button>
+                                            <button class="waves-effect waves-light btn" id="cancelar" type="button" name="action" >Cancelar</button>
                                         </div>
                                         <!--<div class="input-field col m2">
                                             <button class="waves-effect waves-light btn" id="aceptar" type="submit" name="action" disabled>Aceptar</button>
@@ -194,7 +194,7 @@
                 });
                 //CANCELAR
                 $("#cancelar").on("click", function (e) {
-                    window.location = "editarPerfil.php";
+                    window.location = "index.php";
                 });
                 //PROCESO METER DATOS A BD  
                 
