@@ -8,3 +8,6 @@
         </div>
     </div>
 </footer>
+<script type="text/javascript" src = "../JS/Redirect/jquery.redirect.js"></script>
+
+    <script type="text/javascript" src="../JS/header.js"></script>
