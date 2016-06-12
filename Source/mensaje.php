@@ -178,6 +178,7 @@
                     solicitud.onreadystatechange = function () {
                         if (solicitud.readyState == 4 && solicitud.status == 200) {
                             Materialize.toast('Mensaje Enviado!', 3000)
+                            setTimeout(window.location='inbox.php',3000);
                         }
                     };
                     solicitud.open("POST", "procesos/enviarMensaje.php", true);
