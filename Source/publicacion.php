@@ -9,7 +9,7 @@
     $acceso=1;//$_SESSION['tipo'];
     
     //Parámetros externos
-    $idPub=64;//$_POST['idPub']
+    $idPub=$_POST['idPub'];
 
     //Conexión y query's a la BD
     require("procesos/connection.php");
@@ -146,11 +146,11 @@
                                         <a href="#comentar" class="modal-trigger waves-effect waves-light btn-floating btn-large secundario">
                                             <i class="material-icons left icoP">message</i> </a>
                                     </li>
-                                    <?php }else echo "&nbsp"?>
+                                    <?php }else {echo "&nbsp";}?>
 
                                         <?php if($filaPub['idUsuario']==$idUsr){?>
                                             <li>
-                                                <a id="comentar" class="waves-effect waves-light btn-floating btn-large secundario">
+                                                <a id="eliminar" class="waves-effect waves-light btn-floating btn-large secundario">
                                                     <i class="material-icons left icoP">delete_forever</i> </a>
                                             </li>
                                             <?php }?>
@@ -522,10 +522,10 @@
 
                 }, 3000);
                 <?php if($filaPub['idUsuario']==$idUsr){?>
-                $("#comentar").click(function (e) {
+                $("#eliminar").click(function (e) {
                     window.location = "procesos/eliminarPub.php?idPub=<?=$idPub?>";
                 });
-                $("#comentar2").click(function (e) {
+                $("#eliminar2").click(function (e) {
                     window.location = "procesos/eliminarPub.php?idPub=<?=$idPub?>";
                 });
                 <?php }?>
