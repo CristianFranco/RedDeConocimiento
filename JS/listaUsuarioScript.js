@@ -38,7 +38,10 @@
                             }
                     },
                     error: function(res,res2){
-                        alert(res2);
+                                $("#tabla").append("No se encontraron resultados");                               
+                            
+                                $("#tablaPersona").append("No se encontraron resultados");
+                            
                     }
                 });
             }
