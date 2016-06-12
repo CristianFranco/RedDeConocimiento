@@ -5,6 +5,6 @@ $idGrupo=$_POST['idGrupo'];
 $delete="DELETE FROM Grupo
 WHERE Grupo.idGrupo=$idGrupo;";
 $result4=$connection->query($delete);
-header("Locataion:../index.php");
+header("Location: ../index.php");
 
 ?>

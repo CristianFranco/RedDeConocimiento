@@ -60,6 +60,7 @@
                 $codig=$_GET['confirmacion'];
                 //echo $codig;
                 require("procesos/connection.php");
+                $connection = connect();
                 $query="UPDATE Usuario SET Estado=1 WHERE IdUsuario='".$usr."' AND CodigoAc=".$codig.";";
                 if($connection -> query($query)){
                     echo "<h4 class='icoP'>Su cuenta de la red de conocimiento ha sido activada con éxito.....</h4>";

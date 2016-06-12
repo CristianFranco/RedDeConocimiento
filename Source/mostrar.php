@@ -3,7 +3,10 @@
     session_start();
     require("procesos/connection.php");    
     //Parámetros de sesión
+    $idUsr=0;
+    if(isset($_SESSION['idUsuario'])){
     $idUsr=$_SESSION["idUsuario"];
+    }
     $acceso=1;//$_SESSION['tipo'];
     $bandera=false; //la publicación fue echa en un grupo
     //Parámetros externos
@@ -214,6 +217,7 @@
                 </div>
               </div>";
             }
+                
                 $band2=false;
                 for($x=0;$x<count($siguiendo);$x++){
                                 if(!isset($_SESSION['idUsuario']) || $siguiendo[$x]['idUsuario']==$uid || $uid==$idUsr){
@@ -224,6 +228,7 @@
                                 }
                                 
                             }
+                
                 if($band2==false){
                                echo "<div class=\"row\">
                                         <div>
@@ -243,6 +248,7 @@
                             <input class=\"btn principal\" type=\"submit\" formaction=\"procesos/dejarDeSeguir.php\" value=\"Dejar de Seguir\">
                             </form>"; 
                           }
+                
                 
             //SE IMIPRIMEN LOS COMENTARIOS DEL USUARIO DENTRO DE UNA SOLA TARJETA
             echo "<div class=\"row\">
@@ -287,7 +293,7 @@
                        if(isset($_SESSION['idUsuario']) and $admin[$n]['idUsuario']==$idUsr and $admin[$n]['Estado']==2){
                       echo "<form method=\"POST\">
                             <input type=\"hidden\" name=\"idGrupo\" value=\"".$admin[$n]['idGrupo']."\"> 
-                          <input class=\"btn principal\" type=\"submit\" formaction=\"borrarGrupo.php\" value=\"Eliminar Grupo\">
+                          <input class=\"btn principal\" type=\"submit\" formaction=\"procesos/borrarGrupo.php\" value=\"Eliminar Grupo\">
                         </form>";
                        }
                         }

@@ -43,7 +43,7 @@
                         <div class="row">
                             <div class="input-field col s6">
                                 <i class="icoP material-icons prefix">account_circle</i>
-                                    <input id="icon_prefix" type="text" class="validate inpP" name="nombre" pattern="[A-Za-z ]{6,15}" title="Mínimo 6 caracteres, máximo 15 caracteres" required>
+                                    <input id="icon_prefix" type="text" class="validate inpP" name="nombre" pattern="[A-Za-z ]{2,15}"  title="Mínimo 6 caracteres, máximo 15 caracteres" required>
                                 <label class="icoP" for="icon_prefix">Nombre</label>
                                 
                             </div>

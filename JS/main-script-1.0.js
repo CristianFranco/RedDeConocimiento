@@ -49,7 +49,7 @@ function cargarSeguidores() {
 function cargarPublicaciones(last_index) {
     $("#contenido").html(
             '<div class="row center">'
-            + '   <div class="principal z-depth-2 col s12 m6 offset-m3"><span class="flow-text">Últimas publicaciones</span></div>'
+            + '   <div class="principal  col s12 m6 offset-m3"><span class="flow-text">Últimas publicaciones</span></div>'
             + ' </div>');
     $("#contenido").append('<div id="cargando"><h3>Cargando...</h3><br><div class="progress principal"><div class="indeterminate secundario"></div></div></div>');
     $.getJSON("procesos/get_publicaciones.php",
@@ -95,20 +95,14 @@ function cargarPublicaciones(last_index) {
 
 function cargarGrupos(opciones, area) {
     area = typeof area !== 'undefined' ? area : 'todos';
-    if (opciones === 'mios') {
-        $("#contenido").html(
-                '<div class="row center  ">'
-                + '   <div class="principal z-depth-2 col s12 m6 offset-m3"><span class="flow-text">Mis grupos</span></div>'
-                + ' </div>'
+    var grupos = opciones === 'mios' ? 'Mis grupos' : 'Últimos grupos';
+    $("#contenido").html(
+            '<div class="row center principal" id="titulosg">'
+            + '   <div class="principal col s12 m4 "><span class="flow-text">' + grupos + '</span></div>'
+            + ' </div>'
 
-                );
-    } else {
-        $("#contenido").html(
-                '<div class="row center">'
-                + '   <div class="principal z-depth-2 col s12 m6 offset-m3"><span class="flow-text">Últimos grupos</span></div>'
-                + ' </div>');
-    }
-    $("#contenido").append('<div class="row " id="areas"></div>');
+            );
+    $("#titulosg").append('<div class="principal col s12 m8" id="areas" ></div>');
     $("#contenido").append('<div id="cargando"><h3>Cargando...</h3><br><div class="progress principal"><div class="indeterminate secundario"></div></div></div>');
     $.getJSON("procesos/getGrupos.php",
             {
@@ -118,15 +112,15 @@ function cargarGrupos(opciones, area) {
             function (data) {
                 var i = 0;
                 var areaActual = data.area_elegida === 'todos' ? 'Todas las áreas del conocimiento' : data.area_elegida;
-                var categorias ="<ul id='dropdown1' class='dropdown-content'>"
+                var categorias = "<ul id='dropdown1' class='dropdown-content'>"
                         + "<li><a class='secundario' href=javascript:cargarGrupos('mios')>Todas las áreas</a></li>"
-                            + '<li class="divider"></li>';
+                        + '<li class="divider"></li>';
                 $.each(data.areas, function (idArea, nombre) {
-                    categorias+=("<li class='secundario'><a href=javascript:cargarGrupos('"+opciones+"',"+idArea+")>"+nombre+"</a></li>");                
+                    categorias += ("<li class='secundario'><a href=javascript:cargarGrupos('" + opciones + "'," + idArea + ")>" + nombre + "</a></li>");
                 });
 
                 $("#areas").append(categorias
-                        +"</ul><a class='dropdown-button btn left principal' href='#' data-activates='dropdown1'>Filtro: "+areaActual+"</a>"
+                        + "</ul><a class='dropdown-button btn left principal'  href='#' data-activates='dropdown1'>Filtro: " + areaActual + '<i class="material-icons right">arrow_drop_down</i></a>'
                         );
                 $('.dropdown-button').dropdown({
                     inDuration: 300,
@@ -164,9 +158,9 @@ function cargarGrupos(opciones, area) {
                                         + '     </div>'
                                         + '<div class="card-action">'
                                         + 'Área de conocimiento<br>'
-                                        + '<a class="tooltipped waves-effect waves-light modal-trigger left" data-position="bottom" data-delay="50" data-tooltip="Click para más info." href="#modal' + i + '">' + val.AreaConocimiento + '</a>'
+                                        + '<div class="row"><a class="tooltipped waves-effect waves-light modal-trigger left" data-position="bottom" data-delay="50" data-tooltip="Click para más info." href="#modal' + i + '">' + val.AreaConocimiento + '</a>'
                                         + '<a class="right tooltipped" data-tooltip="Click para ir al grupo" href=javascript:irGrupo("' + val.idGrupo + '") > Ir al grupo</a>'
-                                        + '</div></div></div>'
+                                        + '</div></div></div></div>'
 
 
                                         + '<div id="modal' + i + '" class="modal bottom-sheet">'
