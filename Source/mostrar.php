@@ -293,7 +293,7 @@
                        if(isset($_SESSION['idUsuario']) and $admin[$n]['idUsuario']==$idUsr and $admin[$n]['Estado']==2){
                       echo "<form method=\"POST\">
                             <input type=\"hidden\" name=\"idGrupo\" value=\"".$admin[$n]['idGrupo']."\"> 
-                          <input class=\"btn principal\" type=\"submit\" formaction=\"borrarGrupo.php\" value=\"Eliminar Grupo\">
+                          <input class=\"btn principal\" type=\"submit\" formaction=\"procesos/borrarGrupo.php\" value=\"Eliminar Grupo\">
                         </form>";
                        }
                         }

@@ -158,9 +158,9 @@ function cargarGrupos(opciones, area) {
                                         + '     </div>'
                                         + '<div class="card-action">'
                                         + 'Área de conocimiento<br>'
-                                        + '<a class="tooltipped waves-effect waves-light modal-trigger left" data-position="bottom" data-delay="50" data-tooltip="Click para más info." href="#modal' + i + '">' + val.AreaConocimiento + '</a>'
+                                        + '<div class="row"><a class="tooltipped waves-effect waves-light modal-trigger left" data-position="bottom" data-delay="50" data-tooltip="Click para más info." href="#modal' + i + '">' + val.AreaConocimiento + '</a>'
                                         + '<a class="right tooltipped" data-tooltip="Click para ir al grupo" href=javascript:irGrupo("' + val.idGrupo + '") > Ir al grupo</a>'
-                                        + '</div></div></div>'
+                                        + '</div></div></div></div>'
 
 
                                         + '<div id="modal' + i + '" class="modal bottom-sheet">'
