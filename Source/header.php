@@ -42,7 +42,7 @@
 
                 <!--- Si está logeado-->
                 <?php } else{ ?>
-                    <li><a href="sass.html" class="tooltipped" data-tooltip="Publicar"><i class="material-icons " >note_add</i></a></li>
+                    <li><a href="publicacion1.php" class="tooltipped" data-tooltip="Publicar"><i class="material-icons " >note_add</i></a></li>
                     <li><a href="creaGrupo.php" class="tooltipped" data-tooltip="Crear grupo"><i class="material-icons">group_add</i></a></li>
                     <li><a href="inbox.php" class="tooltipped" data-tooltip="Bandeja de entrada"><i class="material-icons left">message</i><span id="inb"></span></a></li>
                     <li>
@@ -88,7 +88,7 @@
 
                 <!--- Si está logeado-->
                 <?php } else{ ?>
-                    <li><a href="sass.html"><i class="material-icons left">note_add</i>Publicar</a></li>
+                    <li><a href="publicar1.php"><i class="material-icons left">note_add</i>Publicar</a></li>
                     <li><a href="creaGrupo.php"><i class="material-icons left">group_add</i>Crear Grupo</a></li>
                     <li><a href="inbox.php"><i class="material-icons left">message</i>Inbox</a></li>
                     <li>

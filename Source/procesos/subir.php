@@ -68,7 +68,7 @@ $tamano_archivo = $_FILES['archivo']['size'];
      $descripcion=$_POST['descripcion'];
      $connection = connect();
      $datetime = date("Y-m-d");
-     $query = "INSERT INTO Publicacion(Fecha,Tipo,Titulo,Descripcion,Reporte) VALUES ('$datetime',0,'$titulo','$descripcion',0)"; 
+     $query = "INSERT INTO Publicacion(Fecha,Tipo,Titulo,Descripcion,Reporte) VALUES (curdate(),0,'$titulo','$descripcion',0)"; 
      $result = $connection -> query($query);
      disconnect($connection);
      $connection = connect();
@@ -81,8 +81,9 @@ $tamano_archivo = $_FILES['archivo']['size'];
             $dirmake = mkdir("$dir", 0777);             
             $connection = connect();
               if (isset ($_SESSION['idGrupo']) ){
-                  $idGrupo=$_SESSION['idGrupo'];                  
-                  $query = "INSERT INTO Publica(idPublicacion,idUsuario,idGrupo) VALUES ($idpublicacion,$idUsuario,$idGrupo)";
+                  $idGrupo=$_SESSION['idGrupo']; 
+                  $idusuario=$_SESSION['idUsuario'];
+                  $query = "INSERT INTO Publica(idPublicacion,idUsuario,idGrupo) VALUES ($idpublicacion,$idusuario,$idGrupo)";
                }
               else {
                    $query = "INSERT INTO Publica(idPublicacion,idUsuario,idGrupo) VALUES ($idpublicacion,$idusuario,null)";

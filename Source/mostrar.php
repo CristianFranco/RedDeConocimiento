@@ -228,7 +228,7 @@
                                 }
                                 
                             }
-                
+                if(isset($_SESSION['idUsuario'])){
                 if($band2==false){
                                echo "<div class=\"row\">
                                         <div>
@@ -248,7 +248,7 @@
                             <input class=\"btn principal\" type=\"submit\" formaction=\"procesos/dejarDeSeguir.php\" value=\"Dejar de Seguir\">
                             </form>"; 
                           }
-                
+                }
                 
             //SE IMIPRIMEN LOS COMENTARIOS DEL USUARIO DENTRO DE UNA SOLA TARJETA
             echo "<div class=\"row\">
@@ -290,11 +290,12 @@
                       </p>";
                          //si es el admin del grupo se imprime la opción de eliminarl el grupo******
                         if($admin!=0 and $admin!= null){
-                       if(isset($_SESSION['idUsuario']) and $admin[$n]['idUsuario']==$idUsr and $admin[$n]['Estado']==2){
+                       if(isset($_SESSION['idUsuario']) and $admin[$n]['idUsuario']==$idUsr and $admin[$n]['Estado']==2 and $admin[$n]['idGrupo']==$uid){
                       echo "<form method=\"POST\">
                             <input type=\"hidden\" name=\"idGrupo\" value=\"".$admin[$n]['idGrupo']."\"> 
                           <input class=\"btn principal\" type=\"submit\" formaction=\"procesos/borrarGrupo.php\" value=\"Eliminar Grupo\">
                         </form>";
+                       //echo $admin[$n]['idUsuario']." ".$admin[$n]['idGrupo']." ".$idUsr;
                        }
                         }
                     echo "</div>
@@ -310,6 +311,7 @@
                            break;
                        }
             }
+                if(isset($_SESSION['idUsuario'])){
                     if($band3==false){
                                echo "<div class=\"row\">
                                         <div>
@@ -327,6 +329,7 @@
                             <input class=\"btn principal\" type=\"submit\" formaction=\"procesos/abandonarGrupo.php\" value=\"Abandonar Grupo\">
                             </form>"; 
                           }
+                }
             //}
               
                 
@@ -355,12 +358,14 @@
                                                     break;
                                 }
                           }
+                    if(isset($_SESSION['idUsuario'])){
                             if($band==false){
                                     
                                echo " <input class=\"btn principal\" type=\"submit\" formaction=\"procesos/seguir.php\" value=\"Seguir Usuario\">";         
                             }else{
                                 echo " <input class=\"btn principal\" type=\"submit\" formaction=\"procesos/dejarDeSeguir.php\" value=\"Dejar de Seguir\">"; 
                             }
+                    }
                         
                         echo "</form></p>";
                 }
