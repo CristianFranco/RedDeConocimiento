@@ -1,7 +1,7 @@
 <?php 
 session_start();
 require('connection.php');
-
+$idusuario=$_SESSION['idUsuario'];
 if (isset ($_POST['etiqueta']) ){
                    //etiquetas
     $idpublicacion='';//obtener ultima publicacion
@@ -68,7 +68,7 @@ $tamano_archivo = $_FILES['archivo']['size'];
      $descripcion=$_POST['descripcion'];
      $connection = connect();
      $datetime = date("Y-m-d");
-     $query = "INSERT INTO Publicacion(Fecha,Tipo,Titulo,Descripcion,Reporte) VALUES (curdate(),0,'$titulo','$descripcion',0)"; 
+     $query = "INSERT INTO Publicacion(Fecha,Tipo,Titulo,Descripcion,Reporte) VALUES (now(),0,'$titulo','$descripcion',0)"; 
      $result = $connection -> query($query);
      disconnect($connection);
      $connection = connect();
@@ -82,7 +82,7 @@ $tamano_archivo = $_FILES['archivo']['size'];
             $connection = connect();
               if (isset ($_SESSION['idGrupo']) ){
                   $idGrupo=$_SESSION['idGrupo']; 
-                  $idusuario=$_SESSION['idUsuario'];
+                  
                   $query = "INSERT INTO Publica(idPublicacion,idUsuario,idGrupo) VALUES ($idpublicacion,$idusuario,$idGrupo)";
                }
               else {
