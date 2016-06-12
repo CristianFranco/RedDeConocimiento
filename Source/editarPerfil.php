@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="input-field col m4">
                                     <i class="icoP material-icons prefix">perm_identity</i>
-                                    <input id="nombre" type="text" class="validate inpP " pattern="[A-Za-z ]{3,15}" title="Introduce tu nombre verdadero" name="nombre" required value="<?php echo $usuario ['Nombre'];?>" disabled>
+                                    <input id="nombre" type="text" class="validate inpP " pattern="[A-Za-z ]{2,15}" title="Introduce tu nombre verdadero" name="nombre" required value="<?php echo $usuario ['Nombre'];?>" disabled>
                                     <label class="icoP" for="nombre">Nombre</label>
                                 </div>
                                 <div class="input-field col m4">
