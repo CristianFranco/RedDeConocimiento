@@ -1,4 +1,4 @@
-<?PHP            
+s<?PHP            
     function connect(){
         $servername = "107.180.58.59";
         $username = "adminRCO";
